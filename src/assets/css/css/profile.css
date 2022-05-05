@@ -1,0 +1,12 @@
+.profile_container h2{
+    margin: 3.750vw 0px 1.875vw 0px;
+}
+.profile_container .name-box{
+    padding: 2.344vw 1.875vw;
+}
+.profile_container .name-box h1{
+    margin-bottom:0.938vw
+}
+.profile-edit-form .form-field{
+    margin: 2.281vw 0px 3.281vw 0px;
+}

@@ -54,7 +54,8 @@ const SignUpController = () => {
         setdestributorList(destributor.data)
     }, [destributor.data])
 
-    const onSignUp = async () => {
+    const onSignUp = async (e) => {
+        e.preventDefault()
         if (userDetails.name == "") {
             handleValues('set', 'err', _lang('name_required'))
             return 0

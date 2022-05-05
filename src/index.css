@@ -3,11 +3,19 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  line-height: 100%;
+  
   text-decoration: none;
   scrollbar-width: 0px;
 }
-
-
+body{
+  background-color: white !important;
+}
+button{
+  background-color: transparent;
+  border: none;
+  outline: 0px;
+}
 *::-webkit-scrollbar{
   display: none;
 }
@@ -43,6 +51,9 @@ body #root{
 .space-between{
   justify-content: space-between;
 }
+.flex-end{
+  justify-content: flex-end;
+}
 .row-center{
   align-items: center;
 }
@@ -54,6 +65,7 @@ body #root{
 
 .we_container{
   width: 90%;
+  /* max-width: 1184px; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -90,100 +102,23 @@ body #root{
   height: 100%;
   width: 100%;
 }
-
-.m-primary{
-  margin: 16px;
-}
-.m-v-primary{
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-.m-h-primary{
-  margin-left: 16px;
-  margin-right: 16px;
-}
-
-.line-margin{
-  margin-top: 8px;
-  margin-bottom: 8px;
+.full-page{
+    height: 100vh;
+    width: 100%;
 }
 
 
 
 
-.p-primary{
-  padding: 16px;
-}
-.p-v-primary{
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-.p-h-primary{
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.bg-primary{
-  background-color: #5c56d4;
-}
 
 
 @media (max-width:960px){
   .pointer{
     cursor: auto;
   }
-  .m-primary{
-    margin: 14px;
-  }
-  .m-v-primary{
-    margin-top: 14px;
-    margin-bottom: 14px;
-  }
-  .m-h-primary{
-    margin-left: 14px;
-    margin-right: 14px;
-  }
-  .p-primary{
-    padding: 14px;
-  }
-  .p-v-primary{
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-  .p-h-primary{
-    padding-left: 14px;
-    padding-right: 14px;
-  }
+  
 }
 
 @media (max-width:650px){
-  .m-primary{
-    margin: 8px;
-  }
-  .m-v-primary{
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-  .m-h-primary{
-    margin-left: 8px;
-    margin-right: 8px;
-  }
-  .p-primary{
-    padding: 8px;
-  }
-  .p-v-primary{
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-  .p-h-primary{
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .line-magin{
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  .radius-primary{
-    border-radius: 4px;
-  }
+
 }

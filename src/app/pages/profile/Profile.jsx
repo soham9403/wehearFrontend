@@ -4,21 +4,15 @@ import CustomInput from "../../../component/common/CustomInput"
 import SmallLoader from "../../../component/common/SmallLoader"
 import constants from "../../../config/constants"
 import { getKeyByValue, _lang } from '../../../config/helper'
+import '../../../assets/css/css/profile.css'
+import PenSvg from "../../../component/common/PenSvg"
 const Profile = (props) => {
 
     return (
         <>
-            <div className="df flex-1 p-v-primary" style={{ overflowY: "scroll" }}>
-
-
-                <div className="we_container_small p-primary m-v-primary">
-                    <div className="row df center">
-                        <AccountCircle size={'100'} color={"warning"} style={{ height: "100px", width: "100px" }} />
-                    </div>
-                    <div className="row center df pointer">
-
-                        <Button onClick={() => { props.logOut() }} align="center" style={{ textDecoration: "underline" }} color={"primary"}>{_lang('logout')}</Button>
-                    </div>
+            <div className="df flex-1 bg-light" style={{ overflowY: "scroll" }}>
+                <div className="we_container profile_container">
+                    <h2 className="h2">Manage your Profile</h2>
                     <div className="row center df" style={{ height: "25px" }}>
                         <Typography variant="h4" align="center" color={"red"}>{props.handleValues('get', 'err')}</Typography>
                         <Typography variant="h4" align="center" color={"green"}>{props.handleValues('get', 'sucessMessage')}</Typography>
@@ -26,13 +20,13 @@ const Profile = (props) => {
                     <div className="row m-v-primary">
                         <Grid container item spacing={3}>
                             <Grid container item>
-                                <CustomInput
-                                    disabled={props.loading}
-                                    value={props.handleValues('get', 'name')}
-                                    onChange={(e) => { props.handleValues('set', 'name', e.target.value) }}
-                                    type="text"
-                                    label={_lang("name")}
-                                />
+                                
+                                <div className="df row bg-gradient-primary name-box column radius-2">
+                                    <h1 className="h2 text-light df space-between row-center row">{props.handleValues('get', 'name')} <button className="pointer" onClick={()=>{
+                                        props.onEditBtnClick()
+                                    }}><PenSvg isWhite={true} /></button></h1>
+                                    <h3 className="h3 text-light">{_lang("role_" + props.handleValues('get', 'role'))}</h3>
+                                </div>
                             </Grid>
                             <Grid container item>
                                 <CustomInput
@@ -57,25 +51,27 @@ const Profile = (props) => {
 
                             <Grid container item>
                                 <CustomInput
-                                    disabled={props.loading}
+                                    disabled={true}
+                                    on_side_btn_click={()=>{props.onEditBtnClick('phone_no')}}
+                                    side_icon={<PenSvg />}
                                     value={props.handleValues('get', 'phone_no')}
                                     onChange={(e) => { props.handleValues('set', 'phone_no', e.target.value) }}
-                                    type="text"
+                                    type="side-icon"
                                     label={_lang("phone")}
                                 />
                             </Grid>
 
 
-                            <Grid container item>
+                            {/* <Grid container item>
                                 <CustomInput
                                     disabled={true}
-                                    defaultValue={getKeyByValue(constants.user_role, props.handleValues('get', 'role'))}
+                                    defaultValue={getKeyByValue(constants.user_role, )}
                                     onChange={(e) => { }}
                                     type="text"
                                     label={_lang("role")}
                                 />
-                            </Grid>
-                            {(props.handleValues('get', 'role') == constants.user_role.DESTRIBUTOR_ROLE || props.handleValues('get', 'role') == constants.user_role.RETELLER_ROLE )&&
+                            </Grid> */}
+                            {(props.handleValues('get', 'role') == constants.user_role.DESTRIBUTOR_ROLE || props.handleValues('get', 'role') == constants.user_role.RETELLER_ROLE) &&
                                 <Grid container item>
                                     <CustomInput
                                         disabled={true}
@@ -86,9 +82,9 @@ const Profile = (props) => {
                                         label={_lang("territory")}
                                     />
                                 </Grid>}
-                                <Grid container item>
+                            <Grid container item>
                                 <CustomInput
-                                    disabled={props.loading || (props.handleValues('get', 'role')!=constants.user_role.DESTRIBUTOR_ROLE && props.handleValues('get', 'role')!=constants.user_role.RETELLER_ROLE)}
+                                    disabled={props.loading || (props.handleValues('get', 'role') != constants.user_role.DESTRIBUTOR_ROLE && props.handleValues('get', 'role') != constants.user_role.RETELLER_ROLE)}
                                     value={props.handleValues('get', 'gst_no')}
                                     onChange={(e) => { props.handleValues('set', 'gst_no', e.target.value) }}
                                     type="text"
@@ -97,7 +93,7 @@ const Profile = (props) => {
                             </Grid>
                             <Grid container item>
                                 <CustomInput
-                                    disabled={props.loading || (props.handleValues('get', 'role')!=constants.user_role.DESTRIBUTOR_ROLE && props.handleValues('get', 'role')!=constants.user_role.RETELLER_ROLE)}
+                                    disabled={props.loading || (props.handleValues('get', 'role') != constants.user_role.DESTRIBUTOR_ROLE && props.handleValues('get', 'role') != constants.user_role.RETELLER_ROLE)}
                                     value={props.handleValues('get', 'company_name')}
                                     onChange={(e) => { props.handleValues('set', 'company_name', e.target.value) }}
                                     type="text"
@@ -108,13 +104,13 @@ const Profile = (props) => {
                                 {props.loading && <SmallLoader />}
                             </div>
 
-                            <Grid container item>
+                            {/* <Grid container item>
                                 <Button
                                     disabled={JSON.stringify(props.initialData) === JSON.stringify(props.data) || props.loading}
                                     variant="contained" color="primary" fullWidth={true}
                                     onClick={props.updateProfile}
                                 >{_lang('update')}</Button>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                         <div>
                         </div>

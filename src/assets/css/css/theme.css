@@ -1,0 +1,87 @@
+.bg-primary {
+    background-color: #E6204B;
+}
+
+.bg-secondary {
+    background-color: #C64095;
+}
+
+.bg-gray {
+    background-color: #F4F4F4;
+}
+
+.bg-light {
+    background-color: white;
+}
+
+.bg-dark {
+    background-color: black;
+}
+
+
+.text-primary {
+   color: #E6204B;
+}
+
+.text-secondary {
+   color: #C64095;
+}
+
+.text-gray {
+   color: #F4F4F4;
+}
+.text-danger{
+    color: red;
+}
+.text-light {
+   color: white;
+}
+
+.text-dark {
+   color: black;
+}
+
+.shadow-primary{
+    box-shadow: 0px 1px 16px -5px rgba(169, 22, 116, 0.3);
+}
+
+
+.bg-gradient-primary {
+    
+    background: linear-gradient(93.3deg, #E6204B -67.4%, #A91674 180.21%);
+}
+.btn-gradient{
+    background: linear-gradient(100.88deg, #E94F37 -131.61%, #A91674 288.96%);
+}
+
+.text-gradient-primary {
+    background: linear-gradient(92.74deg, #E6204B -4.3%, #A91674 109.11%);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase !important;
+    /* text-fill-color: transparent; */
+
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+    border-color:#A91674 !important
+}
+.css-1o9vc4y-MuiInputBase-root-MuiOutlinedInput-root,.css-1405wkw-MuiFormLabel-root-MuiInputLabel-root{
+    color: #E6204B !important;
+}
+.css-1405wkw-MuiFormLabel-root-MuiInputLabel-root{
+    opacity: 0.5 !important;
+}
+.css-1714zlv-MuiFormLabel-root-MuiInputLabel-root{
+    color: #A91674 !important;
+}
+.css-1dcgbmo-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled,.css-1bc7vnn-MuiInputBase-root-MuiOutlinedInput-root,.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled{
+    color: #A91674 !important;
+    -webkit-text-fill-color: #A91674 !important;
+
+}
+.css-qzbt6i-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator path,.css-i4bv87-MuiSvgIcon-root path{
+    fill: #A91674;
+}

@@ -32,8 +32,8 @@ const ForgetPasswordController = () => {
             return inputs[filedName]
         }
     }
-    const sendOtpFun = async () => {
-
+    const sendOtpFun = async (e) => {
+        e.preventDefault()
         if (inputs.user_code == "") {
             handleValues('set', 'err', _lang('email_usercode_required'))
             return 0
@@ -54,8 +54,8 @@ const ForgetPasswordController = () => {
         setLoading(false)
     }
 
-    const verifyOtpFun = async () => {
-
+    const verifyOtpFun = async (e) => {
+        e.preventDefault()
         if (inputs.otp.trim() == "") {
             handleValues('set', 'err', _lang('otp_required'))
             return 0
@@ -75,8 +75,8 @@ const ForgetPasswordController = () => {
         setLoading(false)
     }
 
-    const changePassword = async () => {
-
+    const changePassword = async (e) => {
+        e.preventDefault()
         if (inputs.new_pass.trim() == "") {
             handleValues('set', 'err', _lang('password_required'))
             return 0

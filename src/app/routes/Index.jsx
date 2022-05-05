@@ -30,10 +30,10 @@ const IndexRoute = () => {
                                     <Route path=':usercode/all' element={<UserDashboardController all={true} />} />
                                     <Route path=':usercode/channel' element={<UserDashboardController channel={true} />} />
                                     {user.data.role != constants.user_role.RETELLER_ROLE &&
-                                        <Route path=':usercode/all/mass-transfer' element={<MassTransferController  />} />}
-
+                                        <Route path=':usercode/all/mass-transfer' element={<MassTransferController />} />}
+                                    <Route path='users/:usercode' element={<UserController />} />
                                 </Route>
-                                <Route path='users/:usercode' element={<UserController />} />
+
                                 {(user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN) && <Route path='product' element={<ProductController />} />}
                                 <Route path='profile' element={<ProfileController />} />
                                 <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode} />} />

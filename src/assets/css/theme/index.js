@@ -7,6 +7,7 @@ const theme = createTheme({
     ...breakPoint,
     ...colorTheme,
     ...typography,
+    
 
 });
 export default theme  

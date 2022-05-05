@@ -70,7 +70,7 @@ const English = {
   phone_invalid: "Phone Number is Invalid",
   wrong_password: "Password is  wrong",
   password_required: "Password is Required",
-  pass_and_wrong_pass_mismatch: "Password & Wrong-password are not same.",
+  pass_and_wrong_pass_mismatch: "Password & Confirm-password are not same.",
   role_required: "Please select role",
   invalid_role: "Please select correct role",
   destributor_required: "Please select Distributor",
@@ -92,10 +92,11 @@ const English = {
 
   //text
   que_already_have_account: "Do you already have an account?",
-  que_alredy_have_account: "You dont have an account?",
+  que_alredy_have_account: "Don't have an account? Register",
   boxes_transfered_successfully: "Boxes Transfered Successfully",
   que_forgot_pass: "Forget Password?",
   signup: "Sign Up",
+  register:"Register",
   signin: "Sign In",
   update: "Update",
   mass_transfer: "Mass Transfer",

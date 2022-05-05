@@ -1,0 +1,77 @@
+.auth-container{
+    overflow: hidden;
+}
+.auth-container .company-title {
+    margin-top: 10vh;
+    margin-bottom: 6.5278vh;
+}
+
+.auth-container .we_container {
+    height: 51.80555555555556vh;
+}
+
+.auth-container .img {
+    width: 25.938vw;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    margin-right: 6.797vw;
+    max-width: 25.938vw;
+}
+
+.container-left {
+    border-right: 0.078vw solid #A91674
+}
+
+.auth-container .container-right {
+    width: 28.938vw;
+    margin-left: 6.797vw;
+    max-height: 100%;
+    overflow-y: hidden;
+    max-width: 28.938vw;
+}
+
+.auth-container .container-right .h2-container {
+    margin: 0vh 0px 2vh 0px;
+}
+
+.auth-container .container-right .form-filed {
+    margin-bottom: 2.0833333333333335vh;
+}
+
+.auth-submit-btn {
+    margin-top: 2.111111111111111vh;
+    border-radius: 0.625vw;
+    margin-bottom: 2vh;
+    padding: 1.6666666666666665vh 1.953vw;
+}
+
+.auth-container .auth-gradient-left {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    left: 0px;
+    height: 100vh;
+    width: 48.438vw;
+}
+
+.auth-container .auth-gradient-left img {
+    height: 90%;
+    width: 100%;
+    /* object-fit: fill !important; */
+}
+
+.auth-container .auth-gradient-right {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: -1;
+    height: 100vh;
+    width:25.969vw;
+}
+
+.auth-container .auth-gradient-right img {
+    height: 100%;
+    /* object-fit: fill !important; */
+    width: 100%;
+}

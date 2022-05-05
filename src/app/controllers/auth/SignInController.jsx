@@ -14,9 +14,9 @@ const SignInController = () => {
     })
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const onSignIn = async () => {
+    const onSignIn = async (e) => {
 
-
+        e.preventDefault()
         if (inputs.email.trim() === "") {
             setInputs({ ...inputs, err: _lang("email_required") })
             return false

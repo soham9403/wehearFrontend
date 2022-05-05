@@ -1,0 +1,106 @@
+@font-face {
+    font-family: Helvetica;
+    src: url('../../fonts//HelveticaNeueLTStd/HelveticaNeueLTStd-Bd.otf');
+}
+
+* {
+    font-family: Helvetica !important;
+    line-height: 100%;
+    font-weight: 400 !important;
+}
+
+/* .display-1 {
+    font-size: 54px;
+}
+
+.h1 {
+    font-size: 48px;
+}
+
+.h2 {
+    font-size: 36px;
+}
+
+.h3 {
+    font-size: 24px;
+
+}
+
+.h4 {
+    font-size: 20px;
+}
+
+.h5 {
+    font-size: 18px;
+}
+
+.h6 {
+    font-size: 16px;
+}
+
+.subtitle2 {
+    font-size: 14px;
+}
+
+.letter-space-1 {
+    letter-spacing: 0.18em;
+}
+
+.letter-space-2 {
+    letter-spacing: 0.025em
+} */
+
+
+.display-1 {
+    font-size: 4.219vw;
+}
+
+.h1 {
+    font-size: 3.750vw;
+}
+
+.h2 {
+    font-size: 2.813vw;
+}
+
+.h3 {
+    font-size: 1.875vw;
+
+}
+
+.h4 {
+    font-size: 1.563vw;
+}
+
+.h5 {
+    font-size: 1.406vw;
+}
+
+.h6 {
+    font-size: 1.250vw;
+}
+
+.subtitle2 {
+    font-size: 1.094vw;
+}
+
+.letter-space-1 {
+    letter-spacing: 0.18em;
+}
+
+.letter-space-2 {
+    letter-spacing: 0.025em
+}
+
+.underline{
+    text-decoration: underline;
+}
+.radius-1{
+    border-radius: 0.938vw;
+}
+.radius-2{
+    border-radius:0.625vw
+}
+.radius-3{
+    border-radius:0.313vw
+}

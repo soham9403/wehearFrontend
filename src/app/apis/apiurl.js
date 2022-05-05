@@ -1,4 +1,4 @@
-let mode = "heroku";
+let mode = "local";
 let domainUrl;
 switch (mode) {
     case "local": domainUrl = "http://localhost:8000/api/"; break;

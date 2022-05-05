@@ -2,11 +2,13 @@ import { useLayoutEffect } from "react"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { _lang } from "../../../config/helper"
+import { closeModel, openModal } from "../../../store/actions/modalAction"
 import { signInAction, signOutAction } from "../../../store/actions/userReducerAction"
 import useBreadCrumb from "../../../store/hooks/useBreadCrumbs"
 import { getUserInfo } from "../../apis/authApis"
 import { updateUserData } from "../../apis/userApis"
 import Profile from "../../pages/profile/Profile"
+import ProfileEditPopUp from "../../pages/profile/ProfileEditPopUp"
 
 const ProfileController = () => {
     const bread_crumb = useBreadCrumb()
@@ -42,7 +44,8 @@ const ProfileController = () => {
         setUserData({ ...user.data, err: '', sucessMessage: '' })
         setInitialData({ ...user.data, err: '', sucessMessage: '' })
     }, [])
-    const updateProfile = async () => {
+    
+    const updateProfile = async (changedField="",changedFieldValue) => {
         const passData = { ...userData }
         passData['user_id'] = passData['_id']
         setLoading(true)
@@ -53,21 +56,40 @@ const ProfileController = () => {
         delete passData.email
         delete passData.email
         delete passData.sucessMessage
-        
+        if(changedField!=''){
+            passData[changedField] = changedFieldValue
+        }
         const response = await updateUserData(passData)
 
         if (response.status == 1) {
-            const userData = await getUserInfo(passData.user_id)
-            dispatch(signInAction(userData.data, true))
-            handleValues('set', 'sucessMessage', _lang(response.message))
+            const userReponseData = await getUserInfo(passData.user_id)
+            dispatch(signInAction(userReponseData.data, true))
+            
+            setUserData({...userReponseData.data,sucessMessage: _lang(response.message),err:""})
+            setInitialData(userReponseData.data)
+            // handleValues('set', 'sucessMessage', _lang(response.message))
 
         } else {
             handleValues('set', 'err', response.data[0] ? _lang(response.data[0].msg) : _lang('something_went_wrong'))
         }
         setLoading(false)
     }
-    const logOut = ()=>{
+    const logOut = () => {
         dispatch(signOutAction())
+    }
+
+    const onEditBtnClick = (type = "name") => {
+        dispatch(openModal(
+            "CUSTOM",
+            async () => {
+                
+       
+                dispatch(closeModel())
+                
+            },
+            type == "name" ? <ProfileEditPopUp initialValue={initialData['name']} filedName="name" onSave={updateProfile} loading={loading} title="Change your name" error={handleValues('get', 'err')} value={handleValues('get', 'name')} onChangeVal={(value) => { handleValues('set', 'name',value) }} /> : 
+            <ProfileEditPopUp onSave={updateProfile} initialValue={initialData['phone_no']} filedName="phone_no" error={handleValues('get', 'err')} title="Change your Phone number" value={handleValues('get', 'phone_no')} onChangeVal={(value) => { setUserData({ ...userData, phone_no:value }) }} />
+        ))
     }
 
     useEffect(() => {
@@ -89,7 +111,8 @@ const ProfileController = () => {
         <>
             {Object.keys(userData).length > 0 &&
                 <Profile
-                logOut={logOut}
+                    logOut={logOut}
+                    onEditBtnClick={onEditBtnClick}
                     initialData={initialData}
                     handleValues={handleValues}
                     loading={loading}
