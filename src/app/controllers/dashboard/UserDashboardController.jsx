@@ -148,7 +148,7 @@ const UserDashboardController = (props) => {
 
     const onTransfer = (type, data) => {
         dispatch(openModal(
-            "CUSTOM",
+            "CUSTOM_FULL_HEIGHT",
             async () => {
                 setLoading(true)
                 await Promise.all([

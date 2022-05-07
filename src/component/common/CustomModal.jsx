@@ -97,7 +97,7 @@ const CustomModal = () => {
                                 <Button disabled={loading} variant="contained" className="flex-1" color="success" onClick={onAction} >{!loading ? _lang('verify') : <CircularProgress size={15} color="secondary" />}</Button>
                             </div>
                         </div>}
-                    {modal.type == 'CUSTOM' && modal.component}
+                    {(modal.type == 'CUSTOM' || modal.type == 'CUSTOM_FULL_HEIGHT') && modal.component}
                 </div>
                 </Grow>
             </StyledModal>

@@ -20,7 +20,7 @@ const SignUpPage = (props) => {
                     <div className="auth-gradient-right">
                         <img src={gradRight} className="fit-content" alt="" />
                     </div>
-                    <h1 className="center company-title display-1 df row text-gradient-primary" >WE HEAR CRM</h1>
+                    <h1 className="center company-title display-1 df row text-gradient-primary" >WEHEAR CRM</h1>
                     <div className="we_container df ">
                         <div className="df flex-1 container-left">
                             <div className="fit-content df center">
