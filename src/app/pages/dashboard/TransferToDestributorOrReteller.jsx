@@ -7,12 +7,89 @@ import { _lang } from "../../../config/helper"
 const TransferToDestributorOrReteller = (props) => {
     return (
         <>
-            <div className={'column  row m-v-primary'} style={{ maxWidth: "500px", width: '90%' }}>
+        <div className="we-container-small  df column radius-2">
+        <Typography variant="h3">{props.fromReteller?_lang('transfer_to_reteller'):_lang('transfer_to_destributor')}</Typography>
+            <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); e.changeParentValue() }}>
+                <h3 className="h3 text-secondary">{props.title}</h3>
+                <span className="h6 text-danger">{props.error}&nbsp;</span>
+                <div className="row">
+                            <FormControl fullWidth={true} >
+                                <SearchDropDown
+
+                                    getOptionLabel={(option) => {
+                                        if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
+                                            return option['name'] + " (" + option['usercode'] + ")"
+                                        }
+                                        return ""
+                                    }}
+                                    renderOption={(defaultProps, option) => (
+
+                                        <Box component="li" {...defaultProps}>
+                                            {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
+                                                option['name'] + " (" + option['usercode'] + ")" : ""
+                                            }
+                                        </Box>
+                                    )}
+                                    list={props.list}
+
+                                    value={props.handleValues('get', 'allocated_user')}
+                                    label={props.fromReteller?_lang('reteller'):_lang('destributor')}
+
+                                    onChange={(val) => { props.handleValues('set', 'allocated_user', val) }}
+                                />
+                            </FormControl>
+                        </div>
+                <button className="auth-submit-btn df center text-light row pointer h3 btn-gradient">Save Changes</button>
+            </form>
+        </div>
+            {/*<div className={'column  row m-v-primary'} style={{ maxWidth: "500px", width: '90%' }}>
 
                 <div className="df column p-primary radius-primary  row" style={{ overflowY: "scroll", maxHeight: "100%", background: "white" }}>
                     <Typography variant="h3">{props.fromReteller?_lang('transfer_to_reteller'):_lang('transfer_to_destributor')}</Typography>
-                    <form className="row df column m-v-primary" style={{ marginTop: "0px" }}>
-                        <div className="row center df" style={{ height: "25px" }}>
+                    {/*<form className="row df column m-v-primary" style={{ marginTop: "0px" }}>*/}
+                    <h3 className="h3 text-secondary">{props.title}</h3>
+                {/*<span className="h6 text-danger">{props.error}&nbsp;</span>*/}
+
+                {/*<div className="form-field">*/}
+                    
+                    {/*<CustomInput
+                        disabled={props.loading}
+                        value={props.val}
+
+                        // value={value}
+                        onChange={(e) => { props.setVal(e.target.value) }}
+                        type="text"
+    />*/}
+                {/*</div>*/}
+               {/*</form>*/}
+                {/*<FormControl fullWidth={true} >
+                                <SearchDropDown
+
+                                    getOptionLabel={(option) => {
+                                        if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
+                                            return option['name'] + " (" + option['usercode'] + ")"
+                                        }
+                                        return ""
+                                    }}
+                                    renderOption={(defaultProps, option) => (
+
+                                        <Box component="li" {...defaultProps}>
+                                            {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
+                                                option['name'] + " (" + option['usercode'] + ")" : ""
+                                            }
+                                        </Box>
+                                    )}
+                                    list={props.list}
+
+                                    value={props.handleValues('get', 'allocated_user')}
+                                    label={props.fromReteller?_lang('reteller'):_lang('destributor')}
+
+                                    onChange={(val) => { props.handleValues('set', 'allocated_user', val) }}
+                                />
+                            </FormControl>
+                <button className="auth-submit-btn df center text-light row pointer h3 btn-gradient">Save Changes</button>
+        </div>
+                        {/*<div className="row center df" style={{ height: "25px" }}>
                             <Typography variant="h4" align="center" color={"red"}>{props.handleValues('get', 'err')}</Typography>
                         </div>
                         <div className="row">
@@ -50,10 +127,8 @@ const TransferToDestributorOrReteller = (props) => {
                                 onClick={props.onSubmitBtnClick}
 
                             >{_lang('update')}</Button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                                        </div>*/}
+                                    {/*</div>*/}
         </>
     )
 }

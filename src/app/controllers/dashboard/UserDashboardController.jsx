@@ -42,7 +42,7 @@ const UserDashboardController = (props) => {
             value: 'yesterday'
         },
         {
-            label: _lang('to_the_date'),
+            label: _lang('Year_the_date'),
             value: 'this_year'
         },
         {
