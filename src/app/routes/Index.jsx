@@ -7,6 +7,7 @@ import SignInController from '../controllers/auth/SignInController';
 import SignUpController from '../controllers/auth/SignUpController';
 
 import DashboardController from '../controllers/dashboard/DashboardController';
+import SaleBoardMain from '../controllers/dashboard/salesBoard/SaleBoardMain';
 import UserDashboardController from '../controllers/dashboard/UserDashboardController';
 import MassTransferController from '../controllers/masstransfer/MassTransferController';
 import ProductController from '../controllers/product/ProductController';
@@ -25,18 +26,19 @@ const IndexRoute = () => {
                         <>
                             <Route path='' element={<Header />}>
                                 <Route path='dashboard' element={<DashboardController />} >
-                                    <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode} />} />
-                                    <Route path=':usercode' element={<UserDashboardController />} />
-                                    <Route path=':usercode/all' element={<UserDashboardController all={true} />} />
-                                    <Route path=':usercode/channel' element={<UserDashboardController channel={true} />} />
+                                    <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode +"/sold"} />} />
+                                    <Route path=':usercode/users' element={<UserController />} />
+                                    <Route path=':usercode/sold' element={<SaleBoardMain type={'sold'} />} />
+                                    <Route path=':usercode/stock' element={<SaleBoardMain type={'stock'} />} />
+                                    <Route path=':usercode/channel' element={<SaleBoardMain type={'channel'} />} />
                                     {user.data.role != constants.user_role.RETELLER_ROLE &&
                                         <Route path=':usercode/all/mass-transfer' element={<MassTransferController />} />}
-                                    <Route path='users/:usercode' element={<UserController />} />
+                                   
                                 </Route>
 
                                 {(user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN) && <Route path='product' element={<ProductController />} />}
                                 <Route path='profile' element={<ProfileController />} />
-                                <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode} />} />
+                                <Route path='' element={<Navigate replace to={"/dashboard/" +  user.data.usercode +"/sold"} />} />
                             </Route>
                         </>
                         :

@@ -14,8 +14,8 @@ const Profile = (props) => {
                 <div className="we_container profile_container">
                     <h2 className="h2">Manage your Profile</h2>
                     <div className="row center df" style={{ height: "25px" }}>
-                        <Typography variant="h4" align="center" color={"red"}>{props.handleValues('get', 'err')}</Typography>
-                        <Typography variant="h4" align="center" color={"green"}>{props.handleValues('get', 'sucessMessage')}</Typography>
+                        <h4 className="h4 text-danger" align="center" color={"red"}>{props.handleValues('get', 'err')}</h4>
+                        <h4 className="h4 text-success" align="center" color={"green"}>{props.handleValues('get', 'sucessMessage')}</h4>
                     </div>
                     <div className="row m-v-primary">
                         <Grid container item spacing={3}>

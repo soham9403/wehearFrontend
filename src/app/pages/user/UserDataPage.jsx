@@ -33,7 +33,7 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell ><Link to={"/dashboard/" + row.usercode}>{row.usercode}</Link></TableCell>
+                <TableCell ><Link to={"/dashboard/" + row.usercode +'/sold'}>{row.usercode}</Link></TableCell>
                 <TableCell >{row.email}</TableCell>
                 <TableCell >{row.phone_no}</TableCell>
                 <TableCell >{_lang('role_' + row.role)}</TableCell>
@@ -184,7 +184,7 @@ const UserDataPage = (props) => {
 
                         <TextField variant="outlined" />
                     </div> */}
-                    {props.userData && props.userData.total && <TablePagination
+                    {props.userData && props.userData.total && props.userData.total>0 && <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
                         count={props.userData.total}
@@ -215,7 +215,7 @@ const UserDataPage = (props) => {
                                 ))}
                             </TableBody>
                         </Table>
-                        {props.userData && props.userData.total && <TablePagination
+                        {props.userData && props.userData.total && props.userData.total>0 && <TablePagination
                             rowsPerPageOptions={[10, 25, 100]}
                             component="div"
                             count={props.userData.total}

@@ -5,23 +5,28 @@ import { _lang } from "../../../config/helper"
 
 const TransferToStore = (props) => {
     return (
-        <>
-            <div className={'column  row m-v-primary'} style={{ maxWidth: "500px", width: '90%' }}>
-            <Typography variant="h3">{_lang('tranfer_to_store')}</Typography>
-            <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); e.changeParentValue() }}>
-                <h3 className="h3 text-secondary">{props.title}</h3>
-                <span className="h6 text-danger">{props.error}&nbsp;</span>
-                <div className="row m-v-primary" style={{ marginBottom: "10px"}}>
-                            <CustomInput
-                                disabled={props.loading}
-                                value={props.handleValues('get', 'loaction')}
-                                onChange={(e) => { props.handleValues('set', 'invoice_number', e.target.value) }}
-                                type="text"
-                                label={_lang("location")}
-                            />
-                        </div></form>
+        // <>
+        //     <div className={'column  row m-v-primary'} style={{ maxWidth: "500px", width: '90%' }}>
+        //     <Typography variant="h3">{_lang('tranfer_to_store')}</Typography>
+        //     <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); e.changeParentValue() }}>
+        <div className="we-container-small  df column radius-2">
+            <h3 className="h3">{_lang('tranfer_to_store')}</h3>
+            <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); props.onSubmitBtnClick() }}>
 
-               {/* <div className="df column p-primary radius-primary  row" style={{ overflowY: "scroll", maxHeight: "100%", background: "white" }}>
+                <span className="h6  pt-3 pb-3 text-danger">{props.handleValues('get', 'err')}&nbsp;</span>
+                <div className="row form-filed" >
+                    <CustomInput
+                       disabled={props.loading}
+                       value={props.handleValues('get', 'current_location')}
+                       onChange={(e) => { props.handleValues('set', 'current_location', e.target.value) }}
+                       type="location"
+                       label={_lang("location")}
+                    />
+                </div>
+                <button type="submit" className="auth-submit-btn df center text-light row pointer h3 btn-gradient"> {props.loading ? <SmallLoader /> : 'Transfer'}</button>
+            </form>
+
+            {/* <div className="df column p-primary radius-primary  row" style={{ overflowY: "scroll", maxHeight: "100%", background: "white" }}>
                     <Typography variant="h3">{_lang('transfer_to_store')}</Typography>
                     <form className="row df column m-v-primary" style={{ marginTop: "0px" }}>
                         <div className="row center df" style={{ height: "25px" }}>
@@ -56,8 +61,8 @@ const TransferToStore = (props) => {
     </div>
     </form>
     </div>*/}
-    </div>
-</>
+        </div>
+
     )
 }
 export default TransferToStore

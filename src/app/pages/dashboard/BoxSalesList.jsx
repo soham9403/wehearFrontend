@@ -158,9 +158,9 @@ function Row (props) {
                           </TableCell>
                           <TableCell>
                             {' '}
-                            <span variant='h4'>
+                           {row.sale_by && <span variant='h4'>
                               {_lang(row.sale_by.name) + row.sale_by.usercode}
-                            </span>
+                            </span>}
                           </TableCell>
                         </TableRow>
                         <TableRow>

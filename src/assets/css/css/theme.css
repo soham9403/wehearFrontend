@@ -53,7 +53,9 @@
 .btn-gradient{
     background: linear-gradient(100.88deg, #E94F37 -131.61%, #A91674 288.96%);
 }
-
+.text-success{
+    color: green;
+}
 .text-gradient-primary {
     background: linear-gradient(92.74deg, #E6204B -4.3%, #A91674 109.11%);
 

@@ -29,11 +29,7 @@ const ProfileController = () => {
             if (filedName !== 'err') {
                 currentData['err'] = ''
             }
-            if (filedName == 'sucessMessage' && value != "") {
-                setTimeout(() => {
-                    handleValues(method, filedName, '')
-                }, 2000)
-            }
+          
             setUserData(currentData)
             return 0;
         } else {
@@ -67,6 +63,9 @@ const ProfileController = () => {
             
             setUserData({...userReponseData.data,sucessMessage: _lang(response.message),err:""})
             setInitialData(userReponseData.data)
+            setTimeout(() => {
+                setUserData({...userReponseData.data,sucessMessage: '',err:""})
+            }, 2000)
             // handleValues('set', 'sucessMessage', _lang(response.message))
 
         } else {

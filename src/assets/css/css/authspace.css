@@ -38,6 +38,9 @@
 .auth-container .container-right .form-filed {
     margin-bottom: 2.0833333333333335vh;
 }
+.form-filed {
+    margin-bottom: 2.0833333333333335vh;
+}
 
 .auth-submit-btn {
     margin-top: 2.111111111111111vh;

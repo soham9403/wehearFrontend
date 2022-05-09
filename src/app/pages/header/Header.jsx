@@ -6,6 +6,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleRounded';
 import { _lang } from '../../../config/helper'
 import { signOutAction } from '../../../store/actions/userReducerAction';
+import { IconButton } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
 const Header = props => {
   const { user, breadcrumb } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -24,41 +26,45 @@ const Header = props => {
 
             <div className='we_container df row row-center space-between'>
               <div className='df flex-1'>
-              <div className='header-logo  df m-r-3 pointer' onClick={() => { navigate('/') }}>
-                <Logo />
+                <div className='header-logo  df m-r-3 pointer' onClick={() => { navigate('/') }}>
+                  <Logo />
+                </div>
               </div>
-              </div>
-             
+
               <h1 className='h3 flex-1 df center text-gradient-primary'>{
                 _lang('role_' + user.role)
               }</h1>
               <div className='flex-1 df flex-end'>
-              <button className='df  bg-gradient-primary radius-curved p-btn'>
-                {location.pathname != '/profile' &&
-                  <Link to='/profile'>
+                <button className='df  bg-gradient-primary radius-curved p-btn'>
+                  {location.pathname != '/profile' &&
+                    <Link to='/profile'>
+                      <span className='df letter-space-2 flex-1 row-center  df text-light h4 btn'>
+                        {user.data.name.length > 10 ? user.data.name.slice(0, 8) + '...' : user.data.name}
+                        {/* <IconButton   iconStyle={{ largeIcon: { height: '2.344vw', width: "2.344vw" } }}> */}
+                        <AccountCircle
+                          style={{ height: '2.344vw', width: "2.344vw" ,fontSize:'2.344vw'} }
+                          fontSize={'large'}
+                          className='ml-3' color='white'
+
+                        />
+                        {/* </IconButton> */}
+
+                      </span>
+                    </Link>}
+                  {location.pathname == '/profile' && <a className='pointer' onClick={logOut}>
                     <span className='df letter-space-2 flex-1 row-center  df text-light h4 btn'>
-                      {user.data.name.length>10?user.data.name.slice(0,8)+'...':user.data.name}
-                      <AccountCircleIcon
-                        className='ml-3'
+                      <LogoutIcon
+                        className='mr-3'
                         fontSize={'large'}
                         color='white'
                       />
-                    </span>
-                  </Link>}
-                {location.pathname == '/profile' && <a className='pointer' onClick={logOut}>
-                  <span className='df letter-space-2 flex-1 row-center  df text-light h4 btn'>
-                    <LogoutIcon
-                      className='mr-3'
-                      fontSize={'large'}
-                      color='white'
-                    />
-                    {_lang('logout')}
+                      {_lang('logout')}
 
-                  </span>
-                </a>}
-              </button>
+                    </span>
+                  </a>}
+                </button>
               </div>
-             
+
             </div>
           </div>
         </header>

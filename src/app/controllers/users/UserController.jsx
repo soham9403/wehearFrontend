@@ -109,7 +109,7 @@ const UserController = () => {
     const onUpdateBtnClick = (row) => {
         
         dispatch(openModal(
-            "CUSTOM",
+            "CUSTOM_FULL_HEIGHT",
             async () => {
                 await Promise.all([
                     getUserList(usercode),
@@ -124,7 +124,7 @@ const UserController = () => {
 
     const onCreateBtnClick = () => {
         dispatch(openModal(
-            "CUSTOM",
+            "CUSTOM_FULL_HEIGHT",
             async () => {
 
                 await Promise.all([

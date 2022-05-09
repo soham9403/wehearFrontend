@@ -100,6 +100,7 @@ const English = {
   signin: "Sign In",
   update: "Update",
   mass_transfer: "Mass Transfer",
+  channel_stock:"Channel Stock",
   show_list: "Show List",
   update_user: "Update User",
   send_otp: "Send OTP",
