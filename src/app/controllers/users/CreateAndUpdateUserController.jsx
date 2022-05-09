@@ -8,6 +8,7 @@ import { createUserApi, updateUserData } from "../../apis/userApis"
 import CreateAndUpdateUser from "../../pages/user/CreateAndUpdateUser"
 import { closeModel } from '../../../store/actions/modalAction'
 const CreateAndUpdateUserController = (props) => {
+    const { user } = useSelector((state) => state)
     const [inputs, setInputs] = useState({
         name: '',
         email: '',
@@ -18,9 +19,10 @@ const CreateAndUpdateUserController = (props) => {
         company_name: '',
         gst_no: '',
         territory: '',
-        destributor_id: '',
+        destributor_id: user.data.role == constants.user_role.DESTRIBUTOR_ROLE ? user.data._id : '',
         err: ''
     })
+
     const [loading, setLoading] = useState(false)
     const [calledFromUpdate, setCalledFromUpdate] = useState(false)
     const { destributor, modal } = useSelector((state) => { return { destributor: state.destributor_list, modal: state.modal } })
@@ -85,7 +87,7 @@ const CreateAndUpdateUserController = (props) => {
             handleValues('set', 'err', _lang('role_required'))
             return 0
         }
-        if(inputs.role.index == constants.user_role.DESTRIBUTOR_ROLE || inputs.role.index == constants.user_role.RETELLER_ROLE){
+        if (inputs.role.index == constants.user_role.DESTRIBUTOR_ROLE || inputs.role.index == constants.user_role.RETELLER_ROLE) {
             if (inputs.company_name == "") {
                 handleValues('set', 'err', _lang('company_name_required'))
                 return 0
@@ -99,7 +101,7 @@ const CreateAndUpdateUserController = (props) => {
                 return 0
             }
         }
-        
+
 
         if (inputs.role.index == constants.user_role.DESTRIBUTOR_ROLE && inputs.territory == '') {
             handleValues('set', 'err', _lang('territory_required'))
@@ -131,8 +133,8 @@ const CreateAndUpdateUserController = (props) => {
                 handleValues('set', 'err', _lang(response.data[0].msg))
             }
             setLoading(false)
-        }else{
-            document.getElementById('scrollable_form').scrollTo({top:0,behavior:"smooth"})
+        } else {
+            document.getElementById('scrollable_form').scrollTo({ top: 0, behavior: "smooth" })
         }
 
 

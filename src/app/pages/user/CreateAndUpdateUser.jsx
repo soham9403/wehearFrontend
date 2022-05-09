@@ -78,7 +78,7 @@ const CreateAndUpdateUser = (props) => {
                                 )}
                                 list={Object.keys(constants.user_role).filter((val) => constants.user_role[val] > user.data.role).map((label, index) => {
                                     return {
-                                        label: label,
+                                        label: _lang('role_' + constants.user_role[label]),
                                         index: constants.user_role[label]
                                     }
                                 })}
@@ -132,7 +132,7 @@ const CreateAndUpdateUser = (props) => {
                         </>}
 
                     {
-                        props.handleValues('get', 'role') && props.handleValues('get', 'role').index == constants.user_role.RETELLER_ROLE &&
+                        props.handleValues('get', 'role') && props.handleValues('get', 'role').index == constants.user_role.RETELLER_ROLE && user.role != constants.user_role.DESTRIBUTOR_ROLE &&
                         <div className="form-filed row">
                             <FormControl fullWidth={true} >
                                 <SearchDropDown

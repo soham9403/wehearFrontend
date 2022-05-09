@@ -91,7 +91,7 @@ function Row(props) {
                                                             <TableCell>
                                                                 {' '}
                                                                 <span className='font-bold' variant='h3'>
-                                                                    {_lang('name')}
+                                                                    {_lang('name')} :
                                                                 </span>
                                                             </TableCell>
                                                             <TableCell>
@@ -108,7 +108,7 @@ function Row(props) {
                                                             <TableCell>
                                                                 {' '}
                                                                 <span className='font-bold' variant='h3'>
-                                                                    {_lang('email')}
+                                                                    {_lang('email')} :
                                                                 </span>
                                                             </TableCell>
                                                             <TableCell>
@@ -122,7 +122,7 @@ function Row(props) {
                                                             <TableCell>
                                                                 {' '}
                                                                 <span className='font-bold' variant='h3'>
-                                                                    {_lang('role')}
+                                                                    {_lang('role')} :
                                                                 </span>
                                                             </TableCell>
                                                             <TableCell>
@@ -149,7 +149,7 @@ function Row(props) {
                                                                 <TableCell>
                                                                     {' '}
                                                                     <span className='font-bold' variant='h3'>
-                                                                        {_lang('name')}
+                                                                        {_lang('name')} :
                                                                     </span>
                                                                 </TableCell>
                                                                 <TableCell>
@@ -163,7 +163,7 @@ function Row(props) {
                                                                 <TableCell>
                                                                     {' '}
                                                                     <span className='font-bold' variant='h3'>
-                                                                        {_lang('packing_date')}
+                                                                        {_lang('packing_date')} :
                                                                     </span>
                                                                 </TableCell>
                                                                 <TableCell>{dateToDDMMYYYY(_lang(row.packing_date))}</TableCell>

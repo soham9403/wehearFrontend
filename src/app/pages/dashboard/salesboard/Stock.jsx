@@ -168,7 +168,8 @@ function Row(props) {
                                             </>
                                         )}
                                     {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN ||
+                                        user.role == constants.user_role.SUPER_ADMIN || 
+                                        user.role == constants.user_role.DESTRIBUTOR_ROLE ||
                                         user.role == constants.user_role.RETELLER_ROLE) && (
                                             <>
                                                 {row.current_location != 'sold' && (

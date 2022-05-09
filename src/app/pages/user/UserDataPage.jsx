@@ -172,7 +172,7 @@ const UserDataPage = (props) => {
                                 />
                             </div>
 
-                            {(user.role == constants.user_role.SUPER_ADMIN || user.role == constants.user_role.TEAM_ADMIN || user.role == constants.user_role.ADMIN) && <button variant="contained"
+                            {(user.role == constants.user_role.SUPER_ADMIN || user.role == constants.user_role.TEAM_ADMIN || user.role == constants.user_role.ADMIN ||  user.role == constants.user_role.DESTRIBUTOR_ROLE) && <button variant="contained"
                                 onClick={() => { props.onCreateBtnClick() }}
                                 className='mb-3 h5  ml-2 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'
                             >{_lang('create_user')}</button>}

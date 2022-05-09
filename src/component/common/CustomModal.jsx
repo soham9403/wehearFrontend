@@ -65,40 +65,47 @@ const CustomModal = () => {
                 BackdropComponent={Backdrop}
             >
                 <Grow in={modal.show}>
-                <div className={modal.type=="CUSTOM_FULL_HEIGHT"? "we_container df column p-relative pop-up-content" :"we_container df column p-relative pop-up-content-centered" }>
-                    {modal.type == "DELETE" &&
-                        <div className={'column  row p-primary radius-primary m-v-primary'} style={{ backgroundColor: "white", height: 'max-content', flex: 'none' }}>
-                            <div className="m-v-primary">
-                                <Typography variant="h4" align="center" >{_lang('delete_warning')}</Typography>
-                            </div>
-                            <div className="m-v-primary p-primary">
+                    <div className={modal.type == "CUSTOM_FULL_HEIGHT" ? "we_container df column p-relative pop-up-content" : "we_container df column p-relative pop-up-content-centered"}>
+                        {modal.type == "DELETE" &&
+                            <div className="we-container-small  df column radius-2">
+                                <div className="df row column profile-edit-form">
 
-                            </div>
+                                    <div className="df row center">
+                                        <h3 className="h4" align="center" >{_lang('delete_warning')}</h3>
+                                    </div>
+                                    <div className="form-filed p-3">
 
-                            <div className="row space-between df ">
-                                <Button disabled={loading} sx={{ mr: 1 }} variant="contained" className="flex-1" onClick={handleCLose} >{_lang('cancle')}</Button>
-                                <Button disabled={loading} variant="contained" className="flex-1" color="error" onClick={onAction} >{!loading ? _lang('delete') : <CircularProgress size={15} color="secondary" />}</Button>
+                                    </div>
+
+                                    <div className="row space-between df ">
+                                        <Button disabled={loading} sx={{ mr: 1 }} variant="contained" className="flex-1" onClick={handleCLose} >{_lang('cancle')}</Button>
+                                        <Button disabled={loading} variant="contained" className="flex-1" color="error" onClick={onAction} >{!loading ? _lang('delete') : <CircularProgress size={15} color="secondary" />}</Button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
 
 
-                    {modal.type == "VERIFY" &&
-                        <div className={'column  row p-primary radius-primary m-v-primary'} style={{ backgroundColor: "white", height: 'max-content', maxWidth: "500px", flex: 'none' }}>
-                            <div className="m-v-primary">
-                                <Typography variant="h4" align="center" >{_lang('verify_warning')}</Typography>
-                            </div>
-                            <div className="m-v-primary p-primary">
+                        {modal.type == "VERIFY" &&
+                            
+                            <div className="we-container-small  df column radius-2">
+                                <div className="df row column profile-edit-form">
 
-                            </div>
+                                    <div className="">
+                                        <h4 className="h4" align="center" >{_lang('verify_warning')}</h4>
+                                    </div>
+                                    <div className="p-3">
 
-                            <div className="row space-between df ">
-                                <Button disabled={loading} sx={{ mr: 1 }} variant="contained" className="flex-1" onClick={handleCLose} >{_lang('cancle')}</Button>
-                                <Button disabled={loading} variant="contained" className="flex-1" color="success" onClick={onAction} >{!loading ? _lang('verify') : <CircularProgress size={15} color="secondary" />}</Button>
-                            </div>
-                        </div>}
-                    {(modal.type == 'CUSTOM' || modal.type == 'CUSTOM_FULL_HEIGHT') && modal.component}
-                </div>
+                                    </div>
+
+                                    <div className="row space-between df ">
+                                        <Button disabled={loading} sx={{ mr: 1 }} variant="contained" className="flex-1" onClick={handleCLose} >{_lang('cancle')}</Button>
+                                        <Button disabled={loading} variant="contained" className="flex-1" color="success" onClick={onAction} >{!loading ? _lang('verify') : <CircularProgress size={15} color="secondary" />}</Button>
+                                    </div>
+                                </div>
+                            </div>}
+                        {(modal.type == 'CUSTOM' || modal.type == 'CUSTOM_FULL_HEIGHT') && modal.component}
+                    </div>
                 </Grow>
             </StyledModal>
         </>

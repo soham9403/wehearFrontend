@@ -90,7 +90,7 @@ function Row(props) {
                                                     <TableCell>
                                                         {' '}
                                                         <span className='font-bold' variant='h3'>
-                                                            {_lang('name')}
+                                                            {_lang('name')} :
                                                         </span>
                                                     </TableCell>
                                                     <TableCell>
@@ -103,7 +103,7 @@ function Row(props) {
                                                     <TableCell>
                                                         {' '}
                                                         <span className='font-bold' variant='h3'>
-                                                            {_lang('email')}
+                                                            {_lang('email')} :
                                                         </span>
                                                     </TableCell>
                                                     <TableCell>
@@ -118,7 +118,7 @@ function Row(props) {
                                                     <TableCell>
                                                         {' '}
                                                         <span className='font-bold' variant='h3'>
-                                                            {_lang('address')}
+                                                            {_lang('address')} :
                                                         </span>
                                                     </TableCell>
                                                     <TableCell>
@@ -133,7 +133,7 @@ function Row(props) {
                                                     <TableCell>
                                                         {' '}
                                                         <span className='font-bold' variant='h3'>
-                                                            {_lang('phone')}
+                                                            {_lang('phone')} :
                                                         </span>
                                                     </TableCell>
                                                     <TableCell>
@@ -154,7 +154,7 @@ function Row(props) {
                                                         <TableCell>
                                                             {' '}
                                                             <span className='font-bold' variant='h3'>
-                                                                {_lang('name')}
+                                                                {_lang('name')} :
                                                             </span>
                                                         </TableCell>
                                                         <TableCell>
@@ -173,7 +173,7 @@ function Row(props) {
                                         {
                                             <div className='df row column'>
                                                 <Typography variant='h3'>
-                                                    {_lang('sales_details')}
+                                                    {_lang('sales_details')} 
                                                 </Typography>
 
                                                 <Table aria-label='table' sx={{ mb: 2 }}>
@@ -182,7 +182,7 @@ function Row(props) {
                                                             <TableCell>
                                                                 {' '}
                                                                 <span className='font-bold' variant='h3'>
-                                                                    {_lang('sale_by')}
+                                                                    {_lang('sale_by')} :
                                                                 </span>
                                                             </TableCell>
                                                             <TableCell>
@@ -196,7 +196,7 @@ function Row(props) {
                                                             <TableCell>
                                                                 {' '}
                                                                 <span className='font-bold' variant='h3'>
-                                                                    {_lang('date')}
+                                                                    {_lang('date')} :
                                                                 </span>
                                                             </TableCell>
                                                             <TableCell>
@@ -216,7 +216,7 @@ function Row(props) {
                                                             <TableCell>
                                                                 {' '}
                                                                 <span variant='h4'>
-                                                                   {row.invoice_value}
+                                                                    {row.invoice_value}
                                                                 </span>
                                                             </TableCell>
                                                         </TableRow>
@@ -260,7 +260,7 @@ function a11yProps(index) {
     }
 }
 const Sold = props => {
-    // const user = useSelector(state => state.user).data
+    const user = useSelector(state => state.user).data
     // const userInventoryData = props.userInventoryData
     // const params = useParams()
     // const navigate = useNavigate()
@@ -277,11 +277,11 @@ const Sold = props => {
                                 <button onClick={props.exportCsv} className=' h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
                                     {_lang('export')}
                                 </button>
-                                <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
+                                {user.role != constants.user_role.DESTRIBUTOR_ROLE && user.role != constants.user_role.RETELLER_ROLE && <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
                                     <button onClick={() => { props.handleFilters('isB2C', false) }} className={`custom-toggle-button h6 ${!props.filters.isB2C ? 'bg-secondary text-light' : 'text-secondary pointer'}`} >All</button>
                                     <button onClick={() => { props.handleFilters('isB2C', true) }} className={`custom-toggle-button h6 ${props.filters.isB2C ? 'bg-secondary text-light' : 'text-secondary pointer'}`}>B2C</button>
 
-                                </div>
+                                </div>}
                             </div>
                         </div>
                         <div className='df column flex-1' style={{ alignItems: "flex-end" }}>

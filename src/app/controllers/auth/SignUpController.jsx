@@ -20,6 +20,8 @@ const SignUpController = () => {
         password: "",
         role: constants.user_role.RETELLER_ROLE,
         destributor_id: "",
+        company_name: '',
+        gst_no: '',
         err: ''
     })
     const [loading, setLoading] = useState(false)

@@ -10,7 +10,7 @@ const TransferToStore = (props) => {
         //     <Typography variant="h3">{_lang('tranfer_to_store')}</Typography>
         //     <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); e.changeParentValue() }}>
         <div className="we-container-small  df column radius-2">
-            <h3 className="h3">{_lang('tranfer_to_store')}</h3>
+            <h3 className="h3">{_lang('transfer_to_store')}</h3>
             <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); props.onSubmitBtnClick() }}>
 
                 <span className="h6  pt-3 pb-3 text-danger">{props.handleValues('get', 'err')}&nbsp;</span>

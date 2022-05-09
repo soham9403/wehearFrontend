@@ -119,7 +119,7 @@ const English = {
   actions: "Actions",
   delete: "Delete",
   verify: "Verify",
-  cancle: "Cancle",
+  cancle: "Cancel",
   verify_warning: "Are sure to Want to Verify?",
   delete_warning: "Are sure to Want to Delete?",
   product_created: "Product created successfully",
@@ -150,7 +150,9 @@ const English = {
   stock_list:"Stock List",
   sales_amount: "Sales Amount",
   export:"Export",
-  Year_the_date:"Year the date"
+  Year_the_date:"Year the date",
+  start:"Start",
+  end:"End",
 };
 
 export default English;

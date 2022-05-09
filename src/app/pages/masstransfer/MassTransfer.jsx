@@ -113,21 +113,27 @@ const MassTransfer = (props) => {
                         props.type != '' &&
 
                         <div className="row df center form-filed">
-                            <TextField
-                                required
-                                id="outlined-required"
-                                label={_lang('start')}
-                                value={props.handleValues('get', 'rangeFrom')}
-                                onChange={(e) => { props.handleValues('set', 'rangeFrom', e.target.value) }}
-                            />
-                            <Typography variant="h4" sx={{ m: 1 }}>-</Typography>
-                            <TextField
-                                required
-                                id="outlined-required"
-                                label={_lang('end')}
-                                value={props.handleValues('get', 'rangeTo')}
-                                onChange={(e) => { props.handleValues('set', 'rangeTo', e.target.value) }}
-                            />
+                            <div className="df flex-1">
+                                <TextField
+                                    fullWidth
+                                    required
+                                    id="outlined-required"
+                                    label={_lang('start')}
+                                    value={props.handleValues('get', 'rangeFrom')}
+                                    onChange={(e) => { props.handleValues('set', 'rangeFrom', e.target.value) }}
+                                />
+                            </div>
+                            <h3 className="h4 p-3" sx={{ m: 1 }}>-</h3>
+                            <div className="df flex-1">
+                                <TextField
+                                    fullWidth
+                                    required
+                                    id="outlined-required"
+                                    label={_lang('end')}
+                                    value={props.handleValues('get', 'rangeTo')}
+                                    onChange={(e) => { props.handleValues('set', 'rangeTo', e.target.value) }}
+                                />
+                            </div>
                         </div>
 
 

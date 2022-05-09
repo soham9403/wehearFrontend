@@ -107,7 +107,26 @@ const SignUpPage = (props) => {
                                                 />
                                             </FormControl>
                                         </div>
+                                        <div className=" form-filed row">
+                                            <CustomInput
+                                                disabled={props.loading}
+                                                value={props.handleValues('get', 'company_name')}
+                                                onChange={(e) => { props.handleValues('set', 'company_name', e.target.value) }}
+                                                type="text"
+                                                label={_lang('company_name_field')}
 
+                                            />
+                                        </div>
+                                        <div className=" form-filed row">
+                                            <CustomInput
+                                                disabled={props.loading}
+                                                value={props.handleValues('get', 'gst_no')}
+                                                onChange={(e) => { props.handleValues('set', 'gst_no', e.target.value) }}
+                                                type="text"
+                                                label={_lang('gst_no')}
+
+                                            />
+                                        </div>
                                     </div>
                                     {/* <div className="df row flex-end">
                                         <Link to={"/forget-password"} className="subtitle2 underline text-secondary">{_lang('que_forgot_pass')}</Link>
