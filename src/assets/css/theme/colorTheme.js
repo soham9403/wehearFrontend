@@ -14,7 +14,8 @@ const colorTheme = {
         light:{
             main:"#fff"
         }
-    },
+    }
+    
 }
 
 export default colorTheme

@@ -160,9 +160,7 @@ const MassTransferController = () => {
     } else {
         return (
             <>
-                <div className={'column  row m-v-primary'} style={{ maxWidth: "500px", width: '90%' }}>
-
-                    <div className="df column p-primary radius-primary  row" style={{ overflowY: "scroll", maxHeight: "100%", background: "white" }}>
+                
                     
                         <MassTransfer
                             transferMass={transferMass}
@@ -178,8 +176,7 @@ const MassTransferController = () => {
                             destributorList={destributor}
                             userData={user.data}
                         />
-                    </div>
-                </div>
+                   
             </>
         )
     }

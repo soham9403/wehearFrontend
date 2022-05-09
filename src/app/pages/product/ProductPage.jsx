@@ -76,12 +76,12 @@ const ProductPage = (props) => {
     return (
         <>
             <div className="df flex-1 p-v-primary" style={{ overflowY: "scroll" }}>
-                <div className="we_container">
+                <div className="we_container mt-3 table-card">
 
 
 
 
-                    <div className="row space-between m-v-primary df" >
+                    <div className="row space-between  mb-3 df" >
                         <div className="flex-1 df">
                             <Typography variant="h3">{_lang('product_list')}</Typography>
                         </div>

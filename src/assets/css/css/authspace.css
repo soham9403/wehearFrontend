@@ -7,9 +7,26 @@
 }
 
 .auth-container .we_container {
-    height: 51.80555555555556vh;
+    height: 60.80555555555556vh;
 }
-
+.scrollable-container-right-signup{
+    scrollbar-width: 5px !important;
+    padding-right: 0.2vw;
+}
+.scrollable-container-right-signup::-webkit-scrollbar{
+    display: flex;
+    width: 5px !important;
+    
+}
+.scrollable-container-right-signup::-webkit-scrollbar-track{
+    background-color: transparent;
+    width: 5px !important;
+}
+.scrollable-container-right-signup::-webkit-scrollbar-thumb{
+    background-color: #A91674;
+    width: 5px !important;
+    border-radius: 100px;
+}
 .auth-container .img {
     width: 25.938vw;
     height: auto;

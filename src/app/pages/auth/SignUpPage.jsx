@@ -29,7 +29,7 @@ const SignUpPage = (props) => {
                         </div>
                         <div className="df flex-1">
                             <div className="fit-content df">
-                                <form onSubmit={props.onSignUp} className="container-right df column">
+                                <form onSubmit={props.onSignUp} className="container-right  df column">
                                     <div className="h2-container">
                                         <h2 className="h2">Create&nbsp;your&nbsp;account
                                         </h2>
@@ -38,7 +38,7 @@ const SignUpPage = (props) => {
                                         </div>
                                     </div>
 
-                                    <div className="df column row" style={{ overflowY: "scroll", paddingTop: ".7vh" }}>
+                                    <div className="df column row scrollable-container-right-signup" style={{ overflowY: "scroll", paddingTop: ".7vh" }}>
 
                                         <div className="form-filed row">
                                             <CustomInput

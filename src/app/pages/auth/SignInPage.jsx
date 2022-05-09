@@ -27,7 +27,7 @@ const SignInPage = (props) => {
                         </div>
                     </div>
                     <div className="df flex-1">
-                        <div className="fit-content df">
+                        <div className="fit-content df center">
                             <form onSubmit={props.onSignIn} className="container-right df column">
                                 <div className="h2-container">
                                     <h2 className="h2">Log In

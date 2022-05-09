@@ -34,10 +34,7 @@ const AnalyticCountController = (props) => {
             label: _lang('yesterday'),
             value: 'yesterday'
         },
-        {
-            label: _lang('Year_the_date'),
-            value: 'this_year'
-        },
+        
         {
             label: _lang('last_7_days'),
             value: '7'
@@ -53,7 +50,11 @@ const AnalyticCountController = (props) => {
         {
             label: _lang('last_365_days'),
             value: '365'
-        }
+        },
+        {
+            label: _lang('Year_the_date'),
+            value: 'this_year'
+        },
 
     ]
     useLayoutEffect(() => {

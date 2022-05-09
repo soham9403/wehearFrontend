@@ -9,13 +9,14 @@ const ExportCsv = (props) => {
 
     return (
         <>
-            <div className={'column  row m-v-primary'} style={{ maxWidth: "500px", width: '90%' }}>
+            <div className="we-container-small  df column radius-2">
+                <form className="df row column profile-edit-form" onSubmit={async (e) => { e.preventDefault(); props.exportCsv() }}>
+                    <h3 className="h3 text-secondary">{_lang('export')}</h3>
+                    <span className="h6 text-danger pb-3 pt-3">{props.err}&nbsp;</span>
 
-                <div className="df column p-primary radius-primary  row" style={{ overflowY: "scroll", maxHeight: "100%", background: "white" }}>
-                    <Typography variant="h3">{_lang('export')}</Typography>
-                    <Typography variant="h3" color={"red"} >{props.err}</Typography>
-                    <div className="df row m-v-primary">
-                        
+
+                    <div className="df row form-filed">
+
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Date type</InputLabel>
                             <Select
@@ -27,30 +28,30 @@ const ExportCsv = (props) => {
                             >
                                 <MenuItem value={'packing_date'}>Packing Date</MenuItem>
                                 <MenuItem value={'sale_date'}>Sale Date</MenuItem>
-                                
+
                             </Select>
                         </FormControl>
                     </div>
-                    <div className="df row m-v-primary">
+                    <div className="df row form-filed">
 
-                        <TextField id="outlined-basic" type={"date"} value={props.handleValues('get', 'startDate')} onChange={(e) => { props.handleValues('set', 'startDate', e.target.value) }} label={_lang('start')} variant="outlined" />
-                        <span className="df center p-primary"> - </span>
-                        <TextField id="outlined-basic" type={"date"} value={props.handleValues('get', 'endDate')} onChange={(e) => { props.handleValues('set', 'endDate', e.target.value) }} label={_lang('end')} variant="outlined" />
+                        <TextField className="df flex-1" id="outlined-basic" type={"date"} value={props.handleValues('get', 'startDate')} onChange={(e) => { props.handleValues('set', 'startDate', e.target.value) }} label={_lang('start')} variant="outlined" />
+                        <span className="df center p-3"> - </span>
+                        <TextField className="df flex-1" id="outlined-basic" type={"date"} value={props.handleValues('get', 'endDate')} onChange={(e) => { props.handleValues('set', 'endDate', e.target.value) }} label={_lang('end')} variant="outlined" />
                     </div>
-                    <div className="df center row" >
-                        {props.loading && <SmallLoader />}
-                    </div>
-                    <div className="row m-v-primary" style={{ marginBottom: "0px" }}>
 
-                        <Button
+                    <div className="row form-filed" style={{ marginBottom: "0px" }}>
+
+                        <button
+                            className="auth-submit-btn df center text-light row pointer h3 btn-gradient"
                             disabled={props.loading}
                             variant="contained"
                             fullWidth={true}
-                            onClick={props.exportCsv}
 
-                        >{_lang('export')}</Button>
+
+                        > {props.loading ? <SmallLoader /> : _lang('export')}</button>
                     </div>
-                </div>
+                </form>
+
 
             </div>
         </>

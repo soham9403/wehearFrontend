@@ -49,11 +49,14 @@ function Row(props) {
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component='th' scope='row'>
-                    {row.box_qr_code_id}
+                    {dateToDDMMYYYY(_lang(row.sale_date))}
+
                 </TableCell>
-                <TableCell>{row.mac_id}</TableCell>
-                <TableCell>{dateToDDMMYYYY(_lang(row.packing_date))}</TableCell>
-                <TableCell>{row.current_location}</TableCell>
+                <TableCell>{row.box_qr_code_id}</TableCell>
+
+                <TableCell>{row.customer_name}</TableCell>
+                <TableCell>{row.invoice_value}</TableCell>
+                <TableCell>{row.sale_by.name + " (" + row.sale_by.usercode + ")"}</TableCell>
 
                 <TableCell>
                     <IconButton
@@ -69,37 +72,14 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
             </TableRow>
-            <TableRow sx={{ backgroundColor: 'lightgray' }}>
+            <TableRow sx={{ backgroundColor: '#EBEBEB' }}>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout='auto' unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <div className='row df column'>
-                                {
-                                    <>
-                                        <Typography variant='h3'>{_lang('product')}</Typography>
+                                <Grid container spacing={2}>
 
-                                        <Table aria-label='table' sx={{ mb: 2 }}>
-                                            <>
-                                                <TableRow>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span className='font-bold' variant='h3'>
-                                                            {_lang('name')}
-                                                        </span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span variant='h4'>
-                                                            {_lang(row.product_id.name)}
-                                                        </span>
-                                                    </TableCell>
-                                                </TableRow>
-                                            </>
-                                        </Table>
-                                    </>
-                                }
-                                {row.current_location == 'sold' && (
-                                    <>
+                                    <Grid container item md={6}>  <>
                                         <Typography variant='h3'>
                                             {_lang('customer_detils')}
                                         </Typography>
@@ -165,180 +145,106 @@ function Row(props) {
                                                 </TableRow>
                                             </>
                                         </Table>
+                                        <>
+                                            <Typography variant='h3'>{_lang('product')}</Typography>
 
-                                        <Typography variant='h3'>
-                                            {_lang('sales_details')}
-                                        </Typography>
+                                            <Table aria-label='table' sx={{ mb: 2 }}>
+                                                <>
+                                                    <TableRow>
+                                                        <TableCell>
+                                                            {' '}
+                                                            <span className='font-bold' variant='h3'>
+                                                                {_lang('name')}
+                                                            </span>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {' '}
+                                                            <span variant='h4'>
+                                                                {_lang(row.product_id.name)}
+                                                            </span>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </>
+                                            </Table>
+                                        </>
 
-                                        <Table aria-label='table' sx={{ mb: 2 }}>
-                                            <>
-                                                <TableRow>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span className='font-bold' variant='h3'>
-                                                            {_lang('sale_by')}
-                                                        </span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span variant='h4'>
-                                                            {_lang(row.sale_by.name) + row.sale_by.usercode}
-                                                        </span>
-                                                    </TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span className='font-bold' variant='h3'>
-                                                            {_lang('date')}
-                                                        </span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span variant='h4'>
-                                                            {dateToDDMMYYYY(_lang(row.sale_date))}
-                                                        </span>
-                                                    </TableCell>
-                                                </TableRow>
-                                            </>
-                                        </Table>
-                                    </>
-                                )}
-                                {row.allocated_user && row.current_location != 'sold' && (
-                                    <>
-                                        <Typography variant='h3'>
-                                            {_lang('allocated_user')}
-                                        </Typography>
+                                    </></Grid>
+                                    <Grid container item md={6}>
+                                        {
+                                            <div className='df row column'>
+                                                <Typography variant='h3'>
+                                                    {_lang('sales_details')}
+                                                </Typography>
 
-                                        <Table aria-label='table' sx={{ mb: 2 }}>
-                                            <>
-                                                <TableRow>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span className='font-bold' variant='h3'>
-                                                            {_lang('name')}
-                                                        </span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span variant='h4'>
-                                                            {_lang(row.allocated_user.name) +
-                                                                ' ( ' +
-                                                                row.allocated_user.usercode +
-                                                                ' )'}
-                                                        </span>
-                                                    </TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span className='font-bold' variant='h3'>
-                                                            {_lang('email')}
-                                                        </span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span variant='h4'>
-                                                            {_lang(row.allocated_user.email)}
-                                                        </span>
-                                                    </TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span className='font-bold' variant='h3'>
-                                                            {_lang('role')}
-                                                        </span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {' '}
-                                                        <span variant='h4'>
-                                                            {_lang('role_' + row.allocated_user.role)}
-                                                        </span>
-                                                    </TableCell>
-                                                </TableRow>
-                                            </>
-                                        </Table>
-                                    </>
-                                )}
+                                                <Table aria-label='table' sx={{ mb: 2 }}>
+                                                    <>
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span className='font-bold' variant='h3'>
+                                                                    {_lang('sale_by')}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span variant='h4'>
+                                                                    {_lang(row.sale_by.name) + row.sale_by.usercode}
+                                                                </span>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span className='font-bold' variant='h3'>
+                                                                    {_lang('date')}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span variant='h4'>
+                                                                    {dateToDDMMYYYY(_lang(row.sale_date))}
+                                                                </span>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span className='font-bold' variant='h3'>
+                                                                    {_lang('invoice_value')}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span variant='h4'>
+                                                                   {row.invoice_value}
+                                                                </span>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span className='font-bold' variant='h3'>
+                                                                    {_lang('invoice_number')}
+                                                                </span>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                {' '}
+                                                                <span variant='h4'>
+                                                                    {row.invoice_number}
+                                                                </span>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    </>
+                                                </Table>
+                                            </div>
+                                        }
+                                    </Grid>
+                                </Grid>
 
-                                {<Typography variant='h3'>{_lang('actions')}</Typography>}
-                                <div className='row'>
-                                    {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN ||
-                                        user.role == constants.user_role.PRODUCT_MANAGER) && (
-                                            <>
-                                                {row.current_location == 'checked' && (
-                                                    <Button
-                                                        variant='contained'
-                                                        sx={{ m: 1 }}
-                                                        onClick={() => {
-                                                            props.onTransfer('store', row)
-                                                        }}
-                                                    >
-                                                        {_lang('transfer_to_store')}
-                                                    </Button>
-                                                )}
 
-                                                {(row.current_location == 'checked' ||
-                                                    (row.current_location != 'with_destributor' &&
-                                                        row.current_location != 'with_reteller' &&
-                                                        row.current_location != 'sold')) && (
-                                                        <Button
-                                                            variant='contained'
-                                                            sx={{ m: 1 }}
-                                                            onClick={() => {
-                                                                props.onTransfer('destributor', row)
-                                                            }}
-                                                        >
-                                                            {_lang('transfer_to_destributor')}
-                                                        </Button>
-                                                    )}
-                                            </>
-                                        )}
-                                    {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN ||
-                                        user.role == constants.user_role.DESTRIBUTOR_ROLE) && (
-                                            <>
-                                                {row.current_location != 'with_reteller' &&
-                                                    row.current_location != 'sold' && (
-                                                        <Button
-                                                            variant='contained'
-                                                            sx={{ m: 1 }}
-                                                            onClick={() => {
-                                                                props.onTransfer('reteller', row)
-                                                            }}
-                                                        >
-                                                            {_lang('transfer_to_reteller')}
-                                                        </Button>
-                                                    )}
-                                            </>
-                                        )}
-                                    {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN ||
-                                        user.role == constants.user_role.RETELLER_ROLE) && (
-                                            <>
-                                                {row.current_location != 'sold' && (
-                                                    <Button
-                                                        variant='contained'
-                                                        sx={{ m: 1 }}
-                                                        onClick={() => {
-                                                            props.onTransfer('sold', row)
-                                                        }}
-                                                    >
-                                                        {_lang('sold')}
-                                                    </Button>
-                                                )}
-                                            </>
-                                        )}
-                                    {/* {(user.role != constants.user_role.RETELLER_ROLE && !row.verfied) && <Button variant="contained" sx={{ m: 1 }}
-                                          onClick={() => { props.onVerifyBtnClick(row) }}
-                                      >{_lang('verify')}</Button>}
-                                      {(user.role == constants.user_role.SUPER_ADMIN) && <Button variant="contained" sx={{ m: 1 }} color="error"
-                                          onClick={() => { props.onDeleteBtnClick(row) }}
-                                      >{_lang('delete')}</Button>} */}
 
-                                </div>
+
+
                             </div>
                         </Box>
                     </Collapse>
@@ -372,8 +278,8 @@ const Sold = props => {
                                     {_lang('export')}
                                 </button>
                                 <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
-                                    <button onClick={() => { props.handleFilters('isB2C', false) }} className={`custom-toggle-button h6 ${!props.filters.isB2C ? 'bg-secondary text-light':'text-secondary pointer'}`} >All</button>
-                                    <button onClick={() => { props.handleFilters('isB2C', true) }} className={`custom-toggle-button h6 ${props.filters.isB2C ? 'bg-secondary text-light':'text-secondary pointer'}`}>B2C</button>
+                                    <button onClick={() => { props.handleFilters('isB2C', false) }} className={`custom-toggle-button h6 ${!props.filters.isB2C ? 'bg-secondary text-light' : 'text-secondary pointer'}`} >All</button>
+                                    <button onClick={() => { props.handleFilters('isB2C', true) }} className={`custom-toggle-button h6 ${props.filters.isB2C ? 'bg-secondary text-light' : 'text-secondary pointer'}`}>B2C</button>
 
                                 </div>
                             </div>
@@ -444,139 +350,13 @@ const Sold = props => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className='df flex-end' style={{ justifyContent: 'flex-end' }}>
-              <div className='m-h-primary'>
-                <TextField
-                  value={props.filters.box_qr_code_id}
-                  onChange={e => {
-                    props.handleFilters('box_qr_code_id', e.target.value)
-                  }}
-                  id='filled-basic'
-                  label={_lang('search_by_qr_code')}
-                  variant='outlined'
-                />
-              </div>
-              <div>
-                <TextField
-                  value={props.filters.search}
-                  onChange={e => {
-                    props.handleFilters('search', e.target.value)
-                  }}
-                  id='filled-basic'
-                  label={_lang('search')}
-                  variant='outlined'
-                />
-              </div>
-            </div>
-            <div className='df flex-end space-between'>
-              <div className='mass-transfer df column'>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  onClick={props.onMassTransffer}
-                >
-                  {_lang('mass_transfer')}
-                </Button>
-                <Button
-                  variant='contained'
-                  sx={{ mt: 1 }}
-                  color='primary'
-                  onClick={props.exportCsv}
-                >
-                  {_lang('export')}
-                </Button>
-              </div>
-              <div>
-                <div className='df column center'>
-                  <Typography variant='subtitle2'>
-                    {' '}
-                    {_lang('only_b2c')}
-                  </Typography>
-                  <Switch
-                    checked={props.filters.is_b2c == 'true'}
-                    onChange={e => {
-                      props.handleFilters(
-                        'is_b2c',
-                        e.target.checked ? 'true' : 'false'
-                      )
-                    }}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                </div>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id='demo-simple-select-helper-label'>
-                    {_lang('status')}
-                  </InputLabel>
-                  <Select
-                    labelId='demo-simple-select-helper-label'
-                    id='demo-simple-select-helper'
-                    value={props.filters.current_location}
-                    label={_lang('status')}
-                    onChange={e => {
-                      props.handleFilters('current_location', e.target.value)
-                    }}
-                  >
-                    <MenuItem value='' selected>
-                      <em>{_lang('all')}</em>
-                    </MenuItem>
-  
-                    {user.role != constants.user_role.DESTRIBUTOR_ROLE &&
-                      user.role != constants.user_role.RETELLER_ROLE && (
-                        <MenuItem value={'checked'}>{_lang('checked')}</MenuItem>
-                      )}
-                    {user.role != constants.user_role.DESTRIBUTOR_ROLE &&
-                      user.role != constants.user_role.RETELLER_ROLE && (
-                        <MenuItem value={'store'}>{_lang('store')}</MenuItem>
-                      )}
-  
-                    {user.role != constants.user_role.DESTRIBUTOR_ROLE &&
-                      user.role != constants.user_role.RETELLER_ROLE && (
-                        <MenuItem value={'with_destributor'}>
-                          {_lang('with_destributor')}
-                        </MenuItem>
-                      )}
-                    {user.role != constants.user_role.DESTRIBUTOR_ROLE &&
-                      user.role != constants.user_role.RETELLER_ROLE && (
-                        <MenuItem value={'with_reteller'}>
-                          {_lang('with_reteller')}
-                        </MenuItem>
-                      )}
-  
-                    <MenuItem value={'sold'}>{_lang('sold')}</MenuItem>
-                  </Select>
-                </FormControl>
-  
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id='demo-simple-select-helper-label'>
-                    {_lang('type')}
-                  </InputLabel>
-                  <Select
-                    labelId='demo-simple-select-helper-label'
-                    id='demo-simple-select-helper'
-                    value={props.filters.inventoryType}
-                    label={_lang('type')}
-                    onChange={e => {
-                      props.handleFilters('inventoryType', e.target.value)
-                    }}
-                  >
-                    <MenuItem value='' selected>
-                      <em>{_lang('all')}</em>
-                    </MenuItem>
-  
-                    <MenuItem value={'product'}>{_lang('product')}</MenuItem>
-                    <MenuItem value={'marketing_material'}>
-                      {_lang('marketing_material')}
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </div> */}
+
 
 
                     <div className='row table-card radius-1'>
                         <div className='df row space-between'>
-                            <h3 className='h3'>
-                                {_lang('sold')}
+                            <h3 className='h3 mb-3'>
+                                {_lang('latest_sales')}
                             </h3>
                             {props.data && props.data.total != 0 && (
                                 <TablePagination
@@ -597,12 +377,13 @@ const Sold = props => {
 
                         <TableContainer component={Paper}>
                             <Table aria-label='collapsible table'>
-                                <TableHead>
+                                <TableHead >
                                     <TableRow>
-                                        <TableCell>Box QR</TableCell>
-                                        <TableCell>MAC id</TableCell>
-                                        <TableCell>Packing Date</TableCell>
-                                        <TableCell>location</TableCell>
+                                        <TableCell>Sale date</TableCell>
+                                        <TableCell>Product ID</TableCell>
+                                        <TableCell>Customer Name</TableCell>
+                                        <TableCell>Invoice value</TableCell>
+                                        <TableCell>Sold by</TableCell>
                                         <TableCell />
                                     </TableRow>
                                 </TableHead>

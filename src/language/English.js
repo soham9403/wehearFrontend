@@ -128,13 +128,13 @@ const English = {
   create: "Create",
   add_product: "Add Product",
   update_product: "Update Product",
-  allocated_user: "Allocated user",
+  allocated_user: "Allocated Merchant",
 
   product_list: "product List",
   customer_detils: "Customer Details",
   address: "Address",
   sales_details: "Sales Details",
-  sale_by: "Sale By",
+  sale_by: "Sold By",
   search_by_qr_code: "Search By Qr Code",
   store: "Store",
   checked: "Checked",
@@ -147,8 +147,10 @@ const English = {
   transfer_to_reteller: "Transfer -> Retailer",
   only_b2c: "Only B2C",
   latest_sales: "Latest Sales",
+  stock_list:"Stock List",
   sales_amount: "Sales Amount",
-  export:"Export"
+  export:"Export",
+  Year_the_date:"Year the date"
 };
 
 export default English;
