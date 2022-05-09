@@ -1,8 +1,9 @@
-let mode = "local";
+let mode = "production";
 let domainUrl;
 switch (mode) {
     case "local": domainUrl = "http://192.168.29.101:8000/api/";break;//"http://localhost:8000/api/"; break;
     case 'heroku': domainUrl = 'https://lychee-crisp-08059.herokuapp.com/api/';break;
+    case 'production': domainUrl = 'https://crm-admin-wehear.herokuapp.com/api/';break;
     default: domainUrl = "http://localhost:8000/api/"; break;
 }
 
