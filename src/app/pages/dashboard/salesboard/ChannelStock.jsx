@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { dateToDDMMYYYY, _lang } from '../../../../config/helper'
+import { accessControllByRole, dateToDDMMYYYY, _lang } from '../../../../config/helper'
 
 import { TablePagination } from '@mui/material'
 
@@ -172,43 +172,39 @@ function Row(props) {
                                                     </Table>
                                                 </>
                                             }
-                                            {<Typography variant='h3'>{_lang('actions')}</Typography>}
+                                            {/* {<Typography variant='h3'>{_lang('actions')}</Typography>}
                                             <div className='row'>
-                                                {(user.role == constants.user_role.ADMIN ||
-                                                    user.role == constants.user_role.SUPER_ADMIN ||
-                                                    user.role == constants.user_role.PRODUCT_MANAGER) && (
-                                                        <>
-                                                            {row.current_location == 'checked' && (
+                                                {accessControllByRole(user.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") && (
+                                                    <>
+                                                        {row.current_location == 'checked' && (
+                                                            <Button
+                                                                variant='contained'
+                                                                sx={{ m: 1 }}
+                                                                onClick={() => {
+                                                                    props.onTransfer('store', row)
+                                                                }}
+                                                            >
+                                                                {_lang('transfer_to_store')}
+                                                            </Button>
+                                                        )}
+
+                                                        {(row.current_location == 'checked' ||
+                                                            (row.current_location != 'with_destributor' &&
+                                                                row.current_location != 'with_reteller' &&
+                                                                row.current_location != 'sold')) && (
                                                                 <Button
                                                                     variant='contained'
                                                                     sx={{ m: 1 }}
                                                                     onClick={() => {
-                                                                        props.onTransfer('store', row)
+                                                                        props.onTransfer('destributor', row)
                                                                     }}
                                                                 >
-                                                                    {_lang('transfer_to_store')}
+                                                                    {_lang('transfer_to_destributor')}
                                                                 </Button>
                                                             )}
-
-                                                            {(row.current_location == 'checked' ||
-                                                                (row.current_location != 'with_destributor' &&
-                                                                    row.current_location != 'with_reteller' &&
-                                                                    row.current_location != 'sold')) && (
-                                                                    <Button
-                                                                        variant='contained'
-                                                                        sx={{ m: 1 }}
-                                                                        onClick={() => {
-                                                                            props.onTransfer('destributor', row)
-                                                                        }}
-                                                                    >
-                                                                        {_lang('transfer_to_destributor')}
-                                                                    </Button>
-                                                                )}
-                                                        </>
-                                                    )}
-                                                {(user.role == constants.user_role.ADMIN ||
-                                                    user.role == constants.user_role.SUPER_ADMIN ||
-                                                    user.role == constants.user_role.DESTRIBUTOR_ROLE) && (
+                                                    </>
+                                                )}
+                                                {accessControllByRole(user.role, "RETAILLER_TRANSFER_BUTTON") && (
                                                         <>
                                                             {row.current_location != 'with_reteller' &&
                                                                 row.current_location != 'sold' && (
@@ -224,9 +220,7 @@ function Row(props) {
                                                                 )}
                                                         </>
                                                     )}
-                                                {(user.role == constants.user_role.ADMIN ||
-                                                    user.role == constants.user_role.SUPER_ADMIN ||
-                                                    user.role == constants.user_role.RETELLER_ROLE) && (
+                                                {accessControllByRole(user.role, "SELL_BUTTON") && (
                                                         <>
                                                             {row.current_location != 'sold' && (
                                                                 <Button
@@ -241,14 +235,14 @@ function Row(props) {
                                                             )}
                                                         </>
                                                     )}
-                                                {/* {(user.role != constants.user_role.RETELLER_ROLE && !row.verfied) && <Button variant="contained" sx={{ m: 1 }}
+                                                {(user.role != constants.user_role.RETELLER_ROLE && !row.verfied) && <Button variant="contained" sx={{ m: 1 }}
                                           onClick={() => { props.onVerifyBtnClick(row) }}
                                       >{_lang('verify')}</Button>}
                                       {(user.role == constants.user_role.SUPER_ADMIN) && <Button variant="contained" sx={{ m: 1 }} color="error"
                                           onClick={() => { props.onDeleteBtnClick(row) }}
-                                      >{_lang('delete')}</Button>} */}
+                                      >{_lang('delete')}</Button>}
 
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </Grid>
                                 </Grid>
@@ -323,7 +317,7 @@ const ChannelStock = props => {
                                 />
                             </div>
                             <div className='df row flex-end'>
-                                {user.role != constants.user_role.DESTRIBUTOR_ROLE && user.role != constants.user_role.RETELLER_ROLE && <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
+                                {accessControllByRole(user.role,"RETE_DES_CHANNEL_TOGGLE_BTN",true) && <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
                                     <button onClick={e => {
                                         props.handleFilters('sub_location', 'with_reteller')
                                     }} className={`custom-toggle-button h6 ${props.filters.sub_location == 'with_reteller' ? 'bg-secondary text-light' : 'pointer text-secondary'}`}>{_lang('reteller')}</button>
@@ -335,9 +329,6 @@ const ChannelStock = props => {
 
                                 <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt '>
                                     <button className={props.filters.inventoryType == '' ? 'custom-toggle-button h6 bg-secondary text-light ' : 'custom-toggle-button h6 pointer text-secondary'}
-
-
-
                                         onClick={e => {
                                             props.handleFilters('inventoryType', '')
                                         }}>All</button>

@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { _lang } from "../../../config/helper"
 import useBreadCrumb from "../../../store/hooks/useBreadCrumbs"
 import { deleteUserAPi, getUserCountApi, getUserListApi, verifyUserApi } from "../../apis/userApis"
@@ -8,10 +8,13 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { openModal } from "../../../store/actions/modalAction"
 import CreateAndUpdateUserController from "./CreateAndUpdateUserController"
+import { AnalysticContext } from "../dashboard/AnalyticCountController"
 const UserController = () => {
 
     const bread_crumb = useBreadCrumb()
     const dispatch = useDispatch()
+    const {refreshAnalyticCount} = useContext(AnalysticContext)
+    
     const params = useParams()
     const usercode = params.usercode
     const [filters, setFilters] = useState({
@@ -84,8 +87,8 @@ const UserController = () => {
                 await deleteUserAPi(row._id)
                 await Promise.all([
                     getUserList(usercode),
-                    getUserCount(usercode)
-
+                    getUserCount(usercode),
+                    refreshAnalyticCount()
                 ])
             }
         ))
@@ -98,7 +101,8 @@ const UserController = () => {
                 await verifyUserApi(row._id)
                 await Promise.all([
                     getUserList(usercode),
-                    getUserCount(usercode)
+                    getUserCount(usercode),
+                    refreshAnalyticCount()
 
                 ])
             }
@@ -113,7 +117,8 @@ const UserController = () => {
             async () => {
                 await Promise.all([
                     getUserList(usercode),
-                    getUserCount(usercode)
+                    getUserCount(usercode),
+                    refreshAnalyticCount()
 
                 ])
             },
@@ -129,7 +134,8 @@ const UserController = () => {
 
                 await Promise.all([
                     getUserList(usercode),
-                    getUserCount(usercode)
+                    getUserCount(usercode),
+                    refreshAnalyticCount()
 
                 ])
             },

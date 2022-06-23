@@ -1,6 +1,8 @@
+import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { openModal } from "../../../../store/actions/modalAction"
 import MassTransferController from "../../masstransfer/MassTransferController"
+import { AnalysticContext } from "../AnalyticCountController"
 import ExportController from "../ExportController"
 import TransferController from "../TransferController"
 import ChannelStockController from "./ChannelStockController"
@@ -8,19 +10,19 @@ import SoldController from "./SoldController"
 import StockController from "./StockController"
 
 const SaleBoardMain = ({ type, ...props }) => {
-    const { user } = useSelector(state => state)
+    const { refreshAnalyticCount } = useContext(AnalysticContext)
     const dispatch = useDispatch()
     const onTransfer = (type, data, callBack = async () => { }) => {
         dispatch(openModal(
-            type == 'sold' ? "CUSTOM_FULL_HEIGHT" : "CUSTOM",
-            callBack,
+            type == 'sold' ? "CUSTOM" : "CUSTOM",
+            async () => { await Promise.all([refreshAnalyticCount(), callBack()]) },
             <TransferController type={type} data={data} />
         ))
     }
     const onMassTransffer = (callBack = async () => { }) => {
         dispatch(openModal(
             "CUSTOM",
-            callBack,
+            async () => { await Promise.all([refreshAnalyticCount(), callBack()]) },
             <MassTransferController />
         ))
     }

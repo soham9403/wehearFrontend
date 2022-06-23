@@ -54,8 +54,8 @@
 }
 
 .pop-up-content {
-  margin: 5vh auto;
-  max-height: 90vh;
+  margin: 0px auto;
+  max-height: 100vh;
   max-width: 90%;
   width: fit-content;
   overflow-y: scroll;
@@ -64,14 +64,14 @@
 
 .pop-up-content-centered {
   margin: auto auto;
-  max-height: 90vh;
+  max-height: 100vh;
   width: fit-content;
   max-width: 90%;
   overflow-y: scroll;
   z-index: -1;
   position: relative;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 
 }

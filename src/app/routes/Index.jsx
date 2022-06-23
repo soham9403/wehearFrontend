@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import constants from '../../config/constants';
+import { accessControllByRole } from '../../config/helper';
 import ForgetPasswordController from '../controllers/auth/ForgetPasswordController';
 import SignInController from '../controllers/auth/SignInController';
 import SignUpController from '../controllers/auth/SignUpController';
@@ -18,6 +19,7 @@ import Header from '../pages/header/Header';
 
 const IndexRoute = () => {
     const user = useSelector((state) => { return state.user })
+    // alert(user.data.role + "|"+ accessControllByRole(user.data.role, "USERS_PAGE"))
     return (
         <>
             <Routes>
@@ -26,19 +28,20 @@ const IndexRoute = () => {
                         <>
                             <Route path='' element={<Header />}>
                                 <Route path='dashboard' element={<DashboardController />} >
-                                    <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode +"/sold"} />} />
-                                    <Route path=':usercode/users' element={<UserController />} />
+                                    <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode + "/sold"} />} />
+
                                     <Route path=':usercode/sold' element={<SaleBoardMain type={'sold'} />} />
                                     <Route path=':usercode/stock' element={<SaleBoardMain type={'stock'} />} />
                                     <Route path=':usercode/channel' element={<SaleBoardMain type={'channel'} />} />
-                                    {user.data.role != constants.user_role.RETELLER_ROLE &&
+                                    {accessControllByRole(user.data.role, "USERS_PAGE") && <Route path=':usercode/users' element={<UserController />} />}
+                                    {accessControllByRole(user.data.role, "MASS_TRANSFER", true) &&
                                         <Route path=':usercode/all/mass-transfer' element={<MassTransferController />} />}
-                                   
+
                                 </Route>
 
-                                {(user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN) && <Route path='product' element={<ProductController />} />}
+                                {accessControllByRole(user.data.role, "PRODUCT_PAGE") && <Route path='product' element={<ProductController />} />}
                                 <Route path='profile' element={<ProfileController />} />
-                                <Route path='' element={<Navigate replace to={"/dashboard/" +  user.data.usercode +"/sold"} />} />
+                                <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode + "/sold"} />} />
                             </Route>
                         </>
                         :

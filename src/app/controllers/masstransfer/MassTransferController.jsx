@@ -11,7 +11,8 @@ import MassTransfer from "../../pages/masstransfer/MassTransfer"
 
 const MassTransferController = () => {
 
-    const { user, destributor_list } = useSelector(state => state)
+    const { user, destributor_list,modal } = useSelector(state => state)
+    
     const dispatch = useDispatch()
     const destributor = destributor_list
     const [type, setType] = useState(user.data.role == constants.user_role.DESTRIBUTOR_ROLE ? 'retteler' : '')// '','retteler','destributor'
@@ -25,7 +26,11 @@ const MassTransferController = () => {
         allocated_user: ''
     })
 
-    const [transferAvailableList, setTransferAvailableList] = useState({ list: [], total: 0, totalChecked: 0 })
+    const [listFilter, setListFIlters] = useState({
+        searchStr: ''
+    })
+
+    const [transferAvailableList, setTransferAvailableList] = useState({ list: {}, total: 0, totalChecked: 0 })
 
 
     const handleValues = (method, field, value) => {
@@ -60,9 +65,9 @@ const MassTransferController = () => {
         }
         setInputs(temp)
     }
-    useLayoutEffect(()=>{
-        handleValues('set','allocated_destributor',{ usercode: user.data.usercode })
-    },[])
+    useLayoutEffect(() => {
+        handleValues('set', 'allocated_destributor', { usercode: user.data.usercode })
+    }, [])
     const getRangedData = async () => {
         if (inputs.rangeFrom == '') {
             handleValues('set', 'err', _lang('start_required'))
@@ -80,10 +85,13 @@ const MassTransferController = () => {
 
         if (response.status == 1) {
             const data = response.data;
+            const list = {}
             for (let i = 0; i < data.length; i++) {
                 data[i]['checked'] = true;
+                list[data[i]._id] = data[i]
             }
-            setTransferAvailableList({ list: data, total: data.length, totalChecked: data.length })
+
+            setTransferAvailableList({ list: list, total: data.length, totalChecked: data.length })
         }
     }
 
@@ -100,6 +108,22 @@ const MassTransferController = () => {
         setTransferAvailableList(temp)
     }
 
+    const checkUncheckAll = (value) => {
+        const temp = { ...transferAvailableList }
+        
+        for (let key of Object.keys(temp['list'])) {
+            temp['list'][key]['checked'] = value
+        }
+        if (value == true) {
+            temp['totalChecked'] =  Object.keys(temp['list']).length;
+        } else {
+            temp['totalChecked'] = 0;
+        }
+        
+
+        setTransferAvailableList(temp)
+
+    }
     const [loading, setLoading] = useState(false)
     const [dropDownLoading, setDropDownLoading] = useState(false)
     const [retellerList, setRetailerList] = useState([])
@@ -113,7 +137,7 @@ const MassTransferController = () => {
             handleValues('set', 'err', type == 'retteler' ? _lang('reteller_required') : _lang('destributor_required'))
             return 0
         }
-        for (let row of transferAvailableList.list) {
+        for (let row of Object.values(transferAvailableList.list)) {
             if (row.checked) {
                 qrCodes.push(row.box_qr_code_id)
             }
@@ -121,8 +145,9 @@ const MassTransferController = () => {
         setLoading(true)
         const response = await transferBoxBulkApi({ box_qr_code_id: JSON.stringify(qrCodes), allocated_user: inputs.allocated_user._id })
         if (response.status == 1) {
-            setTransferAvailableList({ list: [], total: 0, totalChecked: 0 })
+            setTransferAvailableList({ list: {}, total: 0, totalChecked: 0 })
             handleValues('set', 'successMsg', _lang('boxes_transfered_successfully'))
+            await modal.onAction()
             setTimeout(() => {
                 handleValues('set', 'successMsg', '')
             }, 3000);
@@ -160,23 +185,26 @@ const MassTransferController = () => {
     } else {
         return (
             <>
-                
-                    
-                        <MassTransfer
-                            transferMass={transferMass}
-                            getRangedData={getRangedData}
-                            type={type}
-                            checkUncheck={checkUncheck}
-                            handleValues={handleValues}
-                            loading={loading}
-                            setType={setType}
-                            transferAvailableList={transferAvailableList}
-                            dropDownLoading={dropDownLoading}
-                            list={retellerList}
-                            destributorList={destributor}
-                            userData={user.data}
-                        />
-                   
+
+
+                <MassTransfer
+                    listFilter={listFilter}
+                    checkUncheckAll={checkUncheckAll}
+                    setListFilters={setListFIlters}
+                    transferMass={transferMass}
+                    getRangedData={getRangedData}
+                    type={type}
+                    checkUncheck={checkUncheck}
+                    handleValues={handleValues}
+                    loading={loading}
+                    setType={setType}
+                    transferAvailableList={transferAvailableList}
+                    dropDownLoading={dropDownLoading}
+                    list={retellerList}
+                    destributorList={destributor}
+                    userData={user.data}
+                />
+
             </>
         )
     }

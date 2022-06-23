@@ -1,10 +1,10 @@
-import { accessToken, refreshToken, userId } from "../../config/helper"
+import { accessToken, refreshToken } from "../../config/helper"
 
 export const signInAction = (data, donotSetLocalVar = false) => {
     if (!donotSetLocalVar) {
         accessToken.set(data.accessToken)
         refreshToken.set(data.refreshToken)
-        userId.set(data._id)
+        
     }
 
     return {
@@ -16,7 +16,7 @@ export const signInAction = (data, donotSetLocalVar = false) => {
 export const signOutAction = () => {
     accessToken.remove()
     refreshToken.remove()
-    userId.remove()
+    
 
     return {
         type: "SIGN_OUT",

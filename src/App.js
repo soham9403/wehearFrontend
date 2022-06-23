@@ -2,7 +2,7 @@ import './App.css';
 import IndexRoute from './app/routes/Index';
 import { useState } from 'react';
 import Loader from './component/common/Loader';
-import { logOut, userId } from './config/helper';
+import { accessToken, logOut } from './config/helper';
 
 import { useLayoutEffect } from 'react';
 import { getUserInfo } from './app/apis/authApis';
@@ -19,8 +19,8 @@ function App() {
   const navigate = useNavigate()
   useEffect(() => {
     (async () => {
-      if (userId.get()) {
-        const response = await getUserInfo(userId.get())
+      if (accessToken.get()) {
+        const response = await getUserInfo()
         if (response.status === 1) {
           dispatch(signInAction(response.data,true))
         } else {

@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { dateToDDMMYYYY, _lang } from '../../../../config/helper'
+import { accessControllByRole, dateToDDMMYYYY, _lang } from '../../../../config/helper'
 
 import { TablePagination } from '@mui/material'
 
@@ -47,13 +47,13 @@ function Row(props) {
 
     return (
         <>
-            <TableRow sx={{borderBottom:"unset", '& > *': { borderBottom: 'none',borderTop:"none" } }}>
-                <TableCell  sx={{borderBottom:"none"}} component='th' scope='row'>
+            <TableRow sx={{ borderBottom: "unset", '& > *': { borderBottom: 'none', borderTop: "none" } }}>
+                <TableCell sx={{ borderBottom: "none" }} component='th' scope='row'>
                     {row.box_qr_code_id}
                 </TableCell>
                 <TableCell>{row.mac_id}</TableCell>
                 <TableCell>{dateToDDMMYYYY(_lang(row.packing_date))}</TableCell>
-                {user.role!=constants.user_role.DESTRIBUTOR_ROLE && <TableCell>{row.current_location}</TableCell>}
+                {accessControllByRole(user.role, "LOCATION_CELL_SHOW", true) && <TableCell>{row.current_location}</TableCell>}
 
                 <TableCell>
                     <IconButton
@@ -112,79 +112,72 @@ function Row(props) {
                                         </Table>
                                     </>
                                 }
-                               
-                               
+
+
 
                                 {<Typography variant='h3'>{_lang('actions')}</Typography>}
                                 <div className='row'>
-                                    {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN ||
-                                        user.role == constants.user_role.PRODUCT_MANAGER) && (
-                                            <>
-                                                {row.current_location == 'checked' && (
-                                                    <Button
-                                                        variant='contained'
-                                                        sx={{ m: 1 }}
-                                                        onClick={() => {
-                                                            props.onTransfer('store', row)
-                                                        }}
-                                                    >
-                                                        {_lang('transfer_to_store')}
-                                                    </Button>
-                                                )}
+                                    {accessControllByRole(user.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") && (
+                                        <>
+                                            {row.current_location == 'checked' && (
+                                                <Button
+                                                    variant='contained'
+                                                    sx={{ m: 1 }}
+                                                    onClick={() => {
+                                                        props.onTransfer('store', row)
+                                                    }}
+                                                >
+                                                    {_lang('transfer_to_store')}
+                                                </Button>
+                                            )}
 
-                                                {(row.current_location == 'checked' ||
-                                                    (row.current_location != 'with_destributor' &&
-                                                        row.current_location != 'with_reteller' &&
-                                                        row.current_location != 'sold')) && (
-                                                        <Button
-                                                            variant='contained'
-                                                            sx={{ m: 1 }}
-                                                            onClick={() => {
-                                                                props.onTransfer('destributor', row)
-                                                            }}
-                                                        >
-                                                            {_lang('transfer_to_destributor')}
-                                                        </Button>
-                                                    )}
-                                            </>
-                                        )}
-                                    {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN ||
-                                        user.role == constants.user_role.DESTRIBUTOR_ROLE) && (
-                                            <>
-                                                {row.current_location != 'with_reteller' &&
-                                                    row.current_location != 'sold' && (
-                                                        <Button
-                                                            variant='contained'
-                                                            sx={{ m: 1 }}
-                                                            onClick={() => {
-                                                                props.onTransfer('reteller', row)
-                                                            }}
-                                                        >
-                                                            {_lang('transfer_to_reteller')}
-                                                        </Button>
-                                                    )}
-                                            </>
-                                        )}
-                                    {(user.role == constants.user_role.ADMIN ||
-                                        user.role == constants.user_role.SUPER_ADMIN || 
-                                        user.role == constants.user_role.DESTRIBUTOR_ROLE ||
-                                        user.role == constants.user_role.RETELLER_ROLE) && (
-                                            <>
-                                                {row.current_location != 'sold' && (
+                                            {(row.current_location == 'checked' ||
+                                                (row.current_location != 'with_destributor' &&
+                                                    row.current_location != 'with_reteller' &&
+                                                    row.current_location != 'sold')) && (
                                                     <Button
                                                         variant='contained'
                                                         sx={{ m: 1 }}
                                                         onClick={() => {
-                                                            props.onTransfer('sold', row)
+                                                            props.onTransfer('destributor', row)
                                                         }}
                                                     >
-                                                        {_lang('sold')}
+                                                        {_lang('transfer_to_destributor')}
                                                     </Button>
                                                 )}
-                                            </>
-                                        )}
+                                        </>
+                                    )}
+                                    {accessControllByRole(user.role, "RETAILLER_TRANSFER_BUTTON") && (
+                                        <>
+                                            {row.current_location != 'with_reteller' &&
+                                                row.current_location != 'sold' && (
+                                                    <Button
+                                                        variant='contained'
+                                                        sx={{ m: 1 }}
+                                                        onClick={() => {
+                                                            props.onTransfer('reteller', row)
+                                                        }}
+                                                    >
+                                                        {_lang('transfer_to_reteller')}
+                                                    </Button>
+                                                )}
+                                        </>
+                                    )}
+                                    {accessControllByRole(user.role, "SELL_BUTTON") && (
+                                        <>
+                                            {row.current_location != 'sold' && (
+                                                <Button
+                                                    variant='contained'
+                                                    sx={{ m: 1 }}
+                                                    onClick={() => {
+                                                        props.onTransfer('sold', row)
+                                                    }}
+                                                >
+                                                    {_lang('sold')}
+                                                </Button>
+                                            )}
+                                        </>
+                                    )}
                                     {/* {(user.role != constants.user_role.RETELLER_ROLE && !row.verfied) && <Button variant="contained" sx={{ m: 1 }}
                                           onClick={() => { props.onVerifyBtnClick(row) }}
                                       >{_lang('verify')}</Button>}
@@ -293,7 +286,7 @@ const Stock = props => {
                             </div>
                         </div>
                     </div>
-                    
+
 
 
                     <div className='row table-card radius-1'>
@@ -325,7 +318,7 @@ const Stock = props => {
                                         <TableCell>Product Id</TableCell>
                                         <TableCell>MAC id</TableCell>
                                         <TableCell>Packing Date</TableCell>
-                                        {user.role!=constants.user_role.DESTRIBUTOR_ROLE &&<TableCell>location</TableCell>}
+                                        {accessControllByRole(user.role, "LOCATION_CELL_SHOW", true) && <TableCell>location</TableCell>}
                                         <TableCell />
                                     </TableRow>
                                 </TableHead>

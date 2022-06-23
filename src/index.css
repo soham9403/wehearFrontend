@@ -3,7 +3,7 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  line-height: 100%;
+  /* line-height: 100%; */
   
   text-decoration: none;
   scrollbar-width: 0px;

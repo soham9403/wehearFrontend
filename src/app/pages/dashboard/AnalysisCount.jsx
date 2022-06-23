@@ -1,10 +1,12 @@
 import { Button, FormControl, SeMenuItem, lect, Typography, Select, MenuItem } from '@mui/material'
 import Grid from '@mui/material/Grid'
+import { useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { _lang } from '../../../config/helper'
+import { accessControllByRole, _lang } from '../../../config/helper'
 
 const AnalysisCount = ({ changePage, checkPage, ...props }) => {
     const userInventoryData = props.userInventoryData
+    const { user } = useSelector(state => state)
     const params = useParams()
     const location = useLocation()
 
@@ -15,7 +17,7 @@ const AnalysisCount = ({ changePage, checkPage, ...props }) => {
                     !props.analyticLoader && <>
 
                         {
-                            userInventoryData &&
+                            userInventoryData && accessControllByRole(user.data.role, "USERS_PAGE") &&
                             <Grid xs={6} md={3} container item>
                                 <button className={`analytic-btn  df center column radius-1 bg-light row ${checkPage('users') ? 'analytic-btn-active' : 'pointer'}`} onClick={() => { changePage('users') }}>
                                     <h1 className='h2 text-gradient-primary' style={{ marginBottom: "0.391vw" }}>{userInventoryData.total_user ? userInventoryData.total_user : "0"}</h1>
@@ -62,7 +64,7 @@ const AnalysisCount = ({ changePage, checkPage, ...props }) => {
                             </Grid>
                         }
                         {
-                            userInventoryData && userInventoryData.inventory && <Grid xs={6} md={3} container item>
+                            userInventoryData && userInventoryData.inventory && accessControllByRole(user.data.role, "CHANNEL_STOCK",true) &&  <Grid xs={6} md={3} container item>
                                 <button className={`analytic-btn  df center column radius-1 bg-light row ${checkPage('channel') ? 'analytic-btn-active' : 'pointer'}`} onClick={() => { changePage('channel') }}>
                                     <h1 className='h2 text-gradient-primary' style={{ marginBottom: "0.391vw" }}>{userInventoryData.inventory.channel_stock_count ? userInventoryData.inventory.channel_stock_count : "0"}</h1>
                                     <h1 className='h4'>{_lang('channel_stock')}</h1>
@@ -78,26 +80,26 @@ const AnalysisCount = ({ changePage, checkPage, ...props }) => {
                             <div className='grid-loader analytic-btn-active df center column radius-1 bg-light row'>
 
                             </div>
-                            
+
                         </Grid>
 
                         <Grid xs={6} md={3} container item>
                             <div className='grid-loader analytic-btn-active df center column radius-1 bg-light row'>
 
                             </div>
-                            
+
                         </Grid>
                         <Grid xs={6} md={3} container item>
                             <div className='grid-loader analytic-btn-active df center column radius-1 bg-light row'>
 
                             </div>
-                            
+
                         </Grid>
                         <Grid xs={6} md={3} container item>
                             <div className='grid-loader analytic-btn-active df center column radius-1 bg-light row'>
 
                             </div>
-                            
+
                         </Grid>
                     </>
                 }

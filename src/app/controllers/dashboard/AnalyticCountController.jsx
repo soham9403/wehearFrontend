@@ -4,12 +4,14 @@ import { useLayoutEffect } from "react"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
-import { getDateFiltersTime, _lang } from "../../../config/helper"
+import constants from "../../../config/constants"
+import { accessControllByRole, getDateFiltersTime, _lang } from "../../../config/helper"
 import { setuserAnalyticAction } from "../../../store/actions/userAnalyticaction"
 import getUseranalayticInfo from "../../apis/dashboardApi"
 import AnalysisCount from "../../pages/dashboard/AnalysisCount"
 
 export const AnalysticFiltersContecxt = createContext(null)
+export const AnalysticContext = createContext(null)
 const AnalyticCountController = (props) => {
     const [analysticFilters, setAnalyticFilrter] = useState({ startDate: '', endDate: '', value: '' })
     const [analyticLoader, setAnalyticLoading] = useState(false)
@@ -18,7 +20,7 @@ const AnalyticCountController = (props) => {
     const navigate = useNavigate()
     const location = useLocation()
     const params_user_code = params.usercode
-    const { userAnalytic } = useSelector(state => state)
+    const { userAnalytic, user } = useSelector(state => state)
     const handleAnlyticFilter = (field, value) => {
         if (field == 'value') {
             const date = getDateFiltersTime(value);
@@ -34,7 +36,7 @@ const AnalyticCountController = (props) => {
             label: _lang('yesterday'),
             value: 'yesterday'
         },
-        
+
         {
             label: _lang('last_7_days'),
             value: '7'
@@ -60,34 +62,39 @@ const AnalyticCountController = (props) => {
     useLayoutEffect(() => {
         handleAnlyticFilter('value', 'today')
     }, [])
+    const loadAnalyticsInfo = async () => {
 
+        if (analysticFilters.value != '') {
+            setAnalyticLoading(true)
+            const res = await getUseranalayticInfo({
+                user_code: params_user_code,
+                ...analysticFilters
+            })
+
+            dispatch(setuserAnalyticAction(params_user_code, res.data))
+            setAnalyticLoading(false)
+        }
+
+
+    }
 
     useEffect(() => {
-        (async () => {
+        loadAnalyticsInfo()
 
-            if (analysticFilters.value != '') {
-                setAnalyticLoading(true)
-                const res = await getUseranalayticInfo({
-                    user_code: params_user_code,
-                    ...analysticFilters
-                })
-
-                dispatch(setuserAnalyticAction(params_user_code, res.data))
-                setAnalyticLoading(false)
-            }
-
-
-        })()
-        
     }, [analysticFilters, params_user_code])
     const changePage = (path) => {
+        if (path == 'users' && !accessControllByRole(user.data.role, "USERS_PAGE")) {
+            return
+        }
         navigate("/dashboard/" + params_user_code + '/' + path)
     }
     const checkPage = (path) => {
         // navigate("/dashboard/" + params_user_code + '/' + path)
         return location.pathname === "/dashboard/" + params_user_code + '/' + path
     }
-
+    const analyticsObj = {
+        refreshAnalyticCount: loadAnalyticsInfo
+    }
     return (
         <>
             <div className='row bg-light'>
@@ -95,7 +102,9 @@ const AnalyticCountController = (props) => {
                     <AnalysisCount checkPage={checkPage} changePage={changePage} allowedDatesFilter={allowedDatesFilter} userInventoryData={userAnalytic.data[params_user_code] ? userAnalytic.data[params_user_code] : {}} analyticLoader={analyticLoader} handleAnlyticFilter={handleAnlyticFilter} analysticFilters={analysticFilters} />
                 </div>
                 <AnalysticFiltersContecxt.Provider value={analysticFilters}>
-                    {props.children}
+                    <AnalysticContext.Provider value={analyticsObj}>
+                        {props.children}
+                    </AnalysticContext.Provider>
                 </AnalysticFiltersContecxt.Provider>
             </div>
         </>

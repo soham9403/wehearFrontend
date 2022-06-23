@@ -65,7 +65,7 @@ const CustomModal = () => {
                 BackdropComponent={Backdrop}
             >
                 <Grow in={modal.show}>
-                    <div className={modal.type == "CUSTOM_FULL_HEIGHT" ? "we_container df column p-relative pop-up-content" : "we_container df column p-relative pop-up-content-centered"}>
+                    <div className={modal.type == "CUSTOM_FULL_HEIGHT" ? "we_container df column p-relative pop-up-content pt-3 pb-3" : "we_container df column p-relative pop-up-content-centered pt-3 pb-3"}>
                         {modal.type == "DELETE" &&
                             <div className="we-container-small  df column radius-2">
                                 <div className="df row column profile-edit-form">

@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { dateToDDMMYYYY, _lang } from '../../../../config/helper'
+import { accessControllByRole, dateToDDMMYYYY, _lang } from '../../../../config/helper'
 
 import { TablePagination } from '@mui/material'
 
@@ -277,7 +277,7 @@ const Sold = props => {
                                 <button onClick={props.exportCsv} className=' h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
                                     {_lang('export')}
                                 </button>
-                                {user.role != constants.user_role.DESTRIBUTOR_ROLE && user.role != constants.user_role.RETELLER_ROLE && <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
+                                {accessControllByRole(user.role,'RETE_DES_CHANNEL_TOGGLE_BTN',true) && <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
                                     <button onClick={() => { props.handleFilters('isB2C', false) }} className={`custom-toggle-button h6 ${!props.filters.isB2C ? 'bg-secondary text-light' : 'text-secondary pointer'}`} >All</button>
                                     <button onClick={() => { props.handleFilters('isB2C', true) }} className={`custom-toggle-button h6 ${props.filters.isB2C ? 'bg-secondary text-light' : 'text-secondary pointer'}`}>B2C</button>
 

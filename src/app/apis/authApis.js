@@ -1,6 +1,6 @@
 import axios from 'axios'
 import constants from '../../config/constants'
-import { accessToken, getHeaders, logOut, refreshToken, userId } from '../../config/helper'
+import { accessToken, getHeaders, logOut, refreshToken } from '../../config/helper'
 import apiurl from './apiurl'
 export const getUserInfo = async (user_code) => {
 
@@ -8,9 +8,9 @@ export const getUserInfo = async (user_code) => {
         url: apiurl.get_user_by_code,
         method: "GET",
         headers: getHeaders(),
-        params: {
-            user_code: user_code,
-        }
+        // params: {
+        //     user_code: user_code,
+        // }
     }).then(res => {
         return res.data
     }).catch(async (err) => {

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import constants from '../../config/constants'
-import { accessToken, getHeaders, logOut, refreshToken, userId } from '../../config/helper'
+
+import {  getHeaders } from '../../config/helper'
 import apiurl from './apiurl'
 import { resetToken } from './authApis'
 const getUseranalayticInfo = async(params)=>{

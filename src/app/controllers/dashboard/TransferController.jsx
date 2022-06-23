@@ -124,17 +124,17 @@ const TransferController = (props) => {
             return 0;
         }
 
-        let saleBy = '';
-        if(data.allocated_user && data.allocated_user._id!=''){
-            saleBy = data.allocated_user._id
+        let sale_by = '';
+        if (data.allocated_user && data.allocated_user._id != '') {
+            sale_by = data.allocated_user._id
         }
         setLoading(true)
-        
+
         const response = await saleBoxApi({
             box_qr_code_id: data.box_qr_code_id,
             customer_address: inputs.customer_address,
             customer_name: inputs.customer_name,
-            saleBy,
+            sale_by,
             customer_email: inputs.customer_email,
             customer_phone_no: inputs.customer_phone_no,
             invoice_number: inputs.invoice_number,
@@ -142,11 +142,18 @@ const TransferController = (props) => {
         })
 
         if (response.status == 1) {
-            await modal.onAction()
-            dispatch(closeModel())
+            setTimeout(async () => {
+                await modal.onAction()
+                dispatch(closeModel())
+                setLoading(false)
+            }, 100)
 
+
+
+        } else {
+            setLoading(false)
         }
-        setLoading(false)
+
     }
 
     useEffect(() => {
@@ -161,9 +168,9 @@ const TransferController = (props) => {
                 setDropDownLoading(false)
             }
 
-            if ( type == 'reteller') {
+            if (type == 'reteller') {
                 setDropDownLoading(true)
-                const response = await getUserListApi({ all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: data.allocated_user.usercode, verified: true })
+                const response = await getUserListApi({ all_retailers: data.allocated_user ? false : true, all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: data.allocated_user ? data.allocated_user.usercode : null, verified: true })
                 if (response.status == 1) {
                     setRetailerList(response.data.result)
                 }

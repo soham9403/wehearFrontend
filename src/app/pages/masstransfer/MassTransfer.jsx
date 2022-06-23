@@ -1,18 +1,21 @@
 import { Box, Button, TableBody, Checkbox, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Table, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, TableFooter } from "@mui/material"
 import { useState } from "react";
+import CustomInput from "../../../component/common/CustomInput";
 import SearchDropDown from "../../../component/common/SearchDropDown"
 import SmallLoader from "../../../component/common/SmallLoader";
 import constants from "../../../config/constants"
-import { _lang } from "../../../config/helper"
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
+import { accessControllByRole, _lang } from "../../../config/helper"
 function Row(props) {
     const { row } = props;
-    console.log(row)
+
 
     return (
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">
-                    <Checkbox checked={row.checked} onChange={(e) => { props.checkUncheck(props.index, e.target.checked) }} color="default" />
+                    <Checkbox checked={row.checked} onChange={(e) => { props.checkUncheck(row._id, e.target.checked) }} color="default" />
 
                 </TableCell>
                 <TableCell component="th" scope="row">
@@ -39,15 +42,15 @@ const MassTransfer = (props) => {
                                 <h4 className="h4 df row">Whom You want to tarnsfer?</h4>
 
                                 <div className="df row row-center">
-                                    <button onClick={(e) => { props.setType('destributor') }} className="auth-submit-btn df flex-1 mr-2 center text-light  pointer h5 btn-gradient">{_lang('destributor')}</button>
-                                    <button onClick={(e) => { props.setType('retteler') }} className="auth-submit-btn df flex-1 center text-light  pointer h5 btn-gradient">{_lang('reteller')}</button>
+                                    {accessControllByRole(props.userData.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") && <button onClick={(e) => { props.setType('destributor') }} className="auth-submit-btn df flex-1 mr-2 center text-light  pointer h5 btn-gradient">{_lang('destributor')}</button>}
+                                    {accessControllByRole(props.userData.role, "RETAILLER_TRANSFER_BUTTON") && <button onClick={(e) => { props.setType('retteler') }} className="auth-submit-btn df flex-1 center text-light  pointer h5 btn-gradient">{_lang('reteller')}</button>}
                                 </div>
 
                             </div>
                         </div>
                     }
 
-                    {(props.type == 'retteler' || props.type == 'destributor') && props.type != '' && props.userData.role != constants.user_role.DESTRIBUTOR_ROLE &&
+                    {(props.type == 'retteler' || props.type == 'destributor') && props.type != '' && accessControllByRole(props.userData.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") &&
                         <div className="df row form-filed">
 
                             <FormControl fullWidth={true} >
@@ -151,7 +154,7 @@ const MassTransfer = (props) => {
                         </div>
 
                     }
-                    {!props.loading && props.transferAvailableList.list.length > 0 &&
+                    {!props.loading && Object.values(props.transferAvailableList.list).length > 0 &&
                         <TableContainer component={Paper}>
 
                             <Table aria-label="collapsible table">
@@ -159,16 +162,51 @@ const MassTransfer = (props) => {
                                 <TableHead>
 
                                     <TableRow>
-                                        <TableCell />
+                                        <TableCell ></TableCell>
                                         <TableCell>Box QR</TableCell>
 
                                     </TableRow>
+
                                 </TableHead>
 
                                 <TableBody>
-                                    {!props.loading && props.transferAvailableList && props.transferAvailableList.list.length > 0 && props.transferAvailableList.list.map((row, index) => (
-                                        <Row key={row._id} {...props} index={index} row={{ ...row, id: props.data }} />
-                                    ))}
+                                    <TableRow>
+                                        <TableCell colSpan={2} >
+                                            <div className="df row">
+                                                <div className="df mr-1">
+                                                <Checkbox title="check All" checked={!props.loading && props.transferAvailableList && Object.values(props.transferAvailableList.list).length > 0 && Object.values(props.transferAvailableList.list).filter((row, index) => {
+                                                    return !row.checked
+                                                }).length == 0} onChange={(e) => { props.checkUncheckAll(e.target.checked) }} color="default" />
+                                                </div>
+                                                
+                                                <div className="df flex-1">
+                                                <CustomInput
+                                                    disabled={false}
+                                                    on_side_btn_click={props.listFilter.searchStr == '' ? () => { } : () => { props.setListFilters({ ...props.listFilter, searchStr: '' }) }}
+                                                    side_icon={props.listFilter.searchStr == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
+                                                    value={props.listFilter.searchStr}
+                                                    onChange={e => {
+                                                        props.setListFilters({ ...props.listFilter, searchStr: e.target.value })
+                                                        // props.handleFilters('box_qr_code_id', e.target.value)
+                                                    }}
+                                                    type="side-icon"
+                                                    label={_lang("search_by_qr_code")}
+                                                />
+                                                </div>
+                                            </div>
+
+
+                                        </TableCell>
+
+                                        {/* <TableCell>Box QR</TableCell> */}
+
+                                    </TableRow>
+
+                                    {!props.loading && props.transferAvailableList && Object.values(props.transferAvailableList.list).length > 0 && Object.values(props.transferAvailableList.list).filter((row, index) => {
+                                        return row.box_qr_code_id.includes(props.listFilter.searchStr)
+                                    }).map((row, index) => {
+                                        return <Row key={row._id} {...props} index={index} row={{ ...row, id: props.data }} />
+                                    })}
 
                                 </TableBody>
                                 <TableFooter>
