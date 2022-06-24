@@ -31,7 +31,7 @@ const SignUpPage = (props) => {
                             <div className="fit-content df">
                                 <form onSubmit={props.onSignUp} className="container-right  df column">
                                     <div className="h2-container">
-                                        <h2 className="h2">Create&nbsp;your&nbsp;account
+                                        <h2 className="h2" dangerouslySetInnerHTML={{__html: 'Create your account'}}>
                                         </h2>
                                         <div className="row center df" style={{ height: "25px" }}>
                                             <h4 align="center" className="text-danger  row df h4" color={"red"}>{props.handleValues('get', 'err')}</h4>
