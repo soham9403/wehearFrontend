@@ -19,6 +19,7 @@ import { useState } from "react";
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 import constants from "../../../config/constants";
+import Loader from "../../../component/common/Loader";
 
 function Row(props) {
     const { row } = props;
@@ -30,11 +31,12 @@ function Row(props) {
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">
-                    {row.name}
+                    {row.to.name + `(${row.to.usercode})`}
                 </TableCell>
 
-                <TableCell >{row.color !='' &&<div style={{ height: '30px', width: '30px', background: constants.color[row.color] }}></div>}</TableCell>
-                <TableCell >{row.type}</TableCell>
+                <TableCell >{row.from.name + `(${row.from.usercode})`}</TableCell>
+                <TableCell >{row.count}</TableCell>
+                <TableCell >{row.by.name + `(${row.by.usercode})`}</TableCell>
 
                 <TableCell>
                     <IconButton
@@ -43,7 +45,7 @@ function Row(props) {
                         onClick={() => setOpen(!open)}
                     >
 
-                        {(!row.verfied || (user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN)) && <>{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}</>}
+                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
             </TableRow>
@@ -55,12 +57,10 @@ function Row(props) {
                                 <Typography variant="h4">{_lang('actions')}</Typography>
                                 <div className="row">
                                     {(user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN) && <Button variant="contained" sx={{ m: 1 }}
-                                        onClick={() => { props.onUpdateBtnClick(row) }}
-                                    >{_lang('update')}</Button>}
+                                        onClick={() => { props.onRevertButtonClick(row) }}
+                                    >{_lang('revert')}</Button>}
 
-                                    {(user.role == constants.user_role.SUPER_ADMIN) && <Button variant="contained" sx={{ m: 1 }} color="error"
-                                        onClick={() => { props.onDeleteBtnClick(row) }}
-                                    >{_lang('delete')}</Button>}
+                                 
                                 </div>
 
                             </div>
@@ -71,25 +71,28 @@ function Row(props) {
         </>
     );
 }
-const ProductPage = (props) => {
-    
+const TransferLogs = (props) => {
+
     return (
         <>
             <div className="df flex-1 p-v-primary" style={{ overflowY: "scroll" }}>
                 <div className="we_container mt-3 table-card">
 
-
-
-
                     <div className="row space-between  mb-3 df" >
                         <div className="flex-1 df">
-                            <Typography variant="h3">{_lang('product_list')}</Typography>
+                            <Typography variant="h3">{_lang('transfer_logs')}</Typography>
                         </div>
-                        <Button variant="contained"
-                            onClick={() => { props.onCreateBtnClick() }}
-                        >{_lang('add_product')}</Button>
+                       
                     </div>
-
+                    {props.filters && props.count && props.count>0 && <TablePagination
+                        rowsPerPageOptions={[10, 25, 100]}
+                        component="div"
+                        count={props.count}
+                        rowsPerPage={props.filters.page_size}
+                        page={(props.filters.page_no) - 1}
+                        onPageChange={(e, page) => { props.handleFilters('page_no', page + 1) }}
+                        onRowsPerPageChange={(e) => { props.handleFilters('page_size', e.target.value) }}
+                    />}
                     <TableContainer component={Paper}>
 
                         <Table aria-label="collapsible table">
@@ -98,16 +101,23 @@ const ProductPage = (props) => {
 
                                 <TableRow>
 
-                                    <TableCell>Name</TableCell>
-                                    <TableCell >Color</TableCell>
-                                    <TableCell >type</TableCell>
+                                    <TableCell>{_lang('to')}</TableCell>
+                                    <TableCell >{_lang('from')}</TableCell>
+                                    <TableCell >{_lang('count')}</TableCell>
+                                    <TableCell >{_lang('by')}</TableCell>
                                     <TableCell />
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {props.data && props.data && props.data.map((row, index) => (
+                                {!props.loading && props.data && props.data && props.data.map((row, index) => (
                                     <Row key={row._id} {...props} row={{ ...row }} />
                                 ))}
+
+                                {
+                                    props.loading && <TableRow  > <TableCell colSpan={5}><div className="df row center">
+                                        <Loader />
+                                    </div></TableCell></TableRow>
+                                }
                             </TableBody>
                         </Table>
 
@@ -117,4 +127,4 @@ const ProductPage = (props) => {
         </>
     )
 }
-export default ProductPage
+export default TransferLogs

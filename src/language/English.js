@@ -153,6 +153,12 @@ const English = {
   Year_the_date:"Year the date",
   start:"Start",
   end:"End",
+  from:"From",
+  to:"To",
+  by:"By",
+  transfer_logs:'Transfer Logs',
+  revert:"Revert",
+  ask_revert:"Are you sure to revert?"
 };
 
 export default English;

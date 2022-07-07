@@ -2,7 +2,7 @@
   "name": "admin-frontend",
   "version": "0.1.0",
 
-  "homepage": "http://crm.wehear.in",
+  "homepage": "http://wehear.in",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",

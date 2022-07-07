@@ -1,4 +1,4 @@
-let mode = "production";
+let mode = "local";
 let domainUrl;
 switch (mode) {
     case "local": domainUrl = "http://localhost:8000/api/";break;//"http://localhost:8000/api/"; break;
@@ -38,4 +38,6 @@ export default {
     transferBoxBulk:domainUrl + 'app/sales/transfer/bulk',
     getBoxBetweenRange: domainUrl + 'app/sales/range',
     exportBox: domainUrl + 'app/sales/export',
+    getTransferlogs: domainUrl + 'app/get-transfer-logs',
+    resetTransferlogs: domainUrl + 'app/revert-log'
 }

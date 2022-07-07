@@ -71,7 +71,7 @@ const CustomModal = () => {
                                 <div className="df row column profile-edit-form">
 
                                     <div className="df row center">
-                                        <h3 className="h4" align="center" >{_lang('delete_warning')}</h3>
+                                        <h3 className="h4" align="center" >{modal.defaultData.title ? modal.defaultData.title : _lang('delete_warning')}</h3>
                                     </div>
                                     <div className="form-filed p-3">
 
@@ -79,7 +79,7 @@ const CustomModal = () => {
 
                                     <div className="row space-between df ">
                                         <Button disabled={loading} sx={{ mr: 1 }} variant="contained" className="flex-1" onClick={handleCLose} >{_lang('cancle')}</Button>
-                                        <Button disabled={loading} variant="contained" className="flex-1" color="error" onClick={onAction} >{!loading ? _lang('delete') : <CircularProgress size={15} color="secondary" />}</Button>
+                                        <Button disabled={loading} variant="contained" className="flex-1" color="error" onClick={onAction} >{!loading ?modal.defaultData.title ? modal.defaultData.btnTitle : _lang('delete') : <CircularProgress size={15} color="secondary" />}</Button>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ const CustomModal = () => {
 
 
                         {modal.type == "VERIFY" &&
-                            
+
                             <div className="we-container-small  df column radius-2">
                                 <div className="df row column profile-edit-form">
 
