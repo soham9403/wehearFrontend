@@ -262,9 +262,7 @@ function Row(props) {
 
 const ChannelStock = props => {
     const user = useSelector(state => state.user).data
-    // const userInventoryData = props.userInventoryData
-    // const params = useParams()
-    // const navigate = useNavigate()
+
     return (
         <>
             <div className='we_container '>
@@ -278,11 +276,7 @@ const ChannelStock = props => {
                                 <button onClick={props.exportCsv} className=' h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
                                     {_lang('export')}
                                 </button>
-                                {/* <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
-                    <button className='custom-toggle-button h6 bg-secondary text-light'>All</button>
-                    <button className='custom-toggle-button h6 pointer text-secondary'>B2c</button>
-                    
-                  </div> */}
+                              
                             </div>
                         </div>
                         <div className='df column flex-1' style={{ alignItems: "flex-end" }}>
@@ -298,23 +292,7 @@ const ChannelStock = props => {
                                     type="side-icon"
                                     label={_lang("search_by_qr_code")}
                                 />
-                                <div className="ml-1"></div>
-                                <CustomInput
-                                    disabled={false}
-                                    on_side_btn_click={props.filters.search == '' ? () => { } : () => { props.handleFilters('search', '') }}
-                                    side_icon={props.filters.search == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
-
-                                    type="side-icon"
-
-
-                                    value={props.filters.search}
-                                    onChange={e => {
-                                        props.handleFilters('search', e.target.value)
-                                    }}
-                                    id='filled-basic'
-                                    label={_lang('search')}
-
-                                />
+                               
                             </div>
                             <div className='df row flex-end'>
                                 {accessControllByRole(user.role,"RETE_DES_CHANNEL_TOGGLE_BTN",true) && <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
@@ -382,7 +360,7 @@ const ChannelStock = props => {
                                     <TableRow>
                                         <TableCell>Box QR</TableCell>
                                         <TableCell>MAC id</TableCell>
-                                        {/* <TableCell>Packing Date</TableCell> */}
+                                        
                                         <TableCell>Allocated Merchant</TableCell>
                                         <TableCell />
                                     </TableRow>

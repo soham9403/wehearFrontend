@@ -233,23 +233,7 @@ const Stock = props => {
                                     type="side-icon"
                                     label={_lang("search_by_qr_code")}
                                 />
-                                <div className="ml-1"></div>
-                                <CustomInput
-                                    disabled={false}
-                                    on_side_btn_click={props.filters.search == '' ? () => { } : () => { props.handleFilters('search', '') }}
-                                    side_icon={props.filters.search == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
-
-                                    type="side-icon"
-
-
-                                    value={props.filters.search}
-                                    onChange={e => {
-                                        props.handleFilters('search', e.target.value)
-                                    }}
-                                    id='filled-basic'
-                                    label={_lang('search')}
-
-                                />
+                                
                             </div>
                             <div className='df row flex-end'>
                                 {/* <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
