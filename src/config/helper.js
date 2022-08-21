@@ -49,7 +49,6 @@ export const getHeaders = () => {
 export const logOut = () => {
   refreshToken.remove()
   accessToken.remove()
-  
 }
 
 export const isEmail = val => {
@@ -232,10 +231,7 @@ export const accessControllByRole = (
       ]
       break
     case 'CHANNEL_STOCK':
-      roles = [
-       
-        constants.user_role.RETELLER_ROLE
-      ]
+      roles = [constants.user_role.RETELLER_ROLE]
       break
     case 'STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON':
       roles = [
@@ -259,17 +255,18 @@ export const accessControllByRole = (
         constants.user_role.SUPER_ADMIN,
         constants.user_role.PRODUCT_MANAGER,
         constants.user_role.RETELLER_ROLE,
-        
+        constants.user_role.DESTRIBUTOR_ROLE
       ]
       break
-      case 'IMPORT_BUTTON':
-        roles = [
-          constants.user_role.ADMIN,
-          constants.user_role.SUPER_ADMIN,
-          constants.user_role.PRODUCT_MANAGER,
-          
-        ]
-        break
+    case 'ONLY_TEAM':
+    case 'IMPORT_BUTTON':
+      roles = [
+        constants.user_role.ADMIN,
+        constants.user_role.SUPER_ADMIN,
+        constants.user_role.PRODUCT_MANAGER
+      ]
+      break
+
     case 'RETE_DES_CHANNEL_TOGGLE_BTN':
       roles = [
         constants.user_role.RETELLER_ROLE,

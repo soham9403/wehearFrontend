@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import Logo from '../../../component/common/Logo'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircleRounded';
+
 import { _lang } from '../../../config/helper'
 import { signOutAction } from '../../../store/actions/userReducerAction';
-import { IconButton } from '@mui/material';
+
 import { AccountCircle } from '@mui/icons-material';
 const Header = props => {
-  const { user, breadcrumb } = useSelector(state => state)
+  const { user } = useSelector(state => state)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

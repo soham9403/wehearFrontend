@@ -120,17 +120,7 @@ const UserDataPage = (props) => {
                                         <>
                                             <Grid xs={6} md={2.4} container key={index} item>
 
-                                                {/* <button
-                            variant={props.filters.role == data._id.role && props.filters.verified == data._id.verfied ? 'contained' : 'outlined'} onClick={() => { if (props.filters.role != data._id.role || props.filters.verified != data._id.verfied) { props.handleFilters(['role', 'verified'], [data._id.role, data._id.verfied]) } }}
-                            className='df fit-content center column p-primary border-primary radius-primary' style={{ textTransform: "none" }}
-                        >
-
-                            <Typography variant='h3' >{data.count}</Typography>
-                            <div className="m-v-primary" style={{ marginBottom: "0px" }}>
-                                <Typography variant='h4'   >{_lang('role_' + data._id.role)}{!data._id.verfied && <span style={{ color: 'red' }}> *</span>}</Typography>
-                        </div>
-
-                        </button> */}
+                                                
                                                 <button
                                                     onClick={() => { if (props.filters.role != data._id.role || props.filters.verified != data._id.verfied) { props.handleFilters(['role', 'verified'], [data._id.role, data._id.verfied]) } }}
                                                     className={props.filters.role == data._id.role && props.filters.verified == data._id.verfied ? 'analytic-btn df center column radius-1 bg-light row analytic-btn-active ' : 'pointer analytic-btn df center column radius-1 bg-light row'}>

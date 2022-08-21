@@ -16,6 +16,7 @@ const ChannelStockController = (props) => {
         page_size: 10,
         search: '',
         box_qr_code_id: '',
+        category:'',
         usercode: params_user_code,
         location: 'channel',
         sub_location:'with_destributor',//with_reteller

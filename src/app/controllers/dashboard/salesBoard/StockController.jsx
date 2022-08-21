@@ -14,6 +14,7 @@ const StockController = (props) => {
         page_no: 1,
         page_size: 10,
         search: '',
+        category:'',
         box_qr_code_id: '',
         usercode: params_user_code,
         location: 'stock',

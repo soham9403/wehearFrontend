@@ -80,7 +80,7 @@
   position: relative;
   z-index: 99999999999999999999999999999999999;
   width: 43.438vw;
-  padding: 1.875vw;
+  padding: 1.875vw 1.875vw 0px 1.875vw ;
   background-color: white;
 }
 
@@ -224,6 +224,11 @@
   position: sticky;
   
   top: 0px;
+  z-index: 111;
+}
+.p-sticky-bottom{
+  position: sticky;
+  bottom: 0px;
   z-index: 111;
 }
 .btn-gradient:disabled{

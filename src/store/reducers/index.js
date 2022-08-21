@@ -1,5 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit"
 import breadCrumbReducer from "./breadCrumbReducer";
+import CategoryReducer from "./CategoryReducer";
 import destributorListReducer from "./destributorListReducer";
 import ModalReducer from "./ModalReducer";
 import userAnalyticInfoReducer from "./userAnalyticInfo";
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   destributor_list: destributorListReducer,
   breadcrumb: breadCrumbReducer,
   userAnalytic: userAnalyticInfoReducer,
-  modal: ModalReducer
+  modal: ModalReducer,
+  category:CategoryReducer
 })
 export default rootReducer;

@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Modal } from '@mui/material';
 import CustomModal from './component/common/CustomModal';
+import IntializeSystem from './app/controllers/IntializeSystem';
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -41,8 +42,10 @@ function App() {
   } else {
     return (
       <>
+      <IntializeSystem>
         <CustomModal />
         <IndexRoute />
+        </IntializeSystem>
       </>
     );
   }

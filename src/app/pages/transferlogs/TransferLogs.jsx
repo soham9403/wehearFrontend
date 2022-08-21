@@ -1,7 +1,7 @@
 
 
 import { Button, Grid, TablePagination, Typography } from "@mui/material"
-import { _lang } from "../../../config/helper"
+import { dateToDDMMYYYY, _lang } from "../../../config/helper"
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -37,7 +37,7 @@ function Row(props) {
                 <TableCell >{row.from.name + `(${row.from.usercode})`}</TableCell>
                 <TableCell >{row.count}</TableCell>
                 <TableCell >{row.by.name + `(${row.by.usercode})`}</TableCell>
-
+                <TableCell >{dateToDDMMYYYY(row.createdAt)}</TableCell>
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -48,6 +48,7 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
+                
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -105,6 +106,7 @@ const TransferLogs = (props) => {
                                     <TableCell >{_lang('from')}</TableCell>
                                     <TableCell >{_lang('count')}</TableCell>
                                     <TableCell >{_lang('by')}</TableCell>
+                                    <TableCell >{_lang('date')}</TableCell>
                                     <TableCell />
                                 </TableRow>
                             </TableHead>

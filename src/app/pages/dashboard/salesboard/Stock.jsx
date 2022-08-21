@@ -197,12 +197,57 @@ function Row(props) {
 
 const Stock = props => {
     const user = useSelector(state => state.user).data
-    // const userInventoryData = props.userInventoryData
-    // const params = useParams()
-    // const navigate = useNavigate()
+    const categories = useSelector(state => state.category).data
+
     return (
         <>
-            <div className='we_container '>
+            <div className='we_container df column'>
+                <div className="row  df user_data_container">
+                    <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+
+
+                        {categories && categories.length > 0 &&
+                            <>
+                                <Grid xs={6} md={2.4} container item>
+
+
+                                    <button
+                                        onClick={() => { if (props.filters.category != '') { props.handleFilters('category', '') } }}
+                                        className={props.filters.category == '' ? 'analytic-btn df center column radius-1 bg-light row analytic-btn-active ' : 'pointer analytic-btn df center column radius-1 bg-light row'}>
+
+                                        <h1 className='h4'>
+                                            {_lang('all')}
+                                        </h1>
+
+                                    </button>
+
+                                </Grid>
+                                {categories.map((category, index) => {
+                                    return (
+                                        <>
+                                            <Grid xs={6} md={2.4} container key={category._id} item>
+
+
+                                                <button
+                                                    onClick={() => { props.handleFilters('category', category._id) }}
+                                                    className={props.filters.category == category._id ? 'analytic-btn df center column radius-1 bg-light row analytic-btn-active ' : 'pointer analytic-btn df center column radius-1 bg-light row'}>
+
+                                                    <h1 className='h4'>
+                                                        {category.name}
+                                                    </h1>
+
+                                                </button>
+                                            </Grid>
+                                        </>
+                                    )
+                                })}
+                            </>
+
+
+                        }
+                    </Grid>
+                </div>
+
                 <div className='row'>
                     <div className="filter-area df row">
                         <div className='df column'>
@@ -233,7 +278,7 @@ const Stock = props => {
                                     type="side-icon"
                                     label={_lang("search_by_qr_code")}
                                 />
-                                
+
                             </div>
                             <div className='df row flex-end'>
                                 {/* <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>

@@ -11,8 +11,8 @@ import MassTransfer from "../../pages/masstransfer/MassTransfer"
 
 const MassTransferController = () => {
 
-    const { user, destributor_list,modal } = useSelector(state => state)
-    
+    const { user, destributor_list, modal } = useSelector(state => state)
+
     const dispatch = useDispatch()
     const destributor = destributor_list
     const [type, setType] = useState(user.data.role == constants.user_role.DESTRIBUTOR_ROLE ? 'retteler' : '')// '','retteler','destributor'
@@ -23,7 +23,8 @@ const MassTransferController = () => {
         rangeFrom: '',
         rangeTo: '',
         allocated_destributor: user.data.role == constants.user_role.DESTRIBUTOR_ROLE ? { usercode: user.data.usercode } : '',
-        allocated_user: ''
+        allocated_user: '',
+        category: null
     })
 
     const [listFilter, setListFIlters] = useState({
@@ -77,6 +78,8 @@ const MassTransferController = () => {
             handleValues('set', 'err', _lang('end_required'))
             return 0
         }
+
+        setListLoading(true)
         const response = await getRangedDataApi({
             start: inputs.rangeFrom,
             end: inputs.rangeTo,
@@ -85,14 +88,15 @@ const MassTransferController = () => {
 
         if (response.status == 1) {
             const data = response.data;
-            const list = {}
+            const list = { ...transferAvailableList.list }
             for (let i = 0; i < data.length; i++) {
                 data[i]['checked'] = true;
                 list[data[i]._id] = data[i]
             }
-
+            handleValues('set',['rangeTo','rangeFrom'],['',''])
             setTransferAvailableList({ list: list, total: data.length, totalChecked: data.length })
         }
+        setListLoading(false)
     }
 
     const checkUncheck = (index, value) => {
@@ -110,21 +114,24 @@ const MassTransferController = () => {
 
     const checkUncheckAll = (value) => {
         const temp = { ...transferAvailableList }
-        
+
         for (let key of Object.keys(temp['list'])) {
             temp['list'][key]['checked'] = value
         }
         if (value == true) {
-            temp['totalChecked'] =  Object.keys(temp['list']).length;
+            temp['totalChecked'] = Object.keys(temp['list']).length;
         } else {
             temp['totalChecked'] = 0;
         }
-        
+
 
         setTransferAvailableList(temp)
 
     }
     const [loading, setLoading] = useState(false)
+
+    const [listLoading, setListLoading] = useState(false)
+
     const [dropDownLoading, setDropDownLoading] = useState(false)
     const [retellerList, setRetailerList] = useState([])
 
@@ -137,13 +144,19 @@ const MassTransferController = () => {
             handleValues('set', 'err', type == 'retteler' ? _lang('reteller_required') : _lang('destributor_required'))
             return 0
         }
+
+        if (!inputs.category || inputs.category == '') {
+
+            handleValues('set', 'err', _lang('category_required'))
+            return 0
+        }
         for (let row of Object.values(transferAvailableList.list)) {
             if (row.checked) {
                 qrCodes.push(row.box_qr_code_id)
             }
         }
         setLoading(true)
-        const response = await transferBoxBulkApi({ box_qr_code_id: JSON.stringify(qrCodes), allocated_user: inputs.allocated_user._id })
+        const response = await transferBoxBulkApi({ box_qr_code_id: JSON.stringify(qrCodes), allocated_user: inputs.allocated_user._id, category: inputs.category._id })
         if (response.status == 1) {
             setTransferAvailableList({ list: {}, total: 0, totalChecked: 0 })
             handleValues('set', 'successMsg', _lang('boxes_transfered_successfully'))
@@ -188,6 +201,7 @@ const MassTransferController = () => {
 
 
                 <MassTransfer
+                    listLoading={listLoading}
                     listFilter={listFilter}
                     checkUncheckAll={checkUncheckAll}
                     setListFilters={setListFIlters}

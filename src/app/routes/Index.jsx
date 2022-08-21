@@ -20,8 +20,7 @@ import Err404 from '../pages/errorscreens/Err404';
 import Header from '../pages/header/Header';
 
 const IndexRoute = () => {
-    const user = useSelector((state) => { return state.user })
-    // alert(user.data.role + "|"+ accessControllByRole(user.data.role, "USERS_PAGE"))
+    const user = useSelector((state) => { return state.user })    
     return (
         <>
             <Routes>

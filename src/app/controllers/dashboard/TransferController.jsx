@@ -22,14 +22,15 @@ const TransferController = (props) => {
     const [inputs, setInputs] = useState({
         current_location: '',
         err: '',
-        allocated_user: '',
+        allocated_user: null,
         invoice_number: '',
         invoice_value: '',
         sale_by: '',
         customer_address: '',
         customer_phone_no: '',
         customer_email: "",
-        customer_name: ""
+        customer_name: "",
+        category: null
     })
 
     const { destributor, modal } = useSelector((state) => { return { destributor: state.destributor_list, modal: state.modal } })
@@ -77,8 +78,19 @@ const TransferController = (props) => {
             handleValues('set', 'err', isRetteler ? _lang('reteller_required') : _lang('destributor_required'))
             return 0;
         }
+
+        if (!((data.category && data.category != '') || (inputs.category && inputs.category != ''))) {
+            handleValues('set', 'err', _lang('category_required'))
+            return 0;
+        }
+
+        const passParams = { box_qr_code_id: data.box_qr_code_id, allocated_user: inputs.allocated_user._id }
+
+        if (!(data.category && data.category != '')) {
+            passParams['category'] = inputs.category._id
+        }
         setLoading(true)
-        const response = await transferBoxApi({ box_qr_code_id: data.box_qr_code_id, allocated_user: inputs.allocated_user._id })
+        const response = await transferBoxApi(passParams)
 
         if (response.status == 1) {
             await modal.onAction()
@@ -183,9 +195,9 @@ const TransferController = (props) => {
         <>
             {type == 'store' && <TransferToStore loading={loading} handleValues={handleValues} onSubmitBtnClick={onTransferToStoreBtnClick} />}
 
-            {type == 'destributor' && <TransferToDestributorOrReteller loading={loading} list={destributor.data} handleValues={handleValues} onSubmitBtnClick={onTransferToDestributorBtnClick} />}
+            {type == 'destributor' && <TransferToDestributorOrReteller currentCategory={data.category} loading={loading} list={destributor.data} handleValues={handleValues} onSubmitBtnClick={onTransferToDestributorBtnClick} />}
 
-            {type == 'reteller' && <TransferToDestributorOrReteller fromReteller={true} loading={loading} list={retellerList} handleValues={handleValues} onSubmitBtnClick={async () => { await onTransferToDestributorBtnClick(true) }} />}
+            {type == 'reteller' && <TransferToDestributorOrReteller currentCategory={data.category} fromReteller={true} loading={loading} list={retellerList} handleValues={handleValues} onSubmitBtnClick={async () => { await onTransferToDestributorBtnClick(true) }} />}
 
             {type == 'sold' && <TransferToSold loading={loading} handleValues={handleValues} onSubmitBtnClick={onSold} />}
         </>

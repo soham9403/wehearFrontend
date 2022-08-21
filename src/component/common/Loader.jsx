@@ -1,7 +1,10 @@
-const Loader = ()=>{
-    return(
+const Loader = () => {
+    return (
         <>
-            <h1 className="center">Loading..</h1>
+            <div className="df row fit-conent center">
+                <h1 className="center">Loading..</h1>
+            </div>
+
         </>
     )
 }
