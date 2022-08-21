@@ -11,6 +11,7 @@ const English = {
   role_6: "Retailer",
 
   //fields name
+  errors:"Errors",
   name: "Name",
   company_name_field:"Company Name",
   gst_no:"GST number",
@@ -50,18 +51,26 @@ const English = {
   last_90_days: "Last 90 Days",
   last_365_days: "Last 365 Days",
   reteller: "Retailer",
+  checked_by:"Checked by",
   destributor: "Distributor",
-
+loading:'Loading...',
+at_row:" at row ",
   //sucess messages
   success_login: "Logged in Successfully",
   profile_updated: "Profile Update Successfully",
   //errors
+  box_id_required:"Box Id Rerquired",
+  mac_id_required:"MAC Id Rerquired",
+  select_product:"Please select product",
+  select_product_manager:"Please select product manager",
+  mac_id_required:"MAC Id Rerquired",
   email_usercode_required: "Email/Usercode is required",
   usercode_required: "Usercode is required",
   start_required: "Enter Start Field",
   end_required: "Enter End Field",
   email_required: "Email is Required",
   email_already_in_use: "E-mail already in use",
+  already_exist:" Already exist",
   user_not_exist: "User does not exists",
   destributor_not_exist: "Distributor does not exists",
   unvalid_email: "Email is Invalid",
@@ -91,9 +100,11 @@ const English = {
   invoice_value_required: "Invoice value is Required",
 
   //text
+  boxes_inserted_succesfully:"Boxes inserted succesfully",
   que_already_have_account: "Do you already have an account?",
   que_alredy_have_account: "Don't have an account? Register",
   boxes_transfered_successfully: "Boxes Transfered Successfully",
+  remove:"Remove",
   que_forgot_pass: "Forget Password?",
   signup: "Sign Up",
   register:"Register",
@@ -136,6 +147,7 @@ const English = {
   sales_details: "Sales Details",
   sale_by: "Sold By",
   search_by_qr_code: "Search By Qr Code",
+  box_qr_code:"Box QR code",
   store: "Store",
   checked: "Checked",
   with_reteller: "with Retailer",
@@ -150,6 +162,7 @@ const English = {
   stock_list:"Stock List",
   sales_amount: "Sales Amount",
   export:"Export",
+  import:"Import",
   Year_the_date:"Year the date",
   start:"Start",
   end:"End",

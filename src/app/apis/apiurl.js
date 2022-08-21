@@ -38,6 +38,7 @@ export default {
     transferBoxBulk:domainUrl + 'app/sales/transfer/bulk',
     getBoxBetweenRange: domainUrl + 'app/sales/range',
     exportBox: domainUrl + 'app/sales/export',
+    uploadcsvData: domainUrl + 'app/upload-csv-data',
     getTransferlogs: domainUrl + 'app/get-transfer-logs',
     resetTransferlogs: domainUrl + 'app/revert-log'
 }

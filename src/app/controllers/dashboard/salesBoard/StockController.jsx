@@ -49,13 +49,12 @@ const StockController = (props) => {
     return (
         <>
             <Stock
-
-                onMassTransffer={() => { props.onMassTransffer( async () => { await getList() }) }}
-
+                onImportBtnClick={() => { props.onImportBtnClick(async () => { await getList() }) }}
+                onMassTransffer={() => { props.onMassTransffer(async () => { await getList() }) }}
                 loading={loading}
                 handleFilters={handleFilters}
                 filters={salesFilters}
-                onTransfer={(type, data) => { props.onTransfer(type, data,async () => { await getList() }) }}
+                onTransfer={(type, data) => { props.onTransfer(type, data, async () => { await getList() }) }}
 
                 data={data}
                 exportCsv={() => { props.exportCsv(salesFilters) }}

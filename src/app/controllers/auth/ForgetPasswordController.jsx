@@ -16,6 +16,7 @@ const ForgetPasswordController = () => {
         otp: "",
         new_pass: "",
         confirm_pass: "",
+        otptoken:'',
         err: ""
     })
     const handleValues = (method = "set", filedName, value = "") => {
@@ -65,7 +66,7 @@ const ForgetPasswordController = () => {
         setLoading(true)
         const response = await verifyOtp(inputs.user_id, inputs.otp)
         if (response.status == 1) {
-            setInputs({ ...inputs, err: "" })
+            setInputs({ ...inputs, err: "",otptoken:response.data.token })
             setStep(3)
         } else {
             if (response.code == 400) {
@@ -87,7 +88,7 @@ const ForgetPasswordController = () => {
             handleValues('set', 'err', '')
         }
         setLoading(true)
-        const response = await updatePassword(inputs.user_id, inputs.new_pass, inputs.confirm_pass)
+        const response = await updatePassword(inputs.user_id, inputs.new_pass, inputs.confirm_pass,inputs.otptoken)
         if (response.status == 1) {
             setStep(4)
             setTimeout(() => {
@@ -97,6 +98,9 @@ const ForgetPasswordController = () => {
         } else {
             if (response.code == 400) {
                 handleValues('set', 'err', _lang(response.data[0].msg))
+            }
+            if(response.code == 403){
+                handleValues('set', 'err', _lang(response.data.message))
             }
         }
         setLoading(false)

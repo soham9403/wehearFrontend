@@ -12,6 +12,7 @@ import rootReducer from './store/reducers';
 import { createStore } from '@reduxjs/toolkit';
 import {  ThemeProvider } from '@mui/material/styles';
 import theme from './assets/css/theme';
+import './App.css';
 const store = createStore(rootReducer)
 
 ReactDOM.render(

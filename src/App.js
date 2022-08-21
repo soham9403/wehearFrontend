@@ -1,4 +1,4 @@
-import './App.css';
+
 import IndexRoute from './app/routes/Index';
 import { useState } from 'react';
 import Loader from './component/common/Loader';

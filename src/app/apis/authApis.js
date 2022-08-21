@@ -93,13 +93,14 @@ export const verifyOtp = async (user_id, otp) => {
     })
 }
 
-export const updatePassword = async (user_id, password, confirm_password) => {
+export const updatePassword = async (user_id, password, confirm_password,token) => {
     return await axios({
         url: apiurl.changepassword,
         method: "put",
         data: {
             user_id,
             password,
+            token,
             confirm_password
         }
     }).then(res => {

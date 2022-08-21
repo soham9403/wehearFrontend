@@ -259,9 +259,17 @@ export const accessControllByRole = (
         constants.user_role.SUPER_ADMIN,
         constants.user_role.PRODUCT_MANAGER,
         constants.user_role.RETELLER_ROLE,
-        constants.user_role.PRODUCT_MANAGER
+        
       ]
       break
+      case 'IMPORT_BUTTON':
+        roles = [
+          constants.user_role.ADMIN,
+          constants.user_role.SUPER_ADMIN,
+          constants.user_role.PRODUCT_MANAGER,
+          
+        ]
+        break
     case 'RETE_DES_CHANNEL_TOGGLE_BTN':
       roles = [
         constants.user_role.RETELLER_ROLE,

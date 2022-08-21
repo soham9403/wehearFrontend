@@ -210,14 +210,14 @@ const Stock = props => {
                                 <button onClick={props.onMassTransffer} className='mb-3 h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
                                     {_lang('mass_transfer')}
                                 </button>
-                                <button onClick={props.exportCsv} className=' h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
-                                    {_lang('export')}
-                                </button>
-                                {/* <div className='custom-toggle-button-container radius-3 custom-toggle-button-container-mt custom-toggle-button-container-mr'>
-                    <button className='custom-toggle-button h6 bg-secondary text-light'>All</button>
-                    <button className='custom-toggle-button h6 pointer text-secondary'>B2c</button>
-                    
-                  </div> */}
+                                <div className='df row '>
+                                    <button onClick={props.exportCsv} className=' h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
+                                        {_lang('export')}
+                                    </button>
+                                    {accessControllByRole(user.role, "IMPORT_BUTTON") && <button onClick={props.onImportBtnClick} className='ml-2 h5 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'>
+                                        {_lang('import')}
+                                    </button>}
+                                </div>
                             </div>
                         </div>
                         <div className='df column flex-1' style={{ alignItems: "flex-end" }}>

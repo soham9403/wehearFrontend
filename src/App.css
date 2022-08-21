@@ -84,6 +84,17 @@
   background-color: white;
 }
 
+.we-container-large {
+  position: relative;
+  z-index: 99999999999999999999999999999999999;
+  width: 90vw;
+  padding: 1.875vw;
+  max-height: 100%;
+  overflow-y: hidden;
+  
+  background-color: white;
+}
+
 .table-card {
   /* border: 0.0px solid #212121; */
   background: #FDFDFD;
@@ -208,4 +219,15 @@
   .hide-below-tablet {
     display: none !important;
   }
+}
+.p-sticky{
+  position: sticky;
+  
+  top: 0px;
+  z-index: 111;
+}
+.btn-gradient:disabled{
+  background-color: lightgray !important;
+  background: lightgray !important;
+  cursor: not-allowed !important;
 }

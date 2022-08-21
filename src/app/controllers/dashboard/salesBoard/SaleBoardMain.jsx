@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { openModal } from "../../../../store/actions/modalAction"
+import UploadDataFromCsvController from "../../csv/UploadDataFromCsvController"
 import MassTransferController from "../../masstransfer/MassTransferController"
 import { AnalysticContext } from "../AnalyticCountController"
 import ExportController from "../ExportController"
@@ -26,6 +27,13 @@ const SaleBoardMain = ({ type, ...props }) => {
             <MassTransferController />
         ))
     }
+    const onImportBtnClick = async (callBack = async () => { }) => {
+        dispatch(openModal(
+            "CUSTOM",
+            async () => { await Promise.all([refreshAnalyticCount(), callBack()]) },
+            <UploadDataFromCsvController />
+        ))
+    }
     const exportCsv = async (filters) => {
 
 
@@ -40,7 +48,7 @@ const SaleBoardMain = ({ type, ...props }) => {
     return (
         <>
             {type == 'sold' && <SoldController onTransfer={onTransfer} onMassTransffer={onMassTransffer} exportCsv={exportCsv} />}
-            {type == 'stock' && <StockController onTransfer={onTransfer} onMassTransffer={onMassTransffer} exportCsv={exportCsv} />}
+            {type == 'stock' && <StockController onImportBtnClick={onImportBtnClick} onTransfer={onTransfer} onMassTransffer={onMassTransffer} exportCsv={exportCsv} />}
             {type == 'channel' && <ChannelStockController onTransfer={onTransfer} onMassTransffer={onMassTransffer} exportCsv={exportCsv} />}
         </>
     )
