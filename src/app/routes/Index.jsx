@@ -6,6 +6,7 @@ import { accessControllByRole } from '../../config/helper';
 import ForgetPasswordController from '../controllers/auth/ForgetPasswordController';
 import SignInController from '../controllers/auth/SignInController';
 import SignUpController from '../controllers/auth/SignUpController';
+import CategoryController from '../controllers/category/CategoryController';
 
 import DashboardController from '../controllers/dashboard/DashboardController';
 import SaleBoardMain from '../controllers/dashboard/salesBoard/SaleBoardMain';
@@ -37,12 +38,13 @@ const IndexRoute = () => {
                                     {accessControllByRole(user.data.role, "USERS_PAGE") && <Route path=':usercode/users' element={<UserController />} />}
                                     {accessControllByRole(user.data.role, "MASS_TRANSFER", true) &&
                                         <Route path=':usercode/all/mass-transfer' element={<MassTransferController />} />}
-                                        
+
 
                                 </Route>
                                 {accessControllByRole(user.data.role, "MASS_TRANSFER", true) &&
-                                        <Route path='/transfer-logs' element={<TransferLogsController />} />}
+                                    <Route path='/transfer-logs' element={<TransferLogsController />} />}
                                 {accessControllByRole(user.data.role, "PRODUCT_PAGE") && <Route path='product' element={<ProductController />} />}
+                                {accessControllByRole(user.data.role, "PRODUCT_PAGE") && <Route path='category' element={<CategoryController />} />}
                                 <Route path='profile' element={<ProfileController />} />
                                 <Route path='' element={<Navigate replace to={"/dashboard/" + user.data.usercode + "/sold"} />} />
                             </Route>

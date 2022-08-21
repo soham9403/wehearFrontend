@@ -32,6 +32,13 @@ export default {
     productDelete: domainUrl + "app/product/delete",
     productUpdate: domainUrl + "app/product/update",
 
+
+
+    categoryGet: domainUrl + "app/category/show",
+    categoryAdd: domainUrl + "app/category/create",
+    categoryDelete: domainUrl + "app/category/delete",
+    categoryUpdate: domainUrl + "app/category/update",
+
     salesList: domainUrl + 'app/sales/list',
     saleBox: domainUrl + 'app/sales/sold',
     transferBox: domainUrl + 'app/sales/transfer',
