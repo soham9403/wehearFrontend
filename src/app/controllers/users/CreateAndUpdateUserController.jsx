@@ -170,7 +170,7 @@ const CreateAndUpdateUserController = (props) => {
             const data = modal.defaultData
 
             handleValues('set',
-                ['name', 'email', 'user_id', 'phone_no', 'role', 'destributor_id', 'territory'],
+                ['name', 'email', 'user_id', 'phone_no', 'role', 'destributor_id', 'territory','company_name','gst_no'],
                 [
                     data.name,
                     data.email,
@@ -178,7 +178,9 @@ const CreateAndUpdateUserController = (props) => {
                     data.phone_no,
                     { label: getKeyByValue(constants.user_role, data.role), index: data.role },
                     data.destributor_id,
-                    data.territory
+                    data.territory,
+                    data.company_name,
+                    data.gst_no
                 ]
             )
         }

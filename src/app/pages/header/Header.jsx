@@ -9,7 +9,7 @@ import { signOutAction } from '../../../store/actions/userReducerAction';
 
 import { AccountCircle } from '@mui/icons-material';
 const Header = props => {
-  const { user } = useSelector(state => state)
+  const { user, currentUser } = useSelector(state => state)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -31,9 +31,24 @@ const Header = props => {
                 </div>
               </div>
 
-              <h1 className='h3 flex-1 df center text-gradient-primary'>{
-                _lang('role_' + user.role)
-              }</h1>
+              <div className='flex-1 df center column'>
+                <h1 className='h3  text-gradient-primary'>{
+                  _lang('role_' + user.role)
+                }</h1>
+
+                {currentUser && Object.keys(currentUser.data).length > 0 && <>
+                  <h6 className='h6'>
+                    {_lang('current_user')} : {currentUser.data.usercode}
+
+                  </h6>
+
+                  <h6 className='h6'>
+                    {_lang('role')}: {_lang('role_' + currentUser.data.role)}
+
+                  </h6>
+                </>}
+
+              </div>
               <div className='flex-1 df flex-end'>
                 <button className='df  bg-gradient-primary radius-curved p-btn'>
                   {location.pathname != '/profile' &&
@@ -42,7 +57,7 @@ const Header = props => {
                         {user.data.name.length > 10 ? user.data.name.slice(0, 8) + '...' : user.data.name}
                         {/* <IconButton   iconStyle={{ largeIcon: { height: '2.344vw', width: "2.344vw" } }}> */}
                         <AccountCircle
-                          style={{ height: '2.344vw', width: "2.344vw" ,fontSize:'2.344vw'} }
+                          style={{ height: '2.344vw', width: "2.344vw", fontSize: '2.344vw' }}
                           fontSize={'large'}
                           className='ml-3' color='white'
 

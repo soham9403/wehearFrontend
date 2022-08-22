@@ -1,6 +1,6 @@
 
 import { Button, Grid, TablePagination, TextField, Typography } from "@mui/material"
-import { _lang } from "../../../config/helper"
+import { accessControllByRole, _lang } from "../../../config/helper"
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -33,7 +33,7 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell ><Link to={"/dashboard/" + row.usercode +'/sold'}>{row.usercode}</Link></TableCell>
+                <TableCell ><Link to={"/dashboard/" + row.usercode + '/sold'}>{row.usercode}</Link></TableCell>
                 <TableCell >{row.email}</TableCell>
                 <TableCell >{row.phone_no}</TableCell>
                 <TableCell >{_lang('role_' + row.role)}</TableCell>
@@ -45,7 +45,7 @@ function Row(props) {
                         onClick={() => setOpen(!open)}
                     >
 
-                        {(!row.verfied || (user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN)) && <>{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}</>}
+                        {(!row.verfied || accessControllByRole(user.role, "USERS_PAGE") )&& <>{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}</>}
                     </IconButton>
                 </TableCell>
             </TableRow>
@@ -71,13 +71,13 @@ function Row(props) {
                                 </Table>
                                 <Typography variant="h3">{_lang('actions')}</Typography>
                                 <div className="row">
-                                    {(user.role == constants.user_role.ADMIN || user.role == constants.user_role.SUPER_ADMIN) && <Button variant="contained" sx={{ m: 1 }}
+                                    {(accessControllByRole(user.role, "USERS_PAGE") ) && <Button variant="contained" sx={{ m: 1 }}
                                         onClick={() => { props.onUpdateBtnClick(row) }}
                                     >{_lang('update')}</Button>}
-                                    {(user.role != constants.user_role.RETELLER_ROLE && !row.verfied) && <Button variant="contained" sx={{ m: 1 }}
+                                    {(accessControllByRole(user.role, "USERS_PAGE")&& !row.verfied) && <Button variant="contained" sx={{ m: 1 }}
                                         onClick={() => { props.onVerifyBtnClick(row) }}
                                     >{_lang('verify')}</Button>}
-                                    {(user.role == constants.user_role.SUPER_ADMIN) && <Button variant="contained" sx={{ m: 1 }} color="error"
+                                    {accessControllByRole(user.role, "USERS_PAGE") && <Button variant="contained" sx={{ m: 1 }} color="error"
                                         onClick={() => { props.onDeleteBtnClick(row) }}
                                     >{_lang('delete')}</Button>}
                                 </div>
@@ -120,7 +120,7 @@ const UserDataPage = (props) => {
                                         <>
                                             <Grid xs={6} md={2.4} container key={index} item>
 
-                                                
+
                                                 <button
                                                     onClick={() => { if (props.filters.role != data._id.role || props.filters.verified != data._id.verfied) { props.handleFilters(['role', 'verified'], [data._id.role, data._id.verfied]) } }}
                                                     className={props.filters.role == data._id.role && props.filters.verified == data._id.verfied ? 'analytic-btn df center column radius-1 bg-light row analytic-btn-active ' : 'pointer analytic-btn df center column radius-1 bg-light row'}>
@@ -162,7 +162,7 @@ const UserDataPage = (props) => {
                                 />
                             </div>
 
-                            {(user.role == constants.user_role.SUPER_ADMIN || user.role == constants.user_role.TEAM_ADMIN || user.role == constants.user_role.ADMIN ||  user.role == constants.user_role.DESTRIBUTOR_ROLE) && <button variant="contained"
+                            {(user.role == constants.user_role.SUPER_ADMIN || user.role == constants.user_role.TEAM_ADMIN || user.role == constants.user_role.ADMIN || user.role == constants.user_role.DESTRIBUTOR_ROLE) && <button variant="contained"
                                 onClick={() => { props.onCreateBtnClick() }}
                                 className='mb-3 h5  ml-2 df center letter-space-2 extraa-btns radius-3 pointer df  bg-secondary text-light'
                             >{_lang('create_user')}</button>}
@@ -174,7 +174,7 @@ const UserDataPage = (props) => {
 
                         <TextField variant="outlined" />
                     </div> */}
-                    {props.userData && props.userData.total && props.userData.total>0 && <TablePagination
+                    {props.userData && props.userData.total && props.userData.total > 0 && <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
                         count={props.userData.total}
@@ -205,7 +205,7 @@ const UserDataPage = (props) => {
                                 ))}
                             </TableBody>
                         </Table>
-                        {props.userData && props.userData.total && props.userData.total>0 && <TablePagination
+                        {props.userData && props.userData.total && props.userData.total > 0 && <TablePagination
                             rowsPerPageOptions={[10, 25, 100]}
                             component="div"
                             count={props.userData.total}

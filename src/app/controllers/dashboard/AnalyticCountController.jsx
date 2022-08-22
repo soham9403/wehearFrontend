@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
 import constants from "../../../config/constants"
 import { accessControllByRole, getDateFiltersTime, _lang } from "../../../config/helper"
+import { removeCurrentUserAction, selectCurrentUserAction } from "../../../store/actions/currentUserActions"
 import { setuserAnalyticAction } from "../../../store/actions/userAnalyticaction"
+import { getUserInfo } from "../../apis/authApis"
 import getUseranalayticInfo from "../../apis/dashboardApi"
 import AnalysisCount from "../../pages/dashboard/AnalysisCount"
 
@@ -65,22 +67,58 @@ const AnalyticCountController = (props) => {
     const loadAnalyticsInfo = async () => {
 
         if (analysticFilters.value != '') {
-            setAnalyticLoading(true)
+
             const res = await getUseranalayticInfo({
                 user_code: params_user_code,
                 ...analysticFilters
             })
 
             dispatch(setuserAnalyticAction(params_user_code, res.data))
-            setAnalyticLoading(false)
+
         }
 
 
     }
 
-    useEffect(() => {
-        loadAnalyticsInfo()
+    const fetchCurrentUserInfo = async () => {
 
+
+
+        const res = await getUserInfo(params_user_code)
+        if (res.status === 1) {
+            if (Object.keys(res.data).length > 0)
+                dispatch(selectCurrentUserAction(res.data))
+            else
+                alert('no user available with usercode ' + params_user_code)
+        } else {
+            alert(res.message)
+        }
+
+
+
+
+
+    }
+    const fetchInfo = async () => {
+        setAnalyticLoading(true)
+        if (params_user_code != user.data.usercode) {
+            await Promise.all([
+                loadAnalyticsInfo(),
+                fetchCurrentUserInfo()
+            ])
+        } else {
+            await loadAnalyticsInfo()
+            dispatch(removeCurrentUserAction())
+        }
+        setAnalyticLoading(false)
+    }
+    useEffect(() => {
+
+        fetchInfo()
+window.scrollTo({
+    top:0,
+    behavior:"smooth"
+})
     }, [analysticFilters, params_user_code])
     const changePage = (path) => {
         if (path == 'users' && !accessControllByRole(user.data.role, "USERS_PAGE")) {
