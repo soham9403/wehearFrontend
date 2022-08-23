@@ -81,7 +81,7 @@ export const getObjectBykey = (key = '', value = '', arr = []) => {
   return ''
 }
 
-export const dateToDDMMYYYY = date => {
+export const dateToDDMMYYYY = (date,withTime=false) => {
   const dateObj = new Date(date)
 
   return (
@@ -89,7 +89,11 @@ export const dateToDDMMYYYY = date => {
     '-' +
     addZeroPrefix(dateObj.getMonth() + 1) +
     '-' +
-    addZeroPrefix(dateObj.getFullYear())
+    addZeroPrefix(dateObj.getFullYear()) 
+    + 
+    " "
+    +
+    (withTime ? (addZeroPrefix(dateObj.getHours()) +":" + addZeroPrefix(dateObj.getMinutes())) :"")
   )
 }
 export const addZeroPrefix = (val, length = 2) => {

@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { _lang } from "../../../config/helper"
 import { openModal } from "../../../store/actions/modalAction"
@@ -14,6 +14,9 @@ const CategoryController = () => {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
    
+    useEffect(()=>{
+        getProductList()
+    },[])
 
     const getProductList = async () => {
         setLoading(true)

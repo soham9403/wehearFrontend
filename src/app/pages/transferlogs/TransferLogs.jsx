@@ -37,7 +37,8 @@ function Row(props) {
                 <TableCell >{row.from.name + `(${row.from.usercode})`}</TableCell>
                 <TableCell >{row.count}</TableCell>
                 <TableCell >{row.by.name + `(${row.by.usercode})`}</TableCell>
-                <TableCell >{dateToDDMMYYYY(row.createdAt)}</TableCell>
+                {console.log(row)}
+                <TableCell >{dateToDDMMYYYY(row.createdAt,true)}</TableCell>
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
