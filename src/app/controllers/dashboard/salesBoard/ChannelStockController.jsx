@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { getSalesListApi } from "../../../apis/SalesApi"
@@ -11,15 +11,18 @@ const ChannelStockController = (props) => {
     const [loading, setLoading] = useState(false)
 
     const [data, setData] = useState({})
+
+    const sortByList = useMemo(() => ['box_qr_code_id_asc', 'box_qr_code_id_dsc', 'packing_date_asc', 'packing_date_dsc'])
     const [salesFilters, setFilters] = useState({
         page_no: 1,
         page_size: 10,
         search: '',
         box_qr_code_id: '',
-        category:'',
+        category: '',
+        sort_by: sortByList[0],
         usercode: params_user_code,
         location: 'channel',
-        sub_location:'with_destributor',//with_reteller
+        sub_location: 'with_destributor',//with_reteller
         inventoryType: '',//product //marketing_material
     })
     const handleFilters = (field, value) => {
@@ -53,13 +56,13 @@ const ChannelStockController = (props) => {
         <>
             <ChannelStock
 
-                onMassTransffer={() => { props.onMassTransffer( async () => { await getList() }) }}
+                onMassTransffer={() => { props.onMassTransffer(async () => { await getList() }) }}
 
                 loading={loading}
                 handleFilters={handleFilters}
                 filters={salesFilters}
-                onTransfer={(type, data) => { props.onTransfer(type, data,async () => { await getList() }) }}
-
+                onTransfer={(type, data) => { props.onTransfer(type, data, async () => { await getList() }) }}
+                sortByList={sortByList}
                 data={data}
                 exportCsv={() => { props.exportCsv(salesFilters) }}
             />

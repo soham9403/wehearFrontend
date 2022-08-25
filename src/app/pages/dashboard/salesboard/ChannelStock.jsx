@@ -39,6 +39,7 @@ import SmallLoader from '../../../../component/common/SmallLoader'
 import CustomInput from '../../../../component/common/CustomInput'
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import SearchDropDown from '../../../../component/common/SearchDropDown'
 function Row(props) {
     const { row } = props
     const [open, setOpen] = useState(false)
@@ -293,7 +294,7 @@ const ChannelStock = props => {
 
 
                                                 <button
-                                                    onClick={() => { props.handleFilters('category', category._id )}}
+                                                    onClick={() => { props.handleFilters('category', category._id) }}
                                                     className={props.filters.category == category._id ? 'analytic-btn df center column radius-1 bg-light row analytic-btn-active ' : 'pointer analytic-btn df center column radius-1 bg-light row'}>
 
                                                     <h1 className='h4'>
@@ -326,17 +327,39 @@ const ChannelStock = props => {
                         </div>
                         <div className='df column flex-1' style={{ alignItems: "flex-end" }}>
                             <div className='df row' style={{ maxWidth: "48vw", width: "100%" }}>
-                                <CustomInput
-                                    disabled={false}
-                                    on_side_btn_click={props.filters.box_qr_code_id == '' ? () => { } : () => { props.handleFilters('box_qr_code_id', '') }}
-                                    side_icon={props.filters.box_qr_code_id == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
-                                    value={props.filters.box_qr_code_id}
-                                    onChange={e => {
-                                        props.handleFilters('box_qr_code_id', e.target.value)
-                                    }}
-                                    type="side-icon"
-                                    label={_lang("search_by_qr_code")}
-                                />
+                                <div className='df flex-1 mr-2'>
+                                    <FormControl fullWidth={true} >
+                                        <SearchDropDown
+
+                                            getOptionLabel={(option) => {
+
+                                                return _lang(option)
+                                            }}
+                                            renderOption={(defaultProps, option) => (
+                                                <Box component="li" {...defaultProps}>{ _lang(option)}</Box>
+                                            )}
+                                            list={props.sortByList ? props.sortByList : []}
+
+                                            value={props.filters.sort_by}
+                                            label={_lang('sort_by')}
+
+                                            onChange={(val) => { props.handleFilters('sort_by', val) }}
+                                        />
+                                    </FormControl>
+                                </div>
+                                <div className='df flex-1'>
+                                    <CustomInput
+                                        disabled={false}
+                                        on_side_btn_click={props.filters.box_qr_code_id == '' ? () => { } : () => { props.handleFilters('box_qr_code_id', '') }}
+                                        side_icon={props.filters.box_qr_code_id == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
+                                        value={props.filters.box_qr_code_id}
+                                        onChange={e => {
+                                            props.handleFilters('box_qr_code_id', e.target.value)
+                                        }}
+                                        type="side-icon"
+                                        label={_lang("search_by_qr_code")}
+                                    />
+                                </div>
 
                             </div>
                             <div className='df row flex-end'>

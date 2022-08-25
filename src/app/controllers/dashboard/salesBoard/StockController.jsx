@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { getSalesListApi } from "../../../apis/SalesApi"
@@ -10,14 +10,16 @@ const StockController = (props) => {
     const [loading, setLoading] = useState(false)
 
     const [data, setData] = useState({})
+    const sortByList = useMemo(() => ['box_qr_code_id_asc', 'box_qr_code_id_dsc', 'packing_date_asc', 'packing_date_dsc'])
     const [salesFilters, setFilters] = useState({
         page_no: 1,
         page_size: 10,
         search: '',
-        category:'',
+        category: '',
         box_qr_code_id: '',
         usercode: params_user_code,
         location: 'stock',
+        sort_by: sortByList[0],
         inventoryType: '',//product //marketing_material
     })
     const handleFilters = (field, value) => {
@@ -56,7 +58,7 @@ const StockController = (props) => {
                 handleFilters={handleFilters}
                 filters={salesFilters}
                 onTransfer={(type, data) => { props.onTransfer(type, data, async () => { await getList() }) }}
-
+                sortByList={sortByList}
                 data={data}
                 exportCsv={() => { props.exportCsv(salesFilters) }}
             />

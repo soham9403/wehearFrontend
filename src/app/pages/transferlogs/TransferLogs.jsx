@@ -38,7 +38,7 @@ function Row(props) {
                 <TableCell >{row.count}</TableCell>
                 <TableCell >{row.by.name + `(${row.by.usercode})`}</TableCell>
                 {console.log(row)}
-                <TableCell >{dateToDDMMYYYY(row.createdAt,true)}</TableCell>
+                <TableCell >{dateToDDMMYYYY(row.createdAt, true)}</TableCell>
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -49,11 +49,22 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                
+
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box sx={{ margin: 1 }}>
+                            <Typography variant="h4">{_lang('devices')}</Typography>
+                            <div className="df  row" style={{ flexWrap: "wrap" }}>
+                                {
+                                    row.boxes && Array.isArray(row.boxes) && row.boxes.map((box_id) => {
+                                        return <div className="bg-dark radius-1 text-light p-btn df mr-3" key={box_id} ><Typography variant="h6">{box_id}</Typography></div>
+                                    })
+                                }
+                               
+                            </div>
+                        </Box>
                         <Box sx={{ margin: 1 }}>
                             <div className="row column">
                                 <Typography variant="h4">{_lang('actions')}</Typography>
@@ -62,7 +73,7 @@ function Row(props) {
                                         onClick={() => { props.onRevertButtonClick(row) }}
                                     >{_lang('revert')}</Button>}
 
-                                 
+
                                 </div>
 
                             </div>
@@ -84,9 +95,9 @@ const TransferLogs = (props) => {
                         <div className="flex-1 df">
                             <Typography variant="h3">{_lang('transfer_logs')}</Typography>
                         </div>
-                       
+
                     </div>
-                    {props.filters && props.count && props.count>0 && <TablePagination
+                    {props.filters && props.count && props.count > 0 && <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
                         count={props.count}

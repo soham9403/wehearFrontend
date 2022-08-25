@@ -15,11 +15,11 @@ function Row(props) {
     return (
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" style={{padding:"0px"}}>
                     <Checkbox checked={row.checked} onChange={(e) => { props.checkUncheck(row._id, e.target.checked) }} color="default" />
 
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" style={{padding:"0px"}}>
                     {row.box_qr_code_id}
                 </TableCell>
 
@@ -36,9 +36,10 @@ const MassTransfer = (props) => {
             <div className="we-container-small  df column radius-2" style={{ overflow: "hidden" }}>
                 <div className="df row column profile-edit-form pt-3" style={{ overflow: "hidden" }}>
                     <h4 className="h3" color={"green"} >{props.handleValues('get', 'successMsg')}</h4>
+
                     {
                         props.type == '' &&
-                        <div className="df row ">
+                        <div className="df flex-1 mr-3">
                             <div className="row df column">
                                 <h4 className="h4 df row">Whom You want to tarnsfer?</h4>
 
@@ -50,97 +51,98 @@ const MassTransfer = (props) => {
                             </div>
                         </div>
                     }
+                    <div className="df row">
+                        {(props.type == 'retteler' || props.type == 'destributor') && props.type != '' && accessControllByRole(props.userData.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") &&
+                            <div className="df flex-1 mr-3">
 
-                    {(props.type == 'retteler' || props.type == 'destributor') && props.type != '' && accessControllByRole(props.userData.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") &&
-                        <div className="df row form-filed">
+                                <FormControl fullWidth={true} >
+                                    <SearchDropDown
 
-                            <FormControl fullWidth={true} >
-                                <SearchDropDown
-
-                                    getOptionLabel={(option) => {
-                                        if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
-                                            return option['name'] + " (" + option['usercode'] + ")"
-                                        }
-                                        return ""
-                                    }}
-                                    renderOption={(defaultProps, option) => (
-
-                                        <Box component="li" {...defaultProps}>
-                                            {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
-                                                option['name'] + " (" + option['usercode'] + ")" : ""
+                                        getOptionLabel={(option) => {
+                                            if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
+                                                return option['name'] + " (" + option['usercode'] + ")"
                                             }
-                                        </Box>
-                                    )}
-                                    list={props.destributorList ? props.destributorList.data : []}
+                                            return ""
+                                        }}
+                                        renderOption={(defaultProps, option) => (
 
-                                    value={props.handleValues('get', props.type == 'destributor' ? 'allocated_user' : 'allocated_destributor')}
-                                    label={_lang('destributor')}
+                                            <Box component="li" {...defaultProps}>
+                                                {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
+                                                    option['name'] + " (" + option['usercode'] + ")" : ""
+                                                }
+                                            </Box>
+                                        )}
+                                        list={props.destributorList ? props.destributorList.data : []}
 
-                                    onChange={(val) => { props.handleValues('set', props.type == 'destributor' ? 'allocated_user' : 'allocated_destributor', val) }}
-                                />
-                            </FormControl>
-                        </div>
-                    }
+                                        value={props.handleValues('get', props.type == 'destributor' ? 'allocated_user' : 'allocated_destributor')}
+                                        label={_lang('destributor')}
 
-                    {(props.type == 'retteler') && props.type != '' &&
-                        <div className="row form-filed">
+                                        onChange={(val) => { props.handleValues('set', props.type == 'destributor' ? 'allocated_user' : 'allocated_destributor', val) }}
+                                    />
+                                </FormControl>
+                            </div>
+                        }
 
-                            <FormControl fullWidth={true} >
-                                <SearchDropDown
+                        {(props.type == 'retteler') && props.type != '' &&
+                            <div className="df flex-1 mr-3">
 
-                                    getOptionLabel={(option) => {
-                                        if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
-                                            return option['name'] + " (" + option['usercode'] + ")"
-                                        }
-                                        return ""
-                                    }}
-                                    renderOption={(defaultProps, option) => (
+                                <FormControl fullWidth={true} >
+                                    <SearchDropDown
 
-                                        <Box component="li" {...defaultProps}>
-                                            {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
-                                                option['name'] + " (" + option['usercode'] + ")" : ""
+                                        getOptionLabel={(option) => {
+                                            if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
+                                                return option['name'] + " (" + option['usercode'] + ")"
                                             }
-                                        </Box>
-                                    )}
-                                    list={props.list ? props.list : []}
+                                            return ""
+                                        }}
+                                        renderOption={(defaultProps, option) => (
 
-                                    value={props.handleValues('get', 'allocated_user')}
-                                    label={_lang('reteller')}
+                                            <Box component="li" {...defaultProps}>
+                                                {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
+                                                    option['name'] + " (" + option['usercode'] + ")" : ""
+                                                }
+                                            </Box>
+                                        )}
+                                        list={props.list ? props.list : []}
 
-                                    onChange={(val) => { props.handleValues('set', 'allocated_user', val) }}
-                                />
-                            </FormControl>
-                        </div>
-                    }
+                                        value={props.handleValues('get', 'allocated_user')}
+                                        label={_lang('reteller')}
+
+                                        onChange={(val) => { props.handleValues('set', 'allocated_user', val) }}
+                                    />
+                                </FormControl>
+                            </div>
+                        }
 
 
-                    {
+                        {
 
-                        accessControllByRole(props.userData.role, "ONLY_TEAM") && props.type != '' &&
-                        <div className="row form-filed">
+                            accessControllByRole(props.userData.role, "ONLY_TEAM") && props.type != '' &&
+                            <div className="df flex-1 ">
 
-                            <FormControl fullWidth={true} >
-                                <SearchDropDown
+                                <FormControl fullWidth={true} >
+                                    <SearchDropDown
 
-                                    getOptionLabel={(option) => {
-                                        return option['name']
-                                    }}
-                                    renderOption={(defaultProps, option) => (
+                                        getOptionLabel={(option) => {
+                                            return option['name']
+                                        }}
+                                        renderOption={(defaultProps, option) => (
 
-                                        <Box component="li" {...defaultProps}>
-                                            {option['name']}
-                                        </Box>
-                                    )}
-                                    list={categories ? categories : []}
+                                            <Box component="li" {...defaultProps}>
+                                                {option['name']}
+                                            </Box>
+                                        )}
+                                        list={categories ? categories : []}
 
-                                    value={props.handleValues('get', 'category')}
-                                    label={_lang('category')}
+                                        value={props.handleValues('get', 'category')}
+                                        label={_lang('category')}
 
-                                    onChange={(val) => { props.handleValues('set', 'category', val) }}
-                                />
-                            </FormControl>
-                        </div>
-                    }
+                                        onChange={(val) => { props.handleValues('set', 'category', val) }}
+                                    />
+                                </FormControl>
+                            </div>
+                        }
+                    </div>
                     {props.handleValues('get', 'err') && <div className="row form-filed">
                         <Typography align="center" color={"red"}>{props.handleValues('get', 'err')}</Typography>
                     </div>}
@@ -168,8 +170,8 @@ const MassTransfer = (props) => {
 
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell colSpan={2} >
-                                            <div className="df row">
+                                        <TableCell colSpan={2} style={{padding:"0px"}}>
+                                            <div className="df row pt-3">
                                                 <div className="df mr-1">
                                                     <Checkbox title="check All" checked={!props.loading && props.transferAvailableList && Object.values(props.transferAvailableList.list).length > 0 && Object.values(props.transferAvailableList.list).filter((row, index) => {
                                                         return !row.checked
@@ -177,7 +179,7 @@ const MassTransfer = (props) => {
                                                 </div>
 
                                                 <div className="df flex-1">
-                                                    <CustomInput
+                                                    <CustomInput                                                    
                                                         disabled={false}
                                                         on_side_btn_click={props.listFilter.searchStr == '' ? () => { } : () => { props.setListFilters({ ...props.listFilter, searchStr: '' }) }}
                                                         side_icon={props.listFilter.searchStr == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
@@ -199,7 +201,7 @@ const MassTransfer = (props) => {
 
                                     </TableRow>
 
-                                    { props.transferAvailableList && Object.values(props.transferAvailableList.list).length > 0 && Object.values(props.transferAvailableList.list).filter((row, index) => {
+                                    {props.transferAvailableList && Object.values(props.transferAvailableList.list).length > 0 && Object.values(props.transferAvailableList.list).filter((row, index) => {
                                         return row.box_qr_code_id.includes(props.listFilter.searchStr)
                                     }).map((row, index) => {
                                         return <Row key={row._id} {...props} index={index} row={{ ...row, id: props.data }} />
@@ -207,11 +209,11 @@ const MassTransfer = (props) => {
 
                                 </TableBody>
                                 <TableFooter className="p-sticky-bottom bg-light">
-                                    <TableCell >
-                                        <Typography variant="h3" >{_lang(props.transferAvailableList.totalChecked + " / " + props.transferAvailableList.total)}</Typography>
+                                    <TableCell style={{padding:"0px"}}>
+                                        <Typography variant="h6" >{_lang(props.transferAvailableList.totalChecked + " / " + props.transferAvailableList.total)}</Typography>
                                     </TableCell>
-                                    <TableCell >
-                                        <Button variant="contained" disabled={props.loading} onClick={props.transferMass}>{_lang('transfer')}</Button>
+                                    <TableCell style={{padding:"0px"}}>
+                                        <Button variant="contained" disabled={props.loading} onClick={props.transferMass} style={{padding:"0px 1vw"}}>{_lang('transfer')}</Button>
                                     </TableCell>
                                 </TableFooter>
                             </Table>
@@ -227,7 +229,7 @@ const MassTransfer = (props) => {
                 {
                     props.type != '' &&
                     <>
-                        <div className="row df center form-filed mt-2">
+                        <div className="row df center form-filed mt-3">
                             <div className="df flex-1">
                                 <TextField
                                     fullWidth
@@ -253,7 +255,7 @@ const MassTransfer = (props) => {
 
 
 
-                        <div className="row center df form-filed">
+                        <div className="row center df">
                             <button disabled={props.listLoading} className="auth-submit-btn df center text-light row pointer h3 btn-gradient" variant="contained" onClick={props.getRangedData} >
                                 {props.listLoading ? _lang('loading') : _lang('show_list')}
                             </button>
