@@ -18,7 +18,7 @@ const TransferToSold = (props) => {
                             disabled={props.loading}
                             value={props.handleValues('get', 'invoice_number')}
                             onChange={(e) => { props.handleValues('set', 'invoice_number', e.target.value) }}
-                            type="number"
+                            type="text"
                             label={_lang("invoice_number")}
                         />
                     </div>
@@ -30,7 +30,7 @@ const TransferToSold = (props) => {
                             disabled={props.loading}
                             value={props.handleValues('get', 'invoice_value')}
                             onChange={(e) => { props.handleValues('set', 'invoice_value', e.target.value) }}
-                            type="number"
+                            type="text"
                             label={_lang("invoice_value")}
                         />
                     </div>
