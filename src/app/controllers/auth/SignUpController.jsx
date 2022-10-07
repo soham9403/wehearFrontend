@@ -19,7 +19,7 @@ const SignUpController = () => {
         phone_no: "",
         password: "",
         role: constants.user_role.RETELLER_ROLE,
-        destributor_id: "",
+        parent_id: "",
         company_name: '',
         gst_no: '',
         err: ''
@@ -77,7 +77,7 @@ const SignUpController = () => {
             handleValues('set', 'err', _lang('password_required'))
             return 0
         }
-        if (!userDetails.destributor_id || userDetails.destributor_id._id == "") {
+        if (!userDetails.parent_id || userDetails.parent_id._id == "") {
             handleValues('set', 'err', _lang('destributor_required'))
             return 0
         }
@@ -85,7 +85,7 @@ const SignUpController = () => {
         setLoading(true)
         const userData = { ...userDetails }
 
-        const response = await signUp({ ...userData, destributor_id: userData.destributor_id._id })
+        const response = await signUp({ ...userData, parent_id: userData.parent_id._id })
 
         if (response.status === 1) {
             dispatch(signInAction(response.data))

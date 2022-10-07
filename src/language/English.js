@@ -9,6 +9,7 @@ const English = {
   role_4: 'Team Admin',
   role_5: 'Distributors',
   role_6: 'Retailer',
+  role_10: 'HR',
 
   //fields name
   errors: 'Errors',

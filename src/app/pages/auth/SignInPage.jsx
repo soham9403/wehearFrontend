@@ -65,7 +65,7 @@ const SignInPage = (props) => {
                                 </div>
                                 <div className="df column">
                                     <button type="submit" className="auth-submit-btn df center text-light row pointer h3 btn-gradient">{!props.loading && 'Log In'} {props.loading && <span style={{marginLeft:"10px"}}> <SmallLoader /> </span>}</button>
-                                    <Link to={"/sign-up"} className="subtitle2 underline text-secondary df row center">{_lang('que_alredy_have_account')}</Link>
+                                    {/* <Link to={"/sign-up"} className="subtitle2 underline text-secondary df row center">{_lang('que_alredy_have_account')}</Link> */}
                                 </div>
                             </form>
                         </div>

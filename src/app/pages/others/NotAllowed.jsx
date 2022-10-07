@@ -14,7 +14,7 @@ const NotAllowed = () => {
     useEffect(() => {
         (async () => {
             setloading(true)
-            const response =await getUserInfo(user.data.destributor_id)
+            const response =await getUserInfo(user.data.parent_id)
             setDestributor(response.data)
             setloading(false)
         })()

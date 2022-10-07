@@ -236,3 +236,34 @@
   background: lightgray !important;
   cursor: not-allowed !important;
 }
+
+.marker{
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  transform: translate(-50%,-50%);
+  border: 2px solid #A91674;
+  background-color: #FDFDFD;
+  position: relative;
+}
+.marker-hover{
+  display: none;
+  position: absolute;
+  transform:  translate(100%);
+  top: 0px;
+  left: 0px;
+  min-width: 100px;
+  background-color: rgba(0,0,0,.5);
+  color: white;
+  font-size: 12px;
+  
+  padding: 4px;
+  width: auto;
+  
+}
+.marker:hover .marker-hover{
+  display: flex;
+  line-break: unset;
+  
+  /* brea */
+}

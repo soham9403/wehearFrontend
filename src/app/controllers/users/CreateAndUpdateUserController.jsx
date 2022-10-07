@@ -19,7 +19,7 @@ const CreateAndUpdateUserController = (props) => {
         company_name: '',
         gst_no: '',
         territory: '',
-        destributor_id: user.data.role == constants.user_role.DESTRIBUTOR_ROLE ? user.data._id : '',
+        parent_id: user.data.role == constants.user_role.DESTRIBUTOR_ROLE ? user.data._id : '',
         err: ''
     })
 
@@ -108,7 +108,7 @@ const CreateAndUpdateUserController = (props) => {
             return 0
         }
 
-        if (inputs.role.index == constants.user_role.RETELLER_ROLE && (!inputs.destributor_id || inputs.destributor_id._id == "")) {
+        if (inputs.role.index == constants.user_role.RETELLER_ROLE && (!inputs.parent_id || inputs.parent_id._id == "")) {
             handleValues('set', 'err', _lang('destributor_required'))
             return 0
         }
@@ -170,14 +170,14 @@ const CreateAndUpdateUserController = (props) => {
             const data = modal.defaultData
 
             handleValues('set',
-                ['name', 'email', 'user_id', 'phone_no', 'role', 'destributor_id', 'territory','company_name','gst_no'],
+                ['name', 'email', 'user_id', 'phone_no', 'role', 'parent_id', 'territory','company_name','gst_no'],
                 [
                     data.name,
                     data.email,
                     data._id,
                     data.phone_no,
                     { label: getKeyByValue(constants.user_role, data.role), index: data.role },
-                    data.destributor_id,
+                    data.parent_id,
                     data.territory,
                     data.company_name,
                     data.gst_no

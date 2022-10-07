@@ -100,10 +100,10 @@ const SignUpPage = (props) => {
                                                     )}
                                                     list={props.destributorList}
 
-                                                    value={props.handleValues('get', 'destributor_id')}
+                                                    value={props.handleValues('get', 'parent_id')}
                                                     label={_lang('destributor')}
 
-                                                    onChange={(val) => { props.handleValues('set', 'destributor_id', val) }}
+                                                    onChange={(val) => { props.handleValues('set', 'parent_id', val) }}
                                                 />
                                             </FormControl>
                                         </div>
@@ -212,10 +212,10 @@ const SignUpPage = (props) => {
                                     )}
                                     list={props.destributorList}
 
-                                    value={props.handleValues('get', 'destributor_id')}
+                                    value={props.handleValues('get', 'parent_id')}
                                     label={_lang('destributor')}
 
-                                    onChange={(val) => { props.handleValues('set', 'destributor_id', val) }}
+                                    onChange={(val) => { props.handleValues('set', 'parent_id', val) }}
                                 />
                             </FormControl>
                         </div>

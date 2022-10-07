@@ -81,21 +81,42 @@ export const getObjectBykey = (key = '', value = '', arr = []) => {
   return ''
 }
 
-export const dateToDDMMYYYY = (date,withTime=false) => {
+export const dateToDDMMYYYY = (
+  date,
+  withTime = false,
+  noDevider = false,
+  only_time = false
+) => {
   const dateObj = new Date(date)
-
+  if (only_time) {
+    return (
+      addZeroPrefix(dateObj.getHours()) +
+      ':' +
+      addZeroPrefix(dateObj.getMinutes())
+    )
+  }
+  if (noDevider) {
+    return (
+      addZeroPrefix(dateObj.getDate()) +
+      addZeroPrefix(dateObj.getMonth() + 1) +
+      addZeroPrefix(dateObj.getFullYear())
+    )
+  }
   return (
     addZeroPrefix(dateObj.getDate()) +
     '-' +
     addZeroPrefix(dateObj.getMonth() + 1) +
     '-' +
-    addZeroPrefix(dateObj.getFullYear()) 
-    + 
-    " "
-    +
-    (withTime ? (addZeroPrefix(dateObj.getHours()) +":" + addZeroPrefix(dateObj.getMinutes())) :"")
+    addZeroPrefix(dateObj.getFullYear()) +
+    ' ' +
+    (withTime
+      ? addZeroPrefix(dateObj.getHours()) +
+        ':' +
+        addZeroPrefix(dateObj.getMinutes())
+      : '')
   )
 }
+
 export const addZeroPrefix = (val, length = 2) => {
   let strVal = val.toString()
   while (strVal.length < length) {
@@ -233,6 +254,9 @@ export const accessControllByRole = (
         constants.user_role.SUPER_ADMIN,
         constants.user_role.DESTRIBUTOR_ROLE
       ]
+      break
+    case 'DASHBOARD':
+      roles = [constants.user_role.HR_ROLE]
       break
     case 'CHANNEL_STOCK':
       roles = [constants.user_role.RETELLER_ROLE]

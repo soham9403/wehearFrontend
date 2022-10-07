@@ -1,4 +1,4 @@
-let mode = "production";
+let mode = "local";
 let domainUrl;
 switch (mode) {
     case "local": domainUrl = "http://localhost:8000/api/";break;//"http://localhost:8000/api/"; break;

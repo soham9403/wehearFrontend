@@ -76,7 +76,17 @@ const CreateAndUpdateUser = (props) => {
                                         {option.label}
                                     </Box>
                                 )}
-                                list={Object.keys(constants.user_role).filter((val) => constants.user_role[val] > user.data.role).map((label, index) => {
+                                list={Object.keys(constants.user_role).filter((val) => 
+                                    {
+                                        if(user.data.role===constants.user_role.ADMIN){
+
+                                        }
+                                        // if(constants.user_role[val] > user.data.role){
+
+                                        // }
+                                    }
+                                    
+                                    ).map((label, index) => {
                                     return {
                                         label: _lang('role_' + constants.user_role[label]),
                                         index: constants.user_role[label]
@@ -156,10 +166,10 @@ const CreateAndUpdateUser = (props) => {
                                     }
                                     list={props.destributorList && props.destributorList.length > 0 ? props.destributorList.map((val) => val._id) : []}
 
-                                    value={props.handleValues('get', 'destributor_id')}
+                                    value={props.handleValues('get', 'parent_id')}
                                     label={_lang('destributor')}
 
-                                    onChange={(val) => { props.handleValues('set', 'destributor_id', val) }}
+                                    onChange={(val) => { props.handleValues('set', 'parent_id', val) }}
                                 />
                             </FormControl>
                         </div>
@@ -327,10 +337,10 @@ const CreateAndUpdateUser = (props) => {
                                         }
                                         list={props.destributorList && props.destributorList.length > 0 ? props.destributorList.map((val) => val._id) : []}
 
-                                        value={props.handleValues('get', 'destributor_id')}
+                                        value={props.handleValues('get', 'parent_id')}
                                         label={_lang('destributor')}
 
-                                        onChange={(val) => { props.handleValues('set', 'destributor_id', val) }}
+                                        onChange={(val) => { props.handleValues('set', 'parent_id', val) }}
                                     />
                                 </FormControl>
                             </div>

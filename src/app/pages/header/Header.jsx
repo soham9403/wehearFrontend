@@ -32,18 +32,18 @@ const Header = props => {
               </div>
 
               <div className='flex-1 df center column'>
-                <h1 className='h3  text-gradient-primary'>{
+                {/* <h1 className='h3  text-gradient-primary'>{
                   _lang('role_' + user.role)
-                }</h1>
+                }</h1> */}
 
                 {currentUser && Object.keys(currentUser.data).length > 0 && <>
-                  <h6 className='h6'>
-                    {_lang('current_user')} : {currentUser.data.usercode}
+                  <h6 className='h3  text-gradient-primary'>
+                  {currentUser.data.name}
 
                   </h6>
 
                   <h6 className='h6'>
-                    {_lang('role')}: {_lang('role_' + currentUser.data.role)}
+                  {_lang('role_' + currentUser.data.role)}
 
                   </h6>
                 </>}
