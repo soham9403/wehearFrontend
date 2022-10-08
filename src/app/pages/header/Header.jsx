@@ -16,6 +16,7 @@ const Header = props => {
   const logOut = () => {
     dispatch(signOutAction())
   }
+  console.log('currentUser',currentUser)
   return (
     <>
       <div className='df flex-1 row column p-relative'>

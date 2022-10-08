@@ -4,10 +4,10 @@ import { memo } from "react"
 import { useState } from "react"
 
 const LargeListViewer = memo(({ list, Component, indexKey = "id", refreshingParamters = "id", HeaderComponent }) => {
-    const [states, setStates] = useState({ page_no: 1, page_size: 30 })
+    const [states, setStates] = useState({ pageNo: 1, pageSize: 30 })
 
     // useEffect(() => {
-    //     console.log('states got changed', states, states.page_size * (states.page_no - 1), states.page_size, list.splice(30, 30))
+    //     console.log('states got changed', states, states.pageSize * (states.pageNo - 1), states.pageSize, list.splice(30, 30))
     // }, [states])
     // useEffect(() => {
     //     console.log('list changerd')
@@ -35,13 +35,13 @@ const LargeListViewer = memo(({ list, Component, indexKey = "id", refreshingPara
                     rowsPerPageOptions={[50]}
                     component='div'
                     count={list.length}
-                    rowsPerPage={states.page_size}
-                    page={states.page_no - 1}
+                    rowsPerPage={states.pageSize}
+                    page={states.pageNo - 1}
                     onPageChange={(e, page) => {
-                        setStates({ ...states, page_no: page + 1 })
+                        setStates({ ...states, pageNo: page + 1 })
                     }}
                     onRowsPerPageChange={e => {
-                        setStates({ ...states, page_size: e.target.value })
+                        setStates({ ...states, pageSize: e.target.value })
                     }}
                 />
 
@@ -54,13 +54,13 @@ const LargeListViewer = memo(({ list, Component, indexKey = "id", refreshingPara
 
                     <TableBody>
                         {
-                            list.slice(states.page_size * (states.page_no - 1), (states.page_size * (states.page_no - 1)) + states.page_size).map((item, index) => {
+                            list.slice(states.pageSize * (states.pageNo - 1), (states.pageSize * (states.pageNo - 1)) + states.pageSize).map((item, index) => {
                                 return <React.Fragment key={Array.isArray(indexKey) ? indexKey.reduce((pre, cur) => pre + item[cur], '') : item[indexKey]}>
 
 
                                     <Component
                                     
-                                        index={states.page_size * (states.page_no - 1) + index}
+                                        index={states.pageSize * (states.pageNo - 1) + index}
                                         item={item}
 
                                     />

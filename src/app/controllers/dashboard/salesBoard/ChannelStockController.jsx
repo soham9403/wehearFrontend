@@ -14,8 +14,8 @@ const ChannelStockController = (props) => {
 
     const sortByList = useMemo(() => ['box_qr_code_id_asc', 'box_qr_code_id_dsc', 'packing_date_asc', 'packing_date_dsc'])
     const [salesFilters, setFilters] = useState({
-        page_no: 1,
-        page_size: 10,
+        pageNo: 1,
+        pageSize: 10,
         search: '',
         box_qr_code_id: '',
         category: '',

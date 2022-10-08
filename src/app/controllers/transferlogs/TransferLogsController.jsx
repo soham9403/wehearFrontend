@@ -14,8 +14,8 @@ const TransferLogsController = () => {
     const [count, setCount] = useState(0)
     const [filters, setFilters] = useState({
 
-        page_no: 1,
-        page_size: 10,
+        pageNo: 1,
+        pageSize: 10,
 
     })
     const handleFilters = (field, value) => {

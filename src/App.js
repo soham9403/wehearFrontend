@@ -23,12 +23,12 @@ function App() {
       if (accessToken.get()) {
         const response = await getUserInfo()
         if (response.status === 1) {
-          dispatch(signInAction(response.data,true))
+          dispatch(signInAction(response.data, true))
         } else {
           dispatch(signOutAction())
           navigate("/sign-in", { replace: true })
         }
-        
+
       } else {
         dispatch(signOutAction())
         // navigate("/sign-in", { replace: true })
@@ -42,9 +42,9 @@ function App() {
   } else {
     return (
       <>
-      <IntializeSystem>
-        <CustomModal />
-        <IndexRoute />
+        <IntializeSystem>
+          <CustomModal />
+          <IndexRoute />
         </IntializeSystem>
       </>
     );

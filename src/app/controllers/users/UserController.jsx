@@ -19,8 +19,8 @@ const UserController = () => {
     const usercode = params.usercode
     const [filters, setFilters] = useState({
         search: '',
-        page_no: 1,
-        page_size: 10,
+        pageNo: 1,
+        pageSize: 10,
         role: '',
         verified: true,
         usercode: usercode

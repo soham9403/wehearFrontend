@@ -12,8 +12,8 @@ const SoldController = (props) => {
     const analyticFiters = useContext(AnalysticFiltersContecxt)
     const [data, setData] = useState({})
     const [salesFilters, setFilters] = useState({
-        page_no: 1,
-        page_size: 10,
+        pageNo: 1,
+        pageSize: 10,
         search: '',
         box_qr_code_id: '',
         isB2C: false,

@@ -363,13 +363,13 @@ const Sold = props => {
                                     rowsPerPageOptions={[10, 25, 100]}
                                     component='div'
                                     count={props.data.total}
-                                    rowsPerPage={props.filters.page_size}
-                                    page={props.filters.page_no - 1}
+                                    rowsPerPage={props.filters.pageSize}
+                                    page={props.filters.pageNo - 1}
                                     onPageChange={(e, page) => {
-                                        props.handleFilters('page_no', page + 1)
+                                        props.handleFilters('pageNo', page + 1)
                                     }}
                                     onRowsPerPageChange={e => {
-                                        props.handleFilters('page_size', e.target.value)
+                                        props.handleFilters('pageSize', e.target.value)
                                     }}
                                 />
                             )}
@@ -413,13 +413,13 @@ const Sold = props => {
                                     rowsPerPageOptions={[10, 25, 100]}
                                     component='div'
                                     count={props.data.total}
-                                    rowsPerPage={props.filters.page_size}
-                                    page={props.filters.page_no - 1}
+                                    rowsPerPage={props.filters.pageSize}
+                                    page={props.filters.pageNo - 1}
                                     onPageChange={(e, page) => {
-                                        props.handleFilters('page_no', page + 1)
+                                        props.handleFilters('pageNo', page + 1)
                                     }}
                                     onRowsPerPageChange={e => {
-                                        props.handleFilters('page_size', e.target.value)
+                                        props.handleFilters('pageSize', e.target.value)
                                     }}
                                 />
                             )}

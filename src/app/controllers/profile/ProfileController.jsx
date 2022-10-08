@@ -58,7 +58,7 @@ const ProfileController = () => {
         const response = await updateUserData(passData)
 
         if (response.status == 1) {
-            const userReponseData = await getUserInfo(passData.user_id)
+            const userReponseData = await getUserInfo(passData.usercode)
             dispatch(signInAction(userReponseData.data, true))
             
             setUserData({...userReponseData.data,sucessMessage: _lang(response.message),err:""})

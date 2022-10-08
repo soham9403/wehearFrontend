@@ -178,10 +178,10 @@ const UserDataPage = (props) => {
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
                         count={props.userData.total}
-                        rowsPerPage={props.userData.page_size}
-                        page={(props.userData.page_no) - 1}
-                        onPageChange={(e, page) => { props.handleFilters('page_no', page + 1) }}
-                        onRowsPerPageChange={(e) => { props.handleFilters('page_size', e.target.value) }}
+                        rowsPerPage={props.userData.pageSize}
+                        page={(props.userData.pageNo) - 1}
+                        onPageChange={(e, page) => { props.handleFilters('pageNo', page + 1) }}
+                        onRowsPerPageChange={(e) => { props.handleFilters('pageSize', e.target.value) }}
                     />}
                     <TableContainer component={Paper}>
 
@@ -209,10 +209,10 @@ const UserDataPage = (props) => {
                             rowsPerPageOptions={[10, 25, 100]}
                             component="div"
                             count={props.userData.total}
-                            rowsPerPage={props.userData.page_size}
-                            page={(props.userData.page_no) - 1}
-                            onPageChange={(e, page) => { props.handleFilters('page_no', page + 1) }}
-                            onRowsPerPageChange={(e) => { props.handleFilters('page_size', e.target.value) }}
+                            rowsPerPage={props.userData.pageSize}
+                            page={(props.userData.pageNo) - 1}
+                            onPageChange={(e, page) => { props.handleFilters('pageNo', page + 1) }}
+                            onRowsPerPageChange={(e) => { props.handleFilters('pageSize', e.target.value) }}
                         />}
                     </TableContainer>
                 </div>

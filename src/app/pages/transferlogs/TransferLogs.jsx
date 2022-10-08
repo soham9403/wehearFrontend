@@ -101,10 +101,10 @@ const TransferLogs = (props) => {
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
                         count={props.count}
-                        rowsPerPage={props.filters.page_size}
-                        page={(props.filters.page_no) - 1}
-                        onPageChange={(e, page) => { props.handleFilters('page_no', page + 1) }}
-                        onRowsPerPageChange={(e) => { props.handleFilters('page_size', e.target.value) }}
+                        rowsPerPage={props.filters.pageSize}
+                        page={(props.filters.pageNo) - 1}
+                        onPageChange={(e, page) => { props.handleFilters('pageNo', page + 1) }}
+                        onRowsPerPageChange={(e) => { props.handleFilters('pageSize', e.target.value) }}
                     />}
                     <TableContainer component={Paper}>
 

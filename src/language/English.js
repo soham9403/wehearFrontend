@@ -10,6 +10,7 @@ const English = {
   role_5: 'Distributors',
   role_6: 'Retailer',
   role_10: 'HR',
+  role_11: 'Business associative',
 
   //fields name
   errors: 'Errors',
@@ -23,7 +24,7 @@ const English = {
   phone: 'Phone No.',
   password: 'Password',
   confirm_pass: 'Confirm Password',
-  destributor: 'Distributor',
+  // destributor: 'Distributor',
   otp: 'OTP',
   territory: 'Territory',
   logout: 'Log Out',
@@ -63,7 +64,7 @@ const English = {
   profile_updated: 'Profile Update Successfully',
   //errors
   box_id_required: 'Box Id Rerquired',
-  mac_id_required: 'MAC Id Rerquired',
+
   category_required: 'Category is required',
 
   select_product: 'Please select product',
@@ -108,12 +109,12 @@ const English = {
   boxes_inserted_succesfully: 'Boxes inserted succesfully',
   que_already_have_account: 'Do you already have an account?',
 
-  devices:"Devices",
+  devices: "Devices",
 
-  box_qr_code_id_asc:"Box Id Asc",
-  box_qr_code_id_dsc:"Box Id Desc",
-  packing_date_asc:'Packing date Asc',
-  packing_date_dsc:'Packing date Desc',
+  box_qr_code_id_asc: "Box Id Asc",
+  box_qr_code_id_dsc: "Box Id Desc",
+  packing_date_asc: 'Packing date Asc',
+  packing_date_dsc: 'Packing date Desc',
   que_alredy_have_account: "Don't have an account? Register",
   boxes_transfered_successfully: 'Boxes Transfered Successfully',
   remove: 'Remove',
@@ -123,7 +124,7 @@ const English = {
   signin: 'Sign In',
   update: 'Update',
   mass_transfer: 'Mass Transfer',
-  channel_stock: 'Channel Stock',
+
   show_list: 'Show List',
   update_user: 'Update User',
   send_otp: 'Send OTP',

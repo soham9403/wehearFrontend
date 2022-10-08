@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import constants from "../../../config/constants"
-import { getKeyByValue, isEmail, _lang } from "../../../config/helper"
-import { setdestributorListAction } from "../../../store/actions/destributorListAction"
-import { getDestributorList } from "../../apis/authApis"
-import { createUserApi, updateUserData } from "../../apis/userApis"
-import CreateAndUpdateUser from "../../pages/user/CreateAndUpdateUser"
+
+import {  _lang } from "../../../config/helper"
 import { closeModel } from '../../../store/actions/modalAction'
 import AddUpdateProduct from "../../pages/product/AddUpdateProduct"
 import { createProductApi, updateProductApi } from "../../apis/productApis"

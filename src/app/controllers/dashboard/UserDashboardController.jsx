@@ -89,8 +89,8 @@ const UserDashboardController = (props) => {
     const params_user_code = params.usercode
 
     const [salesFilters, setFilters] = useState({
-        page_no: 1,
-        page_size: 10,
+        pageNo: 1,
+        pageSize: 10,
         search: '',
         box_qr_code_id: '',
         // sale_by: '',
