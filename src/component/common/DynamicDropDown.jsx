@@ -8,9 +8,8 @@ import { withAsyncPaginate } from "react-select-async-paginate";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 
-const DynamicDropDown = function ({ lazyFun, onSelect, defaultOption = [] }) {
-  const [value, onChange] = useState(null);
-
+const DynamicDropDown = function ({ lazyFun, onSelect, defaultOption = [], placeholder = 'select..', defaultVal = null,...rest }) {
+  const [value, onChange] = useState(defaultVal);  
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState({
     pageSize: 10,
@@ -66,6 +65,8 @@ const DynamicDropDown = function ({ lazyFun, onSelect, defaultOption = [] }) {
   return (
     <CreatableAsyncPaginate
       value={value}
+      {...rest}
+      placeholder={placeholder}
       defaultOptions={defaultOption}
       loadOptions={loadOptions}
       defaultAdditional

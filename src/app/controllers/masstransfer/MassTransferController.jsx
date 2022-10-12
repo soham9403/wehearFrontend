@@ -49,25 +49,25 @@ const MassTransferController = () => {
         }
 
 
-        if (field == 'allocated_destributor') {
-            (async () => {
-                setDropDownLoading(true)
-                const response = await getUserListApi({ all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: value.usercode, verified: true })
-                if (response.status == 1) {
-                    setRetailerList(response.data.result)
-                }
+        // if (field == 'allocated_destributor') {
+        //     (async () => {
+        //         setDropDownLoading(true)
+        //         const response = await getUserListApi({ all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: value.usercode, verified: true })
+        //         if (response.status == 1) {
+        //             setRetailerList(response.data.result)
+        //         }
 
-                setDropDownLoading(false)
-            })()
+        //         setDropDownLoading(false)
+        //     })()
 
-        }
+        // }
         if (field != 'err') {
             temp['err'] = ''
         }
         setInputs(temp)
     }
     useLayoutEffect(() => {
-        handleValues('set', 'allocated_destributor', { usercode: user.data.usercode })
+        handleValues('set', 'allocated_destributor', user.data._id)
     }, [])
     const getRangedData = async () => {
         if (inputs.rangeFrom == '') {
@@ -93,7 +93,7 @@ const MassTransferController = () => {
                 data[i]['checked'] = true;
                 list[data[i]._id] = data[i]
             }
-            handleValues('set',['rangeTo','rangeFrom'],['',''])
+            handleValues('set', ['rangeTo', 'rangeFrom'], ['', ''])
             setTransferAvailableList({ list: list, total: data.length, totalChecked: data.length })
         }
         setListLoading(false)
@@ -156,7 +156,7 @@ const MassTransferController = () => {
             }
         }
         setLoading(true)
-        const response = await transferBoxBulkApi({ box_qr_code_id: JSON.stringify(qrCodes), allocated_user: inputs.allocated_user._id, category: inputs.category._id })
+        const response = await transferBoxBulkApi({ box_qr_code_id: JSON.stringify(qrCodes), allocated_user: inputs.allocated_user, category: inputs.category._id })
         if (response.status == 1) {
             setTransferAvailableList({ list: {}, total: 0, totalChecked: 0 })
             handleValues('set', 'successMsg', _lang('boxes_transfered_successfully'))
@@ -168,29 +168,43 @@ const MassTransferController = () => {
         }
         setLoading(false)
     }
+    console.log(inputs)
+    // useEffect(() => {
 
-    useEffect(() => {
+    //     (async () => {
+    //         if ((!destributor.data || destributor.data.length <= 0) && type != 'retteler') {
+    //             setDropDownLoading(true)
+    //             const response = await getDestributorList()
+    //             if (response.status == 1) {
+    //                 dispatch(setdestributorListAction(response.data.result))
+    //             }
+    //             setDropDownLoading(false)
+    //         }
 
-        (async () => {
-            if ((!destributor.data || destributor.data.length <= 0) && type != 'retteler') {
-                setDropDownLoading(true)
-                const response = await getDestributorList()
-                if (response.status == 1) {
-                    dispatch(setdestributorListAction(response.data.result))
-                }
-                setDropDownLoading(false)
-            }
+    //         if (type == 'retteler') {
+    //             setDropDownLoading(true)
+    //             const response = await getUserListApi({ all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: inputs.allocated_destributor.usercode, verified: true })
+    //             if (response.status == 1) {
+    //                 setRetailerList(response.data.result)
+    //             }
+    //             setDropDownLoading(false)
+    //         }
+    //     })()
+    // }, [])
 
-            if (type == 'retteler') {
-                setDropDownLoading(true)
-                const response = await getUserListApi({ all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: inputs.allocated_destributor.usercode, verified: true })
-                if (response.status == 1) {
-                    setRetailerList(response.data.result)
-                }
-                setDropDownLoading(false)
-            }
-        })()
-    }, [])
+
+    const fetchUserFun = async (params, forRetailer = false) => {
+
+        let role = constants.user_role.DESTRIBUTOR_ROLE
+
+        if (forRetailer) {
+            role = constants.user_role.RETELLER_ROLE
+            return await getUserListApi({ ...params, usercode: user.data.usercode, parent_id: inputs.allocated_destributor, role, verified: true })
+        }
+
+
+        return await getUserListApi({ ...params, usercode: user.data.usercode, role, verified: true })
+    }
     if (loading) {
         return (
             <SmallLoader />
@@ -208,6 +222,7 @@ const MassTransferController = () => {
                     transferMass={transferMass}
                     getRangedData={getRangedData}
                     type={type}
+                    fetchUserFun={fetchUserFun}
                     checkUncheck={checkUncheck}
                     handleValues={handleValues}
                     loading={loading}

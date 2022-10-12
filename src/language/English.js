@@ -187,7 +187,32 @@ const English = {
   by: 'By',
   transfer_logs: 'Transfer Logs',
   revert: 'Revert',
-  ask_revert: 'Are you sure to revert?'
+  ask_revert: 'Are you sure to revert?',
+  create_lead: "Create Lead",
+  lead_id_required: "Lead title Required.",
+  contact_no_required: "Contact no. required",
+  lead_type_required: "Lead type is required",
+  lead_status_required: "Lead status required",
+  lead_id: "Lead title",
+  person_name: "Person name",
+  company_name: "Copmany name",
+  contact_no: "Contact no.",
+  to: "Assigned to",
+  to_required: "Please assign lead to user",
+  select_child: "Please select child",
+
+  lead_status_0: 'YET TO CONNECT',
+  lead_status_1: 'CONNECTED',
+  lead_status_2: 'INTRESTED',
+  lead_status_3: 'GOT BUSINESS',
+  lead_status_4: 'NO BUSINESS',
+
+  lead_type_0:'B2B LEAD',
+  lead_type_1:'RETAILER LEAD',
+  lead_type_2:'EVENT LEAD',
+  lead_type_3:'CUSTOM LEAD',
+
+  forward:"Forward"
 }
 
 export default English

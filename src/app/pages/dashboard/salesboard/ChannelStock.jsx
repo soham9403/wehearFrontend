@@ -54,10 +54,10 @@ function Row(props) {
                 </TableCell>
                 <TableCell>{row.mac_id}</TableCell>
 
-                <TableCell>{_lang(row.allocated_user.name) +
+                <TableCell>{row.allocated_user ?_lang(row.allocated_user.name) +
                     ' ( ' +
                     row.allocated_user.usercode +
-                    ' )'}</TableCell>
+                    ' )':''}</TableCell>
 
                 <TableCell>
                     <IconButton

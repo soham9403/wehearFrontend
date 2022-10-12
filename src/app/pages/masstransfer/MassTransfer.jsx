@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { accessControllByRole, _lang } from "../../../config/helper"
 import { useSelector } from "react-redux";
+import DynamicDropDown from "../../../component/common/DynamicDropDown";
 function Row(props) {
     const { row } = props;
 
@@ -15,11 +16,11 @@ function Row(props) {
     return (
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell component="th" scope="row" style={{padding:"0px"}}>
+                <TableCell component="th" scope="row" style={{ padding: "0px" }}>
                     <Checkbox checked={row.checked} onChange={(e) => { props.checkUncheck(row._id, e.target.checked) }} color="default" />
 
                 </TableCell>
-                <TableCell component="th" scope="row" style={{padding:"0px"}}>
+                <TableCell component="th" scope="row" style={{ padding: "0px" }}>
                     {row.box_qr_code_id}
                 </TableCell>
 
@@ -53,10 +54,10 @@ const MassTransfer = (props) => {
                     }
                     <div className="df row">
                         {(props.type == 'retteler' || props.type == 'destributor') && props.type != '' && accessControllByRole(props.userData.role, "STORE_AND_DESTRIBUTOR_TRANSFER_BUTTON") &&
-                            <div className="df flex-1 mr-3">
+                            <div className="df flex-1 mr-3" style={{ zIndex: "1111" }}>
 
                                 <FormControl fullWidth={true} >
-                                    <SearchDropDown
+                                    {/* <SearchDropDown
 
                                         getOptionLabel={(option) => {
                                             if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
@@ -78,16 +79,19 @@ const MassTransfer = (props) => {
                                         label={_lang('destributor')}
 
                                         onChange={(val) => { props.handleValues('set', props.type == 'destributor' ? 'allocated_user' : 'allocated_destributor', val) }}
-                                    />
+                                    /> */}
+
+                                    <DynamicDropDown placeholder={_lang('destributor')} lazyFun={props.fetchUserFun} defaultOption={[]} onSelect={(val) => { props.handleValues('set', props.type == 'destributor' ? 'allocated_user' : 'allocated_destributor', val.value) }} />
+
                                 </FormControl>
                             </div>
                         }
 
                         {(props.type == 'retteler') && props.type != '' &&
-                            <div className="df flex-1 mr-3">
+                            <div className="df flex-1 mr-3" style={{ zIndex: "1111" }}>
 
                                 <FormControl fullWidth={true} >
-                                    <SearchDropDown
+                                    {/* <SearchDropDown
 
                                         getOptionLabel={(option) => {
                                             if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
@@ -109,7 +113,9 @@ const MassTransfer = (props) => {
                                         label={_lang('reteller')}
 
                                         onChange={(val) => { props.handleValues('set', 'allocated_user', val) }}
-                                    />
+                                    /> */}
+
+                                    <DynamicDropDown cacheUniqs={props.handleValues('get', 'allocated_destributor')} placeholder={_lang('reteller')} lazyFun={async (defaulProps) => props.fetchUserFun(defaulProps, true)} defaultOption={[]} onSelect={(val) => { props.handleValues('set', 'allocated_user', val.value) }} />
                                 </FormControl>
                             </div>
                         }
@@ -170,7 +176,7 @@ const MassTransfer = (props) => {
 
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell colSpan={2} style={{padding:"0px"}}>
+                                        <TableCell colSpan={2} style={{ padding: "0px" }}>
                                             <div className="df row pt-3">
                                                 <div className="df mr-1">
                                                     <Checkbox title="check All" checked={!props.loading && props.transferAvailableList && Object.values(props.transferAvailableList.list).length > 0 && Object.values(props.transferAvailableList.list).filter((row, index) => {
@@ -179,7 +185,7 @@ const MassTransfer = (props) => {
                                                 </div>
 
                                                 <div className="df flex-1">
-                                                    <CustomInput                                                    
+                                                    <CustomInput
                                                         disabled={false}
                                                         on_side_btn_click={props.listFilter.searchStr == '' ? () => { } : () => { props.setListFilters({ ...props.listFilter, searchStr: '' }) }}
                                                         side_icon={props.listFilter.searchStr == '' ? <SearchIcon fontSize={'20'} /> : <CloseIcon fontSize={'20'} />}
@@ -209,11 +215,11 @@ const MassTransfer = (props) => {
 
                                 </TableBody>
                                 <TableFooter className="p-sticky-bottom bg-light">
-                                    <TableCell style={{padding:"0px"}}>
+                                    <TableCell style={{ padding: "0px" }}>
                                         <Typography variant="h6" >{_lang(props.transferAvailableList.totalChecked + " / " + props.transferAvailableList.total)}</Typography>
                                     </TableCell>
-                                    <TableCell style={{padding:"0px"}}>
-                                        <Button variant="contained" disabled={props.loading} onClick={props.transferMass} style={{padding:"0px 1vw"}}>{_lang('transfer')}</Button>
+                                    <TableCell style={{ padding: "0px" }}>
+                                        <Button variant="contained" disabled={props.loading} onClick={props.transferMass} style={{ padding: "0px 1vw" }}>{_lang('transfer')}</Button>
                                     </TableCell>
                                 </TableFooter>
                             </Table>

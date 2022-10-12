@@ -136,48 +136,25 @@ const CreateAndUpdateUser = (props) => {
                     {
                         props.handleValues('get', 'role') && props.handleValues('get', 'role').index == constants.user_role.RETELLER_ROLE && user.role != constants.user_role.DESTRIBUTOR_ROLE &&
                         <div className="form-filed row">
-                            <FormControl fullWidth={true} >
-                                <SearchDropDown
+                            <FormControl fullWidth={true} sx={{ zIndex: "1111" }}>
 
-                                    getOptionLabel={(val) => {
-                                        const option = getObjectBykey('_id', val, props.destributorList)
-                                        if (option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "") {
-                                            return option['name'] + " (" + option['usercode'] + ")"
-                                        }
-                                        return ""
-                                    }}
-                                    renderOption={(defaultProps, val) => {
-                                        const option = getObjectBykey('_id', val, props.destributorList)
-                                        return (
-                                            <Box component="li" {...defaultProps}>
-                                                {option['name'] && option['usercode'] && option['name'] != "" && option['usercode'] != "" ?
-                                                    option['name'] + " (" + option['usercode'] + ")" : ""
-                                                }
-                                            </Box>)
-                                    }
-                                    }
-                                    list={props.destributorList && props.destributorList.length > 0 ? props.destributorList.map((val) => val._id) : []}
-
-                                    value={props.handleValues('get', 'parent_id')}
-                                    label={_lang('destributor')}
-
-                                    onChange={(val) => { props.handleValues('set', 'parent_id', val) }}
-                                />
+                                <DynamicDropDown placeholder="Select Parent" lazyFun={props.fetchUsers} defaultOption={[]} onSelect={(data) => { props.handleValues('set', 'parent_id', data.value) }} />
                             </FormControl>
                         </div>
                     }
 
 
                     {/* -------------------------------when role is business associative-------------------------------------- */}
-
+{/* 
                     {
                         props.handleValues('get', 'role') && props.handleValues('get', 'role').index == constants.user_role.BUSINESS_EXECUTIVE && user.role != constants.user_role.DESTRIBUTOR_ROLE &&
                         <div className="form-filed row">
-                            <FormControl fullWidth={true} sx={{zIndex:"1111"}}>
-                                <DynamicDropDown lazyFun={props.fetchUsers} defaultOption={[]} onSelect={(data) => { console.log(data) }} />
+                            <FormControl fullWidth={true} sx={{ zIndex: "1111" }}>
+
+                                <DynamicDropDown placeholder="Select Parent" lazyFun={props.fetchUsers} defaultOption={[]} onSelect={(data) => { props.handleValues('set', 'parent_id', data.value) }} />
                             </FormControl>
                         </div>
-                    }
+                    } */}
 
 
                     <div className="row " style={{ marginBottom: "0px", zIndex: "11", backgroundColor: "white" }}>

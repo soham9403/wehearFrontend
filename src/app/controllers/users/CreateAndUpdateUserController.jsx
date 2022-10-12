@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import constants from "../../../config/constants"
 import { getKeyByValue, isEmail, isValidGST, _lang } from "../../../config/helper"
-import { setdestributorListAction } from "../../../store/actions/destributorListAction"
-import { getDestributorList } from "../../apis/authApis"
+
 import { createUserApi, getUserListApi, updateUserData } from "../../apis/userApis"
 import CreateAndUpdateUser from "../../pages/user/CreateAndUpdateUser"
 import { closeModel } from '../../../store/actions/modalAction'
@@ -27,26 +26,11 @@ const CreateAndUpdateUserController = (props) => {
 
     const [loading, setLoading] = useState(false)
     const [calledFromUpdate, setCalledFromUpdate] = useState(false)
-    const { destributor, modal } = useSelector((state) => { return { destributor: state.destributor_list, modal: state.modal } })
+    const { modal } = useSelector((state) => state)
     const dispatch = useDispatch()
-    const [destributorList, setdestributorList] = useState([])
 
-    useEffect(() => {
-        (async () => {
 
-            if (!destributor.data || destributor.data.length <= 0) {
 
-                const response = await getDestributorList()
-                if (response.status == 1) {
-                    dispatch(setdestributorListAction(response.data.result))
-                }
-            }
-        })()
-    }, [])
-    useEffect(() => {
-
-        setdestributorList(destributor.data)
-    }, [destributor.data])
 
     const handleValues = (method, field, value) => {
         const temp = { ...inputs }
@@ -195,10 +179,10 @@ const CreateAndUpdateUserController = (props) => {
         if (user.data.role == constants.user_role.SUPER_ADMIN || user.data.role == constants.user_role.ADMIN || user.data.role == constants.user_role.PRODUCT_MANAGER) {
 
             let role = constants.user_role.DESTRIBUTOR_ROLE
-            
-            if (inputs.role && inputs.role.index == constants.user_role.BUSINESS_EXECUTIVE)
-                return await getUserListApi({ ...params, usercode: user.data.usercode, parent: true, verified: true })
-            else
+
+            // if (inputs.role && inputs.role.index == constants.user_role.BUSINESS_EXECUTIVE)
+            //     return await getUserListApi({ ...params, usercode: user.data.usercode, parent: true, verified: true })
+            // else
                 return await getUserListApi({ ...params, usercode: user.data.usercode, role, verified: true })
         }
 
@@ -211,8 +195,6 @@ const CreateAndUpdateUserController = (props) => {
                 updateUser={updateUser}
                 calledFromUpdate={calledFromUpdate}
                 creatUser={creatUser}
-                destributorList={destributorList}
-
 
                 handleValues={handleValues}
             />

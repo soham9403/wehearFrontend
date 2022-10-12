@@ -13,5 +13,23 @@ export default {
   color: {
     0: 'gray'
   },
-  producttype: ['watch', 'headphone', 'marketing_material']
+  producttype: ['watch', 'headphone', 'marketing_material'],
+  leadStatus: {
+    YET_TO_CONNECT: 0,
+    CONNECTED: 1,
+    INTRESTED: 2,
+    GOT_BUSINESS: 3,
+    NO_BUSINESS: 4
+  },
+  leadType: {
+    B2B_LEAD: 0,
+    RETAILER_LEAD: 1,
+    EVENT_LEAD: 2,
+    CUSTOM_LEADS: 3
+  },
+  assignType: {
+    COMPANY: 'copmany',
+    SELF: 'self',
+    
+  },
 }

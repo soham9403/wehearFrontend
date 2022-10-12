@@ -12,6 +12,9 @@ import DashboardController from '../controllers/dashboard/DashboardController';
 import SaleBoardMain from '../controllers/dashboard/salesBoard/SaleBoardMain';
 import UserDashboardController from '../controllers/dashboard/UserDashboardController';
 import EmployeeCoordinatesController from '../controllers/employee/EmployeeCoordinatesController';
+import HomePageController from '../controllers/home/HomePageController';
+import LeadListController from '../controllers/lead/LeadListController';
+import LeadMainController from '../controllers/lead/LeadMainController';
 import MassTransferController from '../controllers/masstransfer/MassTransferController';
 import ProductController from '../controllers/product/ProductController';
 import ProfileController from '../controllers/profile/ProfileController';
@@ -29,7 +32,7 @@ const IndexRoute = () => {
                     user.isLoggedIn ?
                         <>
                             <Route path='' element={<Header />}>
-
+                                <Route path='' element={<HomePageController />} />
                                 {accessControllByRole(user.data.role, "DASHBOARD", true) &&
 
                                     <Route path='dashboard' element={<DashboardController />} >
@@ -40,6 +43,15 @@ const IndexRoute = () => {
                                         {accessControllByRole(user.data.role, "USERS_PAGE") && <Route path=':usercode/users' element={<UserController />} />}
                                         {accessControllByRole(user.data.role, "MASS_TRANSFER", true) &&
                                             <Route path=':usercode/all/mass-transfer' element={<MassTransferController />} />}
+
+
+                                    </Route>}
+                                {accessControllByRole(user.data.role, "LEADDASHBOARD", true) &&
+
+                                    <Route path='lead' element={<LeadMainController />} >
+                                        <Route path='' element={<Navigate replace to={"/lead/" + user.data.usercode + "/" + constants.leadType.B2B_LEAD + "/" + constants.leadStatus.YET_TO_CONNECT} />} />
+                                        
+                                        <Route path=':usercode/:type/:status' element={<LeadListController />} />
 
 
                                     </Route>}

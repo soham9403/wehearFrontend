@@ -18,7 +18,7 @@ const TransferController = (props) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false)
     const [dropDownLoading, setDropDownLoading] = useState(false)
-
+    const { user } = useSelector(state => state)
     const [inputs, setInputs] = useState({
         current_location: '',
         err: '',
@@ -84,7 +84,7 @@ const TransferController = (props) => {
             return 0;
         }
 
-        const passParams = { box_qr_code_id: data.box_qr_code_id, allocated_user: inputs.allocated_user._id }
+        const passParams = { box_qr_code_id: data.box_qr_code_id, allocated_user: inputs.allocated_user }
 
         if (!(data.category && data.category != '')) {
             passParams['category'] = inputs.category._id
@@ -168,36 +168,45 @@ const TransferController = (props) => {
 
     }
 
-    useEffect(() => {
-        (async () => {
+    // useEffect(() => {
+    //     (async () => {
 
-            if ((!destributor.data || destributor.data.length <= 0) && type == 'destributor') {
-                setDropDownLoading(true)
-                const response = await getDestributorList()
-                if (response.status == 1) {
-                    dispatch(setdestributorListAction(response.data.result))
-                }
-                setDropDownLoading(false)
-            }
+    //         if ((!destributor.data || destributor.data.length <= 0) && type == 'destributor') {
+    //             setDropDownLoading(true)
+    //             const response = await getDestributorList()
+    //             if (response.status == 1) {
+    //                 dispatch(setdestributorListAction(response.data.result))
+    //             }
+    //             setDropDownLoading(false)
+    //         }
 
-            if (type == 'reteller') {
-                setDropDownLoading(true)
-                const response = await getUserListApi({ all_retailers: data.allocated_user ? false : true, all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: data.allocated_user ? data.allocated_user.usercode : null, verified: true })
-                if (response.status == 1) {
-                    setRetailerList(response.data.result)
-                }
-                setDropDownLoading(false)
-            }
-        })()
-    }, [])
+    //         if (type == 'reteller') {
+    //             setDropDownLoading(true)
+    //             const response = await getUserListApi({ all_retailers: data.allocated_user ? false : true, all: true, role: constants.user_role.DESTRIBUTOR_ROLE, usercode: data.allocated_user ? data.allocated_user.usercode : null, verified: true })
+    //             if (response.status == 1) {
+    //                 setRetailerList(response.data.result)
+    //             }
+    //             setDropDownLoading(false)
+    //         }
+    //     })()
+    // }, [])
+    const fetchUsers = async (params) => {
+
+
+
+        let role = (type == 'destributor' ? constants.user_role.DESTRIBUTOR_ROLE : constants.user_role.RETELLER_ROLE)
+
+        return await getUserListApi({ ...params, usercode: user.data.usercode, role, verified: true })
+    }
+
 
     return (
         <>
             {type == 'store' && <TransferToStore loading={loading} handleValues={handleValues} onSubmitBtnClick={onTransferToStoreBtnClick} />}
 
-            {type == 'destributor' && <TransferToDestributorOrReteller currentCategory={data.category} loading={loading} list={destributor.data} handleValues={handleValues} onSubmitBtnClick={onTransferToDestributorBtnClick} />}
+            {type == 'destributor' && <TransferToDestributorOrReteller fetchUsers={fetchUsers} currentCategory={data.category} loading={loading} list={destributor.data} handleValues={handleValues} onSubmitBtnClick={onTransferToDestributorBtnClick} />}
 
-            {type == 'reteller' && <TransferToDestributorOrReteller currentCategory={data.category} fromReteller={true} loading={loading} list={retellerList} handleValues={handleValues} onSubmitBtnClick={async () => { await onTransferToDestributorBtnClick(true) }} />}
+            {type == 'reteller' && <TransferToDestributorOrReteller fetchUsers={fetchUsers} currentCategory={data.category} fromReteller={true} loading={loading} list={retellerList} handleValues={handleValues} onSubmitBtnClick={async () => { await onTransferToDestributorBtnClick(true) }} />}
 
             {type == 'sold' && <TransferToSold loading={loading} handleValues={handleValues} onSubmitBtnClick={onSold} />}
         </>

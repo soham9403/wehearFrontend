@@ -256,8 +256,11 @@ export const accessControllByRole = (
       ]
       break
     case 'DASHBOARD':
-      roles = [constants.user_role.HR_ROLE]
+      roles = [constants.user_role.HR_ROLE,constants.user_role.BUSINESS_EXECUTIVE]
       break
+      case 'LEADDASHBOARD':
+        roles = [constants.user_role.HR_ROLE]
+        break
     case 'CHANNEL_STOCK':
       roles = [constants.user_role.RETELLER_ROLE]
       break

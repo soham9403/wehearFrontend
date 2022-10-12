@@ -47,5 +47,8 @@ export default {
     exportBox: domainUrl + 'app/sales/export',
     uploadcsvData: domainUrl + 'app/upload-csv-data',
     getTransferlogs: domainUrl + 'app/get-transfer-logs',
-    resetTransferlogs: domainUrl + 'app/revert-log'
+    resetTransferlogs: domainUrl + 'app/revert-log',
+
+    lead: domainUrl + 'app/lead',
+    leadcount: domainUrl + 'app/lead/count'
 }
